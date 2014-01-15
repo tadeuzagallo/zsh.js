@@ -43,7 +43,39 @@ gulp.task('commands', function () {
       });
 
   fs.writeFileSync('src/js/lib/commands.js', commands.join('\n'));
+});
 
+gulp.task('file-system', function () {
+  var _fs = {};
+  var _ignore = [
+    '.DS_Store'
+  ];
+  var root = 'src/js/lib/fs';
+
+  (function readdir(path, container) {
+    var files = fs.readdirSync(path);
+
+    files.forEach(function (file) {
+      if (~_ignore.indexOf(file)) {
+        return;
+      }
+
+      var stat = fs.statSync(path + '/' + file);
+
+      if (stat.isDirectory()) {
+        var f = {};
+        readdir(path + '/' + file, f);
+        container[file] = f;
+      } else {
+        container[file] = fs.readFileSync(path + '/' + file).toString();
+      }
+    });
+  })(root, _fs);
+
+  fs.writeFileSync('src/js/lib/file-system.json', JSON.stringify(_fs, null, 2));
+});
+
+gulp.task('js', ['commands', 'file-system'], function () {
   gulp.src('src/js/main.js')
     .pipe(jshint())
     .pipe(browserify({debug: true}))

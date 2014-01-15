@@ -1,0 +1,13 @@
+{
+  "Users": {
+    "guest": {
+      "about.md": "",
+      "readme.md": "foo bar baz\n",
+      "resume.md": "baz bar foo\n"
+    }
+  },
+  "tmp": {},
+  "usr": {
+    "bin": {}
+  }
+}
