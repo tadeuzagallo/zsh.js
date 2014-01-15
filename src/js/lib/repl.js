@@ -60,7 +60,7 @@ REPL.use = function (span) {
 };
 
 REPL.parse = function (event) {
-  if ((event.keyCode === R && event.metaKey) || (event.metaKey && event.altKey)) {
+  if (event.metaKey) {
     return;
   }
 
