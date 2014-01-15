@@ -10,6 +10,7 @@ var concat = require('gulp-concat');
 var gulpif = require('gulp-if');
 var gzip = require('gulp-gzip');
 var haml = require('gulp-haml');
+var imagemin = require('gulp-imagemin');
 var jasmine = require('gulp-jasmine');
 var jshint = require('gulp-jshint');
 var refresh = require('gulp-livereload');
@@ -76,11 +77,15 @@ gulp.task('file-system', function () {
   fs.writeFileSync('src/js/lib/file-system.json', JSON.stringify(_fs, null, 2));
 });
 
-gulp.task('js', ['commands', 'file-system'], function () {
-  gulp.src('src/js/main.js')
+gulp.task('jshint', function() { 
+  gulp.src('src/js/**/*.js')
     .pipe(jshint())
-    .pipe(browserify({debug: true}))
-    .pipe(gulpif(production, uglify()))
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
+gulp.task('js', ['jshint', 'commands', 'file-system'], function () {
+  gulp.src('src/js/main.js')
+    .pipe(browserify({ debug: !production }))
     .pipe(concat('all.js'))
     .pipe(gulpif(production, uglify()))
     .pipe(gulp.dest('out/js'))

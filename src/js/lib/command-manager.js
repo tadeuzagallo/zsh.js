@@ -9,7 +9,7 @@ window.CommandManager = {
     var matches = [];
 
     Object.keys(this.commands).forEach(function (command) {
-      if (command.indexOf(cmd) == 0) {
+      if (command.substr(0, cmd.length) === cmd) {
         matches.push(command);
       }
     });

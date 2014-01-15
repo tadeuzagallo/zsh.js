@@ -3,10 +3,10 @@ var FS = require('./fs');
 
 var Terminal = {
   $PS1: function () {
-    return '<span class="who">guest</span>\
-        on\
-        <span class="where">' + FS.currentPath + '</span>\
-        <span class="branch">±master</span>&gt;'
+    return '<span class="who">guest</span>'+
+        'on' +
+        '<span class="where">' + FS.currentPath + '</span>'+
+        '<span class="branch">±master</span>&gt;';
   },
   prompt: function () {
     var row = document.createElement('div');

@@ -20,6 +20,7 @@
     "gulp-browserify": "~0.2.4",
     "gulp-stylus": "0.0.9",
     "gulp-imagemin": "~0.1.4",
-    "gulp-gzip": "0.0.4"
+    "gulp-gzip": "0.0.4",
+    "jshint-stylish": "~0.1.5"
   }
 }

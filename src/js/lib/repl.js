@@ -52,7 +52,7 @@ REPL.use = function (span) {
 
   window.onkeydown = function(e) {
     self.parse(e);
-  }
+  };
 
   this.write();
 
@@ -204,7 +204,7 @@ REPL.actualCharCode = function (code) {
   }
 
   return code;
-}
+};
 
 REPL.update = function(event) {
   code = this.actualCharCode(event.keyCode);
