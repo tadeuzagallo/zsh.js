@@ -1,3 +1,6 @@
-var terminal = require('./lib/terminal');
+require('./lib/commands');
+var Terminal = require('./lib/terminal');
+var Tmux = require('./lib/tmux');
 
-terminal.init(document.getElementById('content'));
+Terminal.init(document.getElementById('content'), document.getElementById('status-bar'));
+Tmux.init(Terminal);

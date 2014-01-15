@@ -1,14 +1,14 @@
-require('./commands');
+var ArgsParser = require('./args-parser');
 
 window.CommandManager = {
-  commands: window.commands,
+  commands: {},
   isValid: function (cmd) {
-    return ~this.commands.indexOf(cmd);
+    return !!this.commands[cmd];
   },
   autoComplete: function (cmd) {
     var matches = [];
 
-    this.commands.forEach(function (command) {
+    Object.keys(this.commands).forEach(function (command) {
       if (command.indexOf(cmd) == 0) {
         matches.push(command);
       }
@@ -16,8 +16,15 @@ window.CommandManager = {
 
     return matches;
   },
-  exec: function (cmd) {
-    return 'zsh: command not found: ' + cmd;
+  exec: function (cmd, args, stdout) {
+    if (!this.commands[cmd]) {
+      stdout('zsh: command not found: ' + cmd);
+    } else {
+      this.commands[cmd].call(undefined, ArgsParser.parse(args), stdout);
+    }
+  },
+  register: function (cmd, fn) {
+    this.commands[cmd] = fn;
   }
 };
 

@@ -18,7 +18,6 @@
     "gulp-watch": "~0.4.1",
     "gulp-if": "0.0.3",
     "gulp-browserify": "~0.2.4",
-    "gulp-stylus": "0.0.9",
-    "rfolderify": "~1.2.0"
+    "gulp-stylus": "0.0.9"
   }
 }
