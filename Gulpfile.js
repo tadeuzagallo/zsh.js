@@ -8,6 +8,7 @@ var path = require('path')
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var gulpif = require('gulp-if');
+var gzip = require('gulp-gzip');
 var haml = require('gulp-haml');
 var jasmine = require('gulp-jasmine');
 var jshint = require('gulp-jshint');
@@ -81,30 +82,35 @@ gulp.task('js', ['commands', 'file-system'], function () {
     .pipe(browserify({debug: true}))
     .pipe(gulpif(production, uglify()))
     .pipe(concat('all.js'))
+    .pipe(gulpif(production, uglify()))
     .pipe(gulp.dest('out/js'))
+    .pipe(gulpif(production, gzip()))
+    .pipe(gulpif(production, gulp.dest('out/js')))
     .pipe(refresh(server));
-
 });
-
-// TODO: Compress images, html and css
 
 gulp.task('css', function () {
   gulp.src('src/css/**/*.styl')
-    .pipe(stylus())
+    .pipe(stylus({ set: production ? ['compress'] : [] }))
     .pipe(concat('all.css'))
+    .pipe(gulp.dest('out/css'))
+    .pipe(gulpif(production, gzip()))
     .pipe(gulp.dest('out/css'))
     .pipe(refresh(server));
 });
 
 gulp.task('images', function () {
   gulp.src('src/images/**')
+    .pipe(gulpif(production, imagemin()))
     .pipe(gulp.dest('out/images'))
     .pipe(refresh(server));
 });
 
 gulp.task('html', function () {
   gulp.src('src/**/*.haml')
-    .pipe(haml())
+    .pipe(haml({ optimize: production }))
+    .pipe(gulp.dest('out'))
+    .pipe(gulpif(production, gzip()))
     .pipe(gulp.dest('out'))
     .pipe(refresh(server));
 });
