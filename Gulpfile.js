@@ -3,7 +3,7 @@ var express = require('express');
 var fs = require('fs');
 var gulp = require('gulp');
 var lr = require('tiny-lr');
-var path = require('path')
+var path = require('path');
 
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
@@ -78,7 +78,7 @@ gulp.task('file-system', function () {
 });
 
 gulp.task('jshint', function() { 
-  gulp.src('src/js/**/*.js')
+  gulp.src(['Gulpfile.js', 'src/js/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
