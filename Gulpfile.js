@@ -33,7 +33,7 @@ gulp.task('lr-server', function () {
   });
 });
 
-gulp.task('js', function () {
+gulp.task('commands', function () {
   var commands =
     fs.readdirSync('src/js/lib/commands')
       .filter(function (f) {
