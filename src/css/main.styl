@@ -1,0 +1,264 @@
+// container
+
+blue = #94A0F8
+green = #00B82E
+gray = #A0A0A0
+yellow = #C4C33E
+red = #FF6C65
+
+body
+  position absolute
+  width 100%
+  height 100%
+  margin 0
+  padding 0
+  background black
+  font-family monaco
+  font-size 12px
+
+#container 
+  width 100%
+  height 100%
+  border-radius 5px
+  overflow hidden
+
+// top
+
+bar-height = 22px
+
+#bar
+  float left
+  position relative
+  width 100%
+  height bar-height
+  background linear-gradient(#E5E5E5, #AEAEAE)
+  margin-top 1px
+
+#title
+  position: absolute
+  width 200px
+  height 100%
+  left 50%
+  margin-left -100px
+  text-align center
+  line-height bar-height
+
+// buttons
+
+#buttons
+  float left
+  width 200px
+  height 100%
+
+  a
+    display block
+    float left
+    width 12px
+    height 12px
+    margin-left 8px
+    margin-top 5px
+
+for button-name in close minimize maximize
+  #buttons
+    #{button-name}
+      background-image url(../images/buttons/button-name.jpg)
+
+    &:hover
+      #{button-name}
+        background-image url(../images/buttons/button-name -hover.jpg)
+
+// bottom
+
+#footer {
+  position absolute
+  bottom 2px
+  width 100%
+  height 15px
+  background #252525
+  color white
+  overflow hidden
+
+  ul {
+    margin 0
+    padding 0
+    font-size 11px
+
+    li {
+      display inline-block
+
+      .data {
+        float left
+
+        &:before {
+          content ''
+          float left
+          height 100%
+          border-left 8px solid #252525
+          border-top 8px solid transparent
+          border-bottom 8px solid transparent
+        }
+      }
+
+      .index {
+        float left
+        position relative
+        padding 0 7px
+        color #6B6B6B
+
+        &:after,
+        &:before {
+          content ''
+          position absolute
+          left 100%
+          width 0
+          height 0
+          border solid transparent
+        }
+
+        &:before {
+          top 0
+          z-index 2
+          border-width 8px
+          border-left-color #252525
+        }
+
+        &:after {
+          top -2px
+          z-index 1
+          border-width 10px
+          border-left-color #6B6B6B
+        }
+      }
+
+      .ps {
+        padding-left 20px
+        padding-right 10px
+        color #BFBFBF
+      }
+
+      span {
+        display inline-block
+        height 100%
+      }
+
+      &:after {
+        content ''
+        display inline-block
+        height 100%
+        border 8px solid transparent
+        border-right-width 0
+      }
+
+      &:first-child {
+        color black
+
+        .data {
+          background white
+
+          &:before  {
+            border-left-width 0
+          }
+        }
+
+        .index {
+          &:after,
+          &:before {
+            border 0
+          }
+        }
+
+        &:after {
+          border-left-color white
+        }
+      }
+        
+
+      &.active {
+        .data {
+          background #009ABA
+
+          .index {
+            color #8DE0F8
+
+            &:before {
+              border-left-color #009ABA
+            }
+
+            &:after {
+              border-left-color #8DE0F8
+            }
+          }
+
+          .ps {
+            color white
+          }
+        }
+
+        &:after {
+          border-left-color #009ABA
+        }
+      }
+    }
+  }
+}
+
+// Terminal
+
+#content {
+  float left
+  padding-top 5px
+}
+
+.ps1 {
+  display inline-block
+  color white
+  width 255px
+
+  .who {
+    color blue
+  }
+
+  .where {
+    color green
+  }
+
+  .branch {
+    color gray
+  }
+}
+
+.code {
+  color white
+  white-space pre
+}
+
+.caret {
+  display inline-block
+  width 8px
+  height 16px
+  padding-bottom 2px
+  background white
+  color black
+}
+
+.valid {
+  color green
+
+  .caret {
+    background green
+    color black
+  }
+}
+
+.invalid {
+  color red
+
+  .caret {
+    background red
+    color black
+  }
+}
+
+.string {
+  color yellow
+}
