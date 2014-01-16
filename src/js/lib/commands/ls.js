@@ -12,11 +12,18 @@ function ls(args, stdin, stdout, stderr, next) {
 
   args.arguments.forEach(function (arg) {
     var dir = FS.open(arg);
+    var files = Object.keys(dir);
+
+    if (!args.options.a) {
+      files = files.filter(function (file) {
+        return file[0] !== '.';
+      });
+    }
 
     outputs.push({
       path: arg,
       success: !!dir,
-      files: dir ? Object.keys(dir).join(' ') : FS.notFound('ls', arg)
+      files: dir ? files.join(args.options.l ? '\n' : ' ') : FS.notFound('ls', arg)
     });
   });
 
