@@ -8,8 +8,10 @@ FS.root = require('./file-system.json');
 FS.currentDir = null;
 FS.pwd = FS.root.Users.guest;
 
-FS.realpath = function(path) {
+FS.translatePath = function (path) {
   var index;
+
+  path = path.replace('~', FS.home);
 
   if (path[0] !== '/') {
     path = FS.currentPath + '/' + path;
@@ -29,15 +31,19 @@ FS.realpath = function(path) {
     path.shift();
   }
 
+  return path.join('/');
+};
 
-  path = path.join('/');
+FS.realpath = function(path) {
+  path = FS.translatePath(path);
 
   return FS.exists(path) ? path : null;
 };
 
+
 FS.open = function (path) {
   if (path[0] !== '/') {
-    path = FS.realpath(path);
+    path = FS.translatePath(path);
   }
 
   path = path.substr(1).split('/');
