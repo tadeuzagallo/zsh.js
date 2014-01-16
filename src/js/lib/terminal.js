@@ -1,5 +1,6 @@
 var REPL = require('./REPL');
 var FS = require('./fs');
+var CommandManager = require('./command-manager');
 
 var Terminal = {
   $PS1: function () {
@@ -69,9 +70,11 @@ var Terminal = {
     this.ouput(err);
   },
   clear: function () {
-    this.container.innerHTML = '';
-    this.prompt();
+    Terminal.container.innerHTML = '';
+    Terminal.prompt();
   }
 };
+
+CommandManager.register('clear', Terminal.clear);
 
 module.exports = Terminal;
