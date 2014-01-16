@@ -138,7 +138,7 @@ gulp.task('spec', ['js'], function () {
 gulp.task('build', ['js', 'css', 'images', 'html']);
 
 gulp.task('server', ['build', 'lr-server', 'start-server'], function () {
-  gulp.watch('src/js/**/*.js', function () {
+  gulp.watch(['src/js/**/*.js', 'src/js/lib/fs/**'], function () {
     gulp.run('js');
   });
 
