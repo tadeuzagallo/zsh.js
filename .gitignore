@@ -5,3 +5,5 @@
 .DS_Store
 out/
 node_modules/
+src/js/lib/file-system.json
+src/js/lib/commands.js
