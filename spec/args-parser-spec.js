@@ -50,6 +50,8 @@ describe('args-parser', function () {
   });
 
   it('should throw on unclosed strings', function () {
-    expect(ArgsParser.parse('--foo "bar baz')).toThrow();
+    expect(function () {
+      ArgsParser.parse('--foo "bar baz');
+    }).toThrow();
   });
 });

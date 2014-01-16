@@ -35,7 +35,7 @@ ArgsParser.parse = function (args) {
   }
 
   if (string) {
-    throw 'unterminated string';
+    throw new Error('unterminated string');
   } else {
     _args.push(word);
   }
