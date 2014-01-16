@@ -78,7 +78,7 @@ gulp.task('file-system', function () {
 });
 
 gulp.task('jshint', function() { 
-  gulp.src(['Gulpfile.js', 'src/js/**/*.js'])
+  gulp.src(['Gulpfile.js', 'spec/**/*.js', 'src/js/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
