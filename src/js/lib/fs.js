@@ -73,7 +73,7 @@ FS.ls = function (args, stdout) {
     outputs.push({
       path: arg,
       success: !!dir,
-      files: dir ? Object.keys(dir).join(' ') : 'ls: ' + arg + ': No such file or directory'
+      files: dir ? Object.keys(dir).join(' ') : FS.notFound('ls', arg)
     });
   });
 
@@ -88,17 +88,42 @@ FS.ls = function (args, stdout) {
   }
 };
 
+FS.error = function () {
+  return [].join.call(arguments, ': ');
+};
+
+FS.notFound = function (cmd, arg) {
+  return FS.error(cmd, arg, 'No such file or directory');
+};
+
 FS.cd = function (args, stdout) {
 };
 
 FS.autocomplete = function () {
 };
 
-FS.read = function () {
+FS.cat =  function (args, stdout) {
+  var out = [];
+
+  args.arguments.forEach(function (arg) {
+    var content = FS.open(arg);
+
+    if (content) {
+      if (typeof(content) === 'string') {
+        out.push(content);
+      } else {
+        out.push(FS.error('cat', arg, 'Is a directory'));
+      }
+    } else {
+      out.push(FS.notFound('cat', arg));
+    }
+  });
+
+  stdout(out.join('\n'));
 };
 
 CommandManager.register('ls', FS.ls);
 CommandManager.register('cd', FS.cd);
-CommandManager.register('read', FS.read);
+CommandManager.register('cat', FS.cat);
 
 module.exports = FS;
