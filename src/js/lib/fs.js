@@ -5,8 +5,22 @@ var FS = {};
 FS.currentPath = FS.home = '/Users/guest';
 FS.root = require('./file-system.json');
 
-FS.currentDir = null;
-FS.pwd = FS.root.Users.guest;
+FS.currentDir = FS.root.Users.guest;
+
+FS.pwd = function (compress, stdout) {
+  var pwd = FS.currentPath;
+
+  if (compress === true) {
+    pwd = pwd.replace(FS.home, '~');
+  }
+  
+  if (stdout) {
+    stdout(pwd);
+  } else {
+    return pwd;
+  }
+};
+  
 
 FS.translatePath = function (path) {
   var index;
@@ -145,5 +159,6 @@ FS.cat =  function (args, stdout) {
 CommandManager.register('ls', FS.ls);
 CommandManager.register('cd', FS.cd);
 CommandManager.register('cat', FS.cat);
+CommandManager.register('pwd', FS.pwd);
 
 module.exports = FS;
