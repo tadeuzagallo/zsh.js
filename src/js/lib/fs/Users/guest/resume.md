@@ -23,24 +23,24 @@
 # Work Experience
 ---
 
-  * iOS Developer at Qranio from December, 2013 and currently employed
-    Qranio is a startup that grew inside the company I work (eMiolo.com) and I was invited to lead the iOS development team on a completely rewriten version of the app.
+  * <i>*iOS Developer*</i> at <i>*Qranio*</i> from <i>*December, 2013*</i> and <i>*currently employed*</i>
+    - Qranio is a startup that grew inside the company I work (eMiolo.com) and I was invited to lead the iOS development team on a completely rewriten version of the app
 
-  * Web and Mobile Developer at Bonuz from February, 2013 and currently employed
-    I started developing the iOS app as a freelancer, after the app was published I was invited to maintain the Ruby on Rails api and work on the Android version of the
-app.
+  * <i>*Web and Mobile Developer*</i> at <i>*Bonuz*</i> from <i>*February, 2013*</i> and <i>*currently employed*</i>
+    - I started developing the iOS app as a freelancer, after the app was published I was invited to maintain the Ruby on Rails api and work on the Android version of the app
 
-  * Web and Mobile Developer at eMiolo.com from April, 2013 and currently employed
-    The company just worked with PHP, so I joined with the intention of bringing new technologies. Worked with Python, Ruby, iOS, Android and HTML5 applications.
+  * <i>*Web and Mobile Developer*</i> at <i>*eMiolo.com*</i> from <i>*April, 2013*</i> and <i>*currently employed*</i>
+    - The company just worked with PHP, so I joined with the intention of bringing new technologies. Worked with Python, Ruby, iOS, Android and HTML5 applications
 
-  * iOS Developer at ProDoctor Software Ltda. from July, 2012 until October, 2012
-    - Briefly worked with the iOS team on the development of their first mobile version of their main product, a medical software.
+  * <i>*iOS Developer*</i> at <i>*ProDoctor Software Ltda.*</i> from <i>*July, 2012*</i> until <i>*October, 2012*</i>
+    - Briefly worked with the iOS team on the development of their first mobile version of their main product, a medical software
 
-  * Web Developer at Ato Interativo from February, 2012 until July, 2012
-    Most of the work was with PHP and MySQL, also working with JavaScript on the client side. Worked with MSSQL and Oracle databases as well
+  * <i>*Web Developer*</i> at <i>*Ato Interativo*</i> from <i>*February, 2012*</i> until <i>*July, 2012*</i>
+    - Most of the work was with PHP and MySQL, also working with JavaScript on the client side. Worked with MSSQL and Oracle databases as well
 
-  * Web Developer at Maria Fumaça Criações from October, 2010 until June, 2011
-    I worked mostly with PHP and MySQL, also making the front end with HTML and CSS and most animations in JavaScript, although I also worked with a few in AS3. Briefly worked with MongoDB.
+  * <i>*Web Developer*</i> at <i>*Maria Fumaça Criações*</i> from <i>*October, 2010*</i> until <i>*June, 2011*</i>
+    - I worked mostly with PHP and MySQL, also making the front end with HTML and CSS and most animations in JavaScript,
+      although I also worked with a few in AS3. Briefly worked with MongoDB
 
 ## Additional Information
 ---
