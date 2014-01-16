@@ -97,6 +97,22 @@ FS.notFound = function (cmd, arg) {
 };
 
 FS.cd = function (args, stdout) {
+  var directory = args.arguments[0] || '~';
+
+  var path = FS.translatePath(directory);
+  var dir = FS.open(path);
+
+  if (dir) {
+    if (typeof(dir) === 'object') {
+      FS.currentPath = path;
+      FS.currentDir = dir;
+      stdout('');
+    } else {
+      stdout(FS.error('cd', directory, 'Is a file'));
+    }
+  } else {
+    stdout(FS.notFound('cd', directory));
+  }
 };
 
 FS.autocomplete = function () {
