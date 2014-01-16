@@ -1,6 +1,6 @@
 var ArgsParser = require('./args-parser');
 
-window.CommandManager = {
+var CommandManager = {
   commands: {},
   isValid: function (cmd) {
     return !!this.commands[cmd];
