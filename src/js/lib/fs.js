@@ -108,7 +108,7 @@ FS.cat =  function (args, stdout) {
   args.arguments.forEach(function (arg) {
     var content = FS.open(arg);
 
-    if (content) {
+    if (content !== undefined) {
       if (typeof(content) === 'string') {
         out.push(content);
       } else {
