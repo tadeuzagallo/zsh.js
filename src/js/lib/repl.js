@@ -22,13 +22,13 @@ var SPACE = 32;
 
 window.REPL = {
   mode: REPL_MODE_DEFAULT,
-  input: '', 
+  input: '',
   index: 0,
   _history: [],
   history: [],
   historyIndex: 0,
   listeners: {},
-  lastKey: null, 
+  lastKey: null,
 };
 
 REPL.on = function(event, callback) {
@@ -65,7 +65,7 @@ REPL.parse = function (event) {
   }
 
   event.preventDefault();
-  
+
   switch (event.keyCode) {
     case LEFT:
     case RIGHT:
@@ -139,6 +139,8 @@ REPL.submit = function () {
     CommandManager.exec(cmd, args, function (output) {
       REPL.trigger('output', output);
     });
+  } else {
+    this.trigger('output', '');
   }
 };
 
@@ -208,7 +210,7 @@ REPL.actualCharCode = function (code) {
 
 REPL.update = function(event) {
   code = this.actualCharCode(event.keyCode);
-  
+
   if (!~code) {
     return;
   }
