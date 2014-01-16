@@ -14,7 +14,7 @@ FS.translatePath = function (path) {
   path = path.replace('~', FS.home);
 
   if (path[0] !== '/') {
-    path = FS.currentPath + '/' + path;
+    path = (FS.currentPath !== '/' ? FS.currentPath + '/' : '/') + path;
   }
 
   path = path.split('/');
