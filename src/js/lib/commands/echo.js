@@ -1,6 +1,6 @@
 var CommandManager = require('../command-manager');
 
-function echo(args, stdout) {
+function echo(args, stdin, stdout, stderr) {
   stdout(args.raw);
 }
 
