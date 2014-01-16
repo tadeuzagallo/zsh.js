@@ -20,16 +20,19 @@ var R = 82;
 
 var SPACE = 32;
 
+var HISTORY_STORAGE_KEY = 'terminal_history';
+
 window.REPL = {
   mode: REPL_MODE_DEFAULT,
   input: '',
   index: 0,
-  _history: [],
-  history: [],
-  historyIndex: 0,
   listeners: {},
   lastKey: null,
 };
+
+REPL._history = ([localStorage.getItem(HISTORY_STORAGE_KEY)]+'').split(',').filter(String);
+REPL.history = REPL._history.slice(0) || [];
+REPL.historyIndex = REPL.history.length;
 
 REPL.on = function(event, callback) {
   ((this.listeners[event] = this.listeners[event] || [])).push(callback);
@@ -130,6 +133,7 @@ REPL.submit = function () {
   var args = this.commandArgsString();
 
   this._history[this._history.length] = this.input;
+  localStorage.setItem(HISTORY_STORAGE_KEY, this._history);
   this.history = this._history.slice(0);
   this.historyIndex = this.history.length;
 
