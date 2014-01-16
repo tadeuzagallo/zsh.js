@@ -3,7 +3,7 @@ var FS = require('../fs');
 
 CommandManager.register('cd', cd);
 
-function cd(args, stdin, stdout, stderr) {
+function cd(args, stdin, stdout, stderr, next) {
   var directory = args.arguments[0] || '~';
 
   var path = FS.translatePath(directory);
@@ -13,11 +13,12 @@ function cd(args, stdin, stdout, stderr) {
     if (typeof(dir) === 'object') {
       FS.currentPath = path;
       FS.currentDir = dir;
-      stdout('');
     } else {
-      stdout(FS.error('cd', directory, 'Is a file'));
+      stderr.write(FS.error('cd', directory, 'Is a file'));
     }
   } else {
-    stdout(FS.notFound('cd', directory));
+    stderr.write(FS.notFound('cd', directory));
   }
+
+  next();
 }

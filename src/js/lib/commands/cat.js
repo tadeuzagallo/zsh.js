@@ -3,7 +3,7 @@ var FS = require('../fs');
 
 CommandManager.register('cat', cat);
 
-function cat(args, stdin, stdout, stderr) {
+function cat(args, stdin, stdout, stderr, next) {
   var out = [];
 
   args.arguments.forEach(function (arg) {
@@ -20,5 +20,6 @@ function cat(args, stdin, stdout, stderr) {
     }
   });
 
-  stdout(out.join('\n'));
+  stdout.write(out.join('\n'));
+  next();
 }

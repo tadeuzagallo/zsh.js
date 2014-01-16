@@ -139,12 +139,14 @@ REPL.submit = function () {
 
   this.clear();
 
+  function next() {
+    Terminal.prompt();
+  }
+
   if (input) {
-    CommandManager.exec(cmd, args, null, function (output) {
-      REPL.trigger('output', output);
-    });
+    CommandManager.exec(cmd, args, null, Terminal.stdout, Terminal.stderr, next);
   } else {
-    this.trigger('output', '');
+    next();
   }
 };
 

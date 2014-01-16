@@ -1,6 +1,7 @@
 var REPL = require('./REPL');
 var FS = require('./fs');
 var CommandManager = require('./command-manager');
+var stream = require('stream');
 
 (window || GLOBAL).Terminal = {};
 
@@ -41,12 +42,6 @@ Terminal.status = function(text) {
 Terminal.init = function (container, statusbar) {
   this.rootContainer = this.container = container;
   this.statusbar = statusbar;
-
-  REPL.on('output', function (output) {
-    Terminal.stdout(output);
-    Terminal.prompt();
-  });
-
   this.prompt();
 };
 
@@ -60,22 +55,27 @@ Terminal.update = function () {
   }
 };
 
-Terminal.stdout = function (output) {
+Terminal.stdout = new stream.PassThrough();
+Terminal.stdout.on('data', function (data) {
+  output(data.toString());
+});
+
+Terminal.stderr = new stream.PassThrough();
+Terminal.stderr.on('data', function (data) {
+  output(data.toString());
+});
+
+function output (_output) {
   var out = document.createElement('div');
   out.className = 'code';
-  out.innerHTML = output.trim();
+  out.innerHTML = _output.trim();
 
-  this.container.appendChild(out);
+  Terminal.container.appendChild(out);
 
-  var self = this;
   setTimeout(function () {
-    self.rootContainer.scrollTop = self.rootContainer.scrollHeight + out.clientHeight;
+    Terminal.rootContainer.scrollTop = Terminal.rootContainer.scrollHeight;
   }, 0);
-};
-
-Terminal.stderr = function (err) {
-  this.ouput(err);
-};
+}
 
 Terminal.clear = function () {
   Terminal.container.innerHTML = '';

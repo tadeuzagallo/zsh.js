@@ -3,7 +3,7 @@ var FS = require('../fs');
 
 CommandManager.register('pwd', pwd);
 
-function pwd(args, stdin, stdout, stderr) {
+function pwd(args, stdin, stdout, stderr, next) {
   var _pwd = FS.currentPath;
 
   if (args === true) {
@@ -11,7 +11,8 @@ function pwd(args, stdin, stdout, stderr) {
   }
 
   if (stdout) {
-    stdout(_pwd);
+    stdout.write(_pwd);
+    next();
   } else {
     return pwd;
   }

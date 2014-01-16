@@ -2,7 +2,7 @@ var CommandManager = require('../command-manager');
 
 CommandManager.register('alias', alias);
 
-function alias(args, stdin, stdout, stderr) {
+function alias(args, stdin, stdout, stderr, next) {
   var buffer = '';
   if (args.arguments.length) {
     var key = args.arguments.shift();
@@ -30,5 +30,6 @@ function alias(args, stdin, stdout, stderr) {
     }
   }
 
-  stdout(buffer);
+  stdout.write(buffer);
+  next();
 }

@@ -17,7 +17,7 @@ var CommandManager = {
 
     return matches;
   },
-  exec: function (cmd, args, stdin, stdout, stderr) {
+  exec: function (cmd, args, stdin, stdout, stderr, next) {
     if (this.aliases[cmd]) {
       var line = (this.aliases[cmd] + args).trim().split(' ');
       return this.exec(line.shift(), line.join(' '), stdin, stdout, stderr);
@@ -25,7 +25,7 @@ var CommandManager = {
     if (!this.commands[cmd]) {
       stdout('zsh: command not found: ' + cmd);
     } else {
-      this.commands[cmd].call(undefined, ArgsParser.parse(args), stdin, stdout, stderr);
+      this.commands[cmd].call(undefined, ArgsParser.parse(args), stdin, stdout, stderr, next);
     }
   },
   register: function (cmd, fn) {
