@@ -25,6 +25,10 @@ ArgsParser.parse = function (args) {
         }
       } else {
         string = char;
+        if (word) {
+          _args.push(word);
+          word = '';
+        }
       }
     } else if (char === ' ' && !string) {
       _args.push(word);
