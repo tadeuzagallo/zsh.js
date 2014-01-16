@@ -20,7 +20,7 @@ var CommandManager = {
   exec: function (cmd, args, stdin, stdout, stderr, next) {
     if (this.aliases[cmd]) {
       var line = (this.aliases[cmd] + args).trim().split(' ');
-      return this.exec(line.shift(), line.join(' '), stdin, stdout, stderr);
+      return this.exec(line.shift(), line.join(' '), stdin, stdout, stderr, next);
     }
     if (!this.commands[cmd]) {
       stdout('zsh: command not found: ' + cmd);
