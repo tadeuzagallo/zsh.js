@@ -77,7 +77,7 @@ gulp.task('file-system', function () {
   fs.writeFileSync('src/js/lib/file-system.json', JSON.stringify(_fs, null, 2));
 });
 
-gulp.task('jshint', function() { 
+gulp.task('jshint', function() {
   gulp.src(['Gulpfile.js', 'spec/**/*.js', 'src/js/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
@@ -152,5 +152,15 @@ gulp.task('server', ['build', 'lr-server', 'start-server'], function () {
 
   gulp.watch('src/**/*.haml', function () {
     gulp.run('html');
+  });
+});
+
+gulp.task('spec-live', function(){
+  gulp.watch('src/js/**/*.js', function () {
+    gulp.run('js');
+  });
+
+  gulp.watch('spec/**/*.js', function(){
+    gulp.run('spec');
   });
 });

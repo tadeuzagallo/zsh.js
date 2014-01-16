@@ -6,32 +6,30 @@ describe('args-parser', function () {
 
   it('should never return a null value', function () {
     var ret = ArgsParser.parse(null);
-    expect(ret).not.toBeNull();
-    expect(ret.arguments).not.toBeNull();
-    expect(ret.options).not.toBeNull();
-    expect(ret.raw).not.toBeNull();
+    expect(ret).to.be.not.equal(null);
+    expect(ret.arguments).to.be.not.equal(null);
+    expect(ret.options).to.be.not.equal(null);
+    expect(ret.raw).to.be.not.equal(null);
   });
 
   it('should always return a raw copy', function () {
-    expect(ArgsParser.parse(arg).raw).toEqual(arg);
+    expect(ArgsParser.parse(arg).raw).to.be.equal(arg);
   });
 
   it('should get files', function () {
-    expect(
-      ArgsParser.parse(arg).arguments
-    ).toEqual(['foo', 'bar', 'baz']);
+    expect(ArgsParser.parse(arg).arguments).to.be.deep.equal(['foo', 'bar', 'baz']);
   });
 
   it('should parse one single dashed options', function () {
     expect(
       ArgsParser.parse('-t').options.t
-    ).toBe(true);
+    ).to.be.equal(true);
 
   });
 
   it('should parse multiple single dashed options', function () {
     var ret = ArgsParser.parse('-ab -c');
-    expect(ret.options).toEqual({
+    expect(ret.options).to.be.deep.equal({
       a: true,
       b: true,
       c: true
@@ -39,20 +37,20 @@ describe('args-parser', function () {
   });
 
   it('should parse single double dashed options', function () {
-    expect(ArgsParser.parse('--foo').options.foo).toBe(true);
+    expect(ArgsParser.parse('--foo').options.foo).to.be.equal(true);
   });
 
   it('should parse double dashed option with value', function () {
-    expect(ArgsParser.parse('--foo bar').options.foo).toBe('bar');
+    expect(ArgsParser.parse('--foo bar').options.foo).to.be.equal('bar');
   });
 
   it('should accept strings', function () {
-    expect(ArgsParser.parse('--foo "bar baz"').options.foo).toBe('bar baz');
+    expect(ArgsParser.parse('--foo "bar baz"').options.foo).to.be.equal('bar baz');
   });
 
   it('should throw on unclosed strings', function () {
     expect(function () {
       ArgsParser.parse('--foo "bar baz');
-    }).toThrow();
+    }).to.throw();
   });
 });
