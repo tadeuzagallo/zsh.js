@@ -1,4 +1,5 @@
 var fs = require('../src/js/lib/fs.js');
+require('jasmine-only');
 
 describe('file-system', function () {
   describe('open', function () {
@@ -34,11 +35,19 @@ describe('file-system', function () {
     it('should not validate a path', function () {
       expect(fs.translatePath('./foo')).toEqual(fs.home + '/foo');
     });
+    
+    it('should translate to root', function () {
+      expect(fs.translatePath('../..')).toEqual('/');
+    });
   });
 
   describe('realpath', function () {
     it('should validate a path', function () {
       expect(fs.realpath('./foo')).toBeNull();
+    });
+
+    it('root path should be valid', function () {
+      expect(fs.realpath('../..')).toEqual('/');
     });
   });
 });

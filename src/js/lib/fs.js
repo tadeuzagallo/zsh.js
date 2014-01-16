@@ -31,6 +31,10 @@ FS.translatePath = function (path) {
     path.shift();
   }
 
+  if (path.length < 2) {
+    path.unshift('');
+  }
+
   return path.join('/');
 };
 
@@ -46,7 +50,7 @@ FS.open = function (path) {
     path = FS.translatePath(path);
   }
 
-  path = path.substr(1).split('/');
+  path = path.substr(1).split('/').filter(String);
 
   var cwd = FS.root;
   while(path.length && cwd) {
