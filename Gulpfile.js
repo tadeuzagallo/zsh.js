@@ -50,7 +50,8 @@ gulp.task('commands', function () {
 gulp.task('file-system', function () {
   var _fs = {};
   var _ignore = [
-    '.DS_Store'
+    '\\.DS_Store',
+    '.*\\.swp'
   ];
   var root = 'src/js/lib/fs';
 
@@ -58,8 +59,10 @@ gulp.task('file-system', function () {
     var files = fs.readdirSync(path);
 
     files.forEach(function (file) {
-      if (~_ignore.indexOf(file)) {
-        return;
+      for (var i = 0, l = _ignore.length; i < l; i++) {
+        if (file.match(new RegExp('^' + _ignore[i] + '$'))) {
+          return;
+        }
       }
 
       var stat = fs.statSync(path + '/' + file);
