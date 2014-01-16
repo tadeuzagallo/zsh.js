@@ -4,14 +4,14 @@ var FS = require('../fs');
 CommandManager.register('pwd', pwd);
 
 function pwd(args, stdin, stdout, stderr) {
-  var pwd = FS.currentPath;
+  var _pwd = FS.currentPath;
 
   if (args === true) {
-    pwd = pwd.replace(FS.home, '~');
+    _pwd = _pwd.replace(FS.home, '~');
   }
 
   if (stdout) {
-    stdout(pwd);
+    stdout(_pwd);
   } else {
     return pwd;
   }
