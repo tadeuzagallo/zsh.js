@@ -23,7 +23,8 @@ var CommandManager = {
       return this.exec(line.shift(), line.join(' '), stdin, stdout, stderr, next);
     }
     if (!this.commands[cmd]) {
-      stdout('zsh: command not found: ' + cmd);
+      stdout.write('zsh: command not found: ' + cmd);
+      next();
     } else {
       this.commands[cmd].call(undefined, ArgsParser.parse(args), stdin, stdout, stderr, next);
     }
