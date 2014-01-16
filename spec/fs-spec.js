@@ -39,6 +39,10 @@ describe('file-system', function () {
     it('should translate to root', function () {
       expect(fs.translatePath('../..')).toEqual('/');
     });
+
+    it('should not go further than root', function () {
+      expect(fs.translatePath('../../../../..')).toEqual('/');
+    });
   });
 
   describe('realpath', function () {

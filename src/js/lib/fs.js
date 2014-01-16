@@ -32,7 +32,7 @@ FS.translatePath = function (path) {
   }
 
   if (path.length < 2) {
-    path.unshift('');
+    path = [,,];
   }
 
   return path.join('/');
