@@ -2,46 +2,56 @@ var CommandManager = require('./command-manager');
 
 var FS = {};
 
-FS.home = '/Users/guest';
+FS.currentPath = FS.home = '/Users/guest';
 FS.root = require('./file-system.json');
 
 FS.currentDir = null;
-FS.currentPath = '~';
 FS.pwd = FS.root.Users.guest;
 
-FS.absolutePath = function(path) {
-  return path.replace(/[^\/]+\/\.\./g, '')
-    .replace(/\./g, '')
-    .replace(/\/{2,}/g, '/');
+FS.realpath = function(path) {
+  var index;
+
+  if (path[0] !== '/') {
+    path = FS.currentPath + '/' + path;
+  }
+
+  path = path.split('/');
+
+  while(~(index = path.indexOf('..'))) {
+    path.splice(index-1, 2);
+  }
+
+  while(~(index = path.indexOf('.'))) {
+    path.splice(index, 1);
+  }
+
+  if (path[0] === '.') {
+    path.shift();
+  }
+
+
+  path = path.join('/');
+
+  return FS.exists(path) ? path : null;
 };
-FS.parse = function (path) {
-  if (path === '~') {
-    path = FS.home;
+
+FS.open = function (path) {
+  if (path[0] !== '/') {
+    path = FS.realpath(path);
   }
 
-  path = FS.absolutePath(path);
+  path = path.substr(1).split('/');
 
-  var directories = path.split('/').filter(String);
-  var root;
-
-  if (path[0] === '/') {
-    root = FS.root;
-    directories.shift();
-  } else {
-    root = FS.pwd;
+  var cwd = FS.root;
+  while(path.length && cwd) {
+    cwd = cwd[path.shift()];
   }
 
-  directories.forEach(function (dir) {
-    if (!dir || !root) {
-      root = null;
-      return;
-    }
+  return cwd;
+};
 
-    root = root[dir];
-  });
-  console.log(root, directories, FS.pwd);
-
-  return root;
+FS.exists = function (path) {
+  return !!FS.open(path);
 };
 
 FS.ls = function (args, stdout) {
@@ -52,7 +62,8 @@ FS.ls = function (args, stdout) {
   }
 
   args.arguments.forEach(function (arg) {
-    var dir = FS.parse(arg);
+    var dir = FS.open(arg);
+
     outputs.push({
       path: arg,
       success: !!dir,
