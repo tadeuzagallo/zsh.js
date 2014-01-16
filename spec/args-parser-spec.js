@@ -1,3 +1,4 @@
+var expect = require('chai').expect;
 var ArgsParser = require('../src/js/lib/args-parser.js');
 
 describe('args-parser', function () {

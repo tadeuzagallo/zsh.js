@@ -11,8 +11,8 @@ var gulpif = require('gulp-if');
 var gzip = require('gulp-gzip');
 var haml = require('gulp-haml');
 var imagemin = require('gulp-imagemin');
-var jasmine = require('gulp-jasmine');
 var jshint = require('gulp-jshint');
+var mocha = require('gulp-mocha');
 var refresh = require('gulp-livereload');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
@@ -132,7 +132,7 @@ gulp.task('start-server', function() {
 
 gulp.task('spec', ['js'], function () {
   gulp.src('spec/**/*-spec.js')
-    .pipe(jasmine());
+    .pipe(mocha());
 });
 
 gulp.task('build', ['js', 'css', 'images', 'html']);
