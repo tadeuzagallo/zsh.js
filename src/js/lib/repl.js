@@ -140,7 +140,7 @@ REPL.submit = function () {
   this.clear();
 
   if (input) {
-    CommandManager.exec(cmd, args, function (output) {
+    CommandManager.exec(cmd, args, null, function (output) {
       REPL.trigger('output', output);
     });
   } else {

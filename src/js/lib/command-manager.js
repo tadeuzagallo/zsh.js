@@ -17,47 +17,29 @@ var CommandManager = {
 
     return matches;
   },
-  exec: function (cmd, args, stdout) {
+  exec: function (cmd, args, stdin, stdout, stderr) {
     if (this.aliases[cmd]) {
       var line = (this.aliases[cmd] + args).trim().split(' ');
-      return this.exec(line.shift(), line.join(' '), stdout);
+      return this.exec(line.shift(), line.join(' '), stdin, stdout, stderr);
     }
     if (!this.commands[cmd]) {
       stdout('zsh: command not found: ' + cmd);
     } else {
-      this.commands[cmd].call(undefined, ArgsParser.parse(args), stdout);
+      this.commands[cmd].call(undefined, ArgsParser.parse(args), stdin, stdout, stderr);
     }
   },
   register: function (cmd, fn) {
     this.commands[cmd] = fn;
   },
   alias: function (cmd, original) {
+    if (arguments.length === 0) {
+      return this.aliases;
+    }
     this.aliases[cmd] = original;
+  },
+  get: function(cmd) {
+    return this.commands[cmd];
   }
 };
-
-CommandManager.register('alias', function(args, stdout) {
-  if (args.arguments.length) {
-    var key = args.arguments.shift();
-    var index;
-    if (~(index = key.indexOf('='))) {
-      var command;
-
-      if (args.arguments.length && index === key.length - 1) {
-        command = args.arguments.join(' ');
-      } else {
-        command = key.substr(index+1);
-      }
-
-      key = key.substr(0, index);
-
-      if (command) {
-        CommandManager.alias(key, command);
-      }
-    }
-  }
-
-  stdout('');
-});
 
 module.exports = CommandManager;
