@@ -130,7 +130,7 @@ gulp.task('start-server', function() {
 });
 
 
-gulp.task('spec', function () {
+gulp.task('spec', ['js'], function () {
   gulp.src('spec/**/*-spec.js')
     .pipe(jasmine());
 });
