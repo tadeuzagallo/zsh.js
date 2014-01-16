@@ -26,7 +26,7 @@ function alias(args, stdin, stdout, stderr, next) {
     var aliases = CommandManager.alias();
 
     for (var i in aliases) {
-      buffer += i + "='" + aliases[i] + "'";
+      buffer += i + "='" + aliases[i] + "'\n";
     }
   }
 
