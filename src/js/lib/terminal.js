@@ -31,6 +31,8 @@ Terminal.prompt = function () {
   REPL.use(code);
 
   this.status(FS.currentPath);
+
+  this.scroll();
 };
 
 Terminal.status = function(text) {
@@ -71,11 +73,14 @@ function output (_output) {
   out.innerHTML = _output.trim();
 
   Terminal.container.appendChild(out);
+  Terminal.scroll();
+}
 
+Terminal.scroll = function () {
   setTimeout(function () {
     Terminal.rootContainer.scrollTop = Terminal.rootContainer.scrollHeight;
   }, 0);
-}
+};
 
 Terminal.clear = function () {
   Terminal.container.innerHTML = '';
