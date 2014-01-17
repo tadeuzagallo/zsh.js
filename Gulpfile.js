@@ -27,6 +27,18 @@ var config = _.extend({
 console.log(config);
 var production = config.env === 'production';
 
+gulp.task('clean', function() {
+  var child = require('child_process').spawn('bash', ['-c', 'rm -rf out/']);
+
+   child.stderr.on('data', function(data) {
+         console.log('stderr:' + data);
+    });
+
+   child.stdout.on('data', function(data) {
+         console.log(data.toString());
+    });
+});
+
 gulp.task('lr-server', function () {
   server.listen(config.lrport, function (err) {
     if (err) {
