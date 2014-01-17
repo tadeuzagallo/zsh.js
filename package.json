@@ -1,6 +1,19 @@
 {
-  "name": "tadeuzagallo.com",
-  "description": "Tadeu Zagallo's personal WebSite",
+  "name": "Terminal.js",
+  "description": "A web version of my terminal",
+  "version": "0.0.1",
+  "keywords": ["terminal", "zsh", "tmux"],
+  "homepage": "http://tadeuzagallo.com",
+  "bugs": {
+    "url": "https://github.com/tadeuzagallo/Terminal.js/issues",
+    "email": "tadeuzagallo@gmail.com"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Tadeu Zagallo",
+    "email": "tadeuzagallo@gmail.com",
+    "url": "tadeuzagallo.com"
+  },
   "devDependencies": {
     "gulp": "~3.3.2",
     "gulp-haml": "0.0.5",
