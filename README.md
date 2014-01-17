@@ -1,6 +1,6 @@
 # Terminal.js
 
-A web version of my terminal, try it: (tadeuzagallo.com)[http://tadeuzagallo.com]
+A web version of my terminal, try it: [tadeuzagallo.com](http://tadeuzagallo.com)
 
 ## Features
 
@@ -51,8 +51,8 @@ Further doubts you can check the source of any of those commands.
 
 You can:
 
-* Follow (@tadeuzagallo)[https://twitter.com/tadeuzagallo] on Twitter
-* Mail me at (tadeuzagallo@gmail.com)[mailto:tadeuzagallo@gmail.com]
+* Follow [@tadeuzagallo](https://twitter.com/tadeuzagallo) on Twitter
+* Mail me at tadeuzagallo@gmail.com
 * Open an issue
 
 Any feedback or help is appreciated! :)
