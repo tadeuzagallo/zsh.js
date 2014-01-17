@@ -72,7 +72,7 @@ Terminal.stderr.on('data', function (data) {
 function output (_output) {
   var out = document.createElement('div');
   out.className = 'code';
-  out.innerHTML = _output.trim();
+  out.innerHTML = _output;
 
   Terminal.container.appendChild(out);
   Terminal.scroll();
