@@ -1,7 +1,6 @@
-window.Tmux = {};
+var Tmux = {};
 var Terminal;
-
-window.windows = [];
+var windows = [];
 
 Tmux.init = function (terminal) {
   Terminal = terminal;
