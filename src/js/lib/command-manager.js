@@ -45,6 +45,10 @@ CommandManager.alias = function (cmd, original) {
   this.aliases[cmd] = original;
 };
 
+CommandManager.unalias = function (cmd) {
+  this.aliases[cmd] = null;
+};
+
 CommandManager.get = function(cmd) {
   return this.commands[cmd];
 };
