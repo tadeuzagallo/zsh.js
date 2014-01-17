@@ -31,7 +31,7 @@ Terminal.prompt = function () {
 
   REPL.use(code);
 
-  this.status(FS.currentPath);
+  this.status(FS.pwd(true));
 
   this.scroll();
 };
