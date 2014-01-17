@@ -6,4 +6,5 @@
 out/
 node_modules/
 src/js/lib/file-system.json
+src/js/lib/fs/usr/bin/
 src/js/lib/commands.js

@@ -27,16 +27,21 @@ var config = _.extend({
 console.log(config);
 var production = config.env === 'production';
 
+function exec(cmd) {
+  var child = require('child_process').spawn('bash', ['-c', cmd]);
+
+  child.stderr.on('data', function(data) {
+   console.log('stderr:' + data);
+  });
+
+  child.stdout.on('data', function(data) {
+   console.log(data.toString());
+  });
+}
+
 gulp.task('clean', function() {
-  var child = require('child_process').spawn('bash', ['-c', 'rm -rf out/']);
-
-   child.stderr.on('data', function(data) {
-         console.log('stderr:' + data);
-    });
-
-   child.stdout.on('data', function(data) {
-         console.log(data.toString());
-    });
+  exec('rm -rf out');
+  exec('rm src/js/lib/fs/usr/bin/*');
 });
 
 gulp.task('lr-server', function () {
@@ -47,12 +52,13 @@ gulp.task('lr-server', function () {
   });
 });
 
-gulp.task('commands', function () {
+gulp.task('commands', ['clean'], function () {
   var commands =
     fs.readdirSync('src/js/lib/commands')
       .filter(function (f) {
         return f[0] != '.' && f.substr(-3) == '.js';
       }).map(function (f) {
+        exec('ln -fh ' + __dirname + '/src/js/lib/commands/' + f + ' src/js/lib/fs/usr/bin/' + f.slice(0, -3));
         return 'require("' + './commands/' + f + '");';
       });
 
