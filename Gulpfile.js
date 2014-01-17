@@ -187,3 +187,15 @@ gulp.task('spec-live', function(){
     gulp.run('spec');
   });
 });
+
+gulp.task('deploy', function () {
+  config.site = true;
+  production = true;
+  config.env = 'production';
+
+  gulp.run('build', function () {
+    setTimeout(function () {
+      exec('cd out && git init && git add -A . && git c -m "deploy" && git push --force git@github.com:tadeuzagallo/tadeuzagallo.github.io.git master');
+    }, 5000);
+  });
+});
