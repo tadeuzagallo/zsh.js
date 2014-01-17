@@ -99,7 +99,9 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('js', ['jshint', 'commands', 'file-system'], function () {
-  gulp.src('src/js/main.js')
+  var src = config.site ? 'src/js/site.js' : 'src/js/main.js';
+
+  gulp.src(src)
     .pipe(browserify({ debug: !production }))
     .pipe(concat('all.js'))
     .pipe(gulpif(production, uglify()))
