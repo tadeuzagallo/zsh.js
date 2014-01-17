@@ -24,13 +24,9 @@ function alias(args, stdin, stdout, stderr, next) {
     }
   } else {
     var aliases = CommandManager.alias();
-    var alias;
 
     for (var i in aliases) {
-      alias = aliases[i];
-      if (alias) {
-        buffer += i + "='" + alias + "'\n";
-      }
+      buffer += i + "='" + aliases[i] + "'\n";
     }
   }
 
