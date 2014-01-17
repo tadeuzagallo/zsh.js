@@ -215,7 +215,6 @@ REPL.actualCharCode = function (event) {
 
 REPL.update = function(event) {
   code = this.actualCharCode(event);
-  console.log(code);
 
   if (!~code) {
     return;
