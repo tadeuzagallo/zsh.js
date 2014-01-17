@@ -12,6 +12,17 @@ function ls(args, stdin, stdout, stderr, next) {
 
   args.arguments.forEach(function (arg) {
     var dir = FS.open(arg);
+
+    if (typeof(dir) !== 'object') {
+      if (!dir) {
+        stderr.write(FS.notFound('ls', arg));
+      } else {
+        stderr.write(FS.error('ls', arg, 'Is a file'));
+      }
+
+      return;
+    }
+
     var files = Object.keys(dir);
 
     if (!args.options.a) {
@@ -20,32 +31,12 @@ function ls(args, stdin, stdout, stderr, next) {
       });
     }
 
-    outputs.push({
-      path: arg,
-      success: !!dir,
-      files: dir ? files.join(args.options.l ? '\n' : ' ') : FS.notFound('ls', arg)
-    });
-  });
-
-  function write(out, multiple) {
-    if (out.success) {
-      if (multiple) {
-        stdout.write(out.path);
-      }
-
-      stdout.write(out.files);
-    } else {
-      stderr.write(out.files);
+    if (args.arguments.length > 1) {
+      stdout.write(arg + ':');
     }
-  }
 
-  if (outputs.length === 1) {
-    write(outputs[0], false);
-  } else {
-    outputs.forEach(function (output) {
-      write(output, true);
-    });
-  }
+    stdout.write(files.join(args.options.l ? '\n' : ' '));
+  });
 
   next();
 }
