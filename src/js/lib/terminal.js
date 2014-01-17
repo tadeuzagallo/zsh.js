@@ -2,14 +2,15 @@ var REPL = require('./REPL');
 var FS = require('./fs');
 var CommandManager = require('./command-manager');
 var stream = require('stream');
+var bindFullScreen = require('./full-screen');
 
 (window || GLOBAL).Terminal = {};
 
 Terminal.$PS1 = function () {
   return '<span class="who">guest</span> ' +
-      'on ' +
-      '<span class="where">' + FS.pwd(true) + '</span> '+
-      '<span class="branch">±master</span>&gt;';
+    'on ' +
+    '<span class="where">' + FS.pwd(true) + '</span> '+
+    '<span class="branch">±master</span>&gt;';
 };
 
 Terminal.prompt = function () {
@@ -45,6 +46,7 @@ Terminal.init = function (container, statusbar) {
   this.rootContainer = this.container = container;
   this.statusbar = statusbar;
   this.prompt();
+  bindFullScreen();
 };
 
 Terminal.update = function () {
