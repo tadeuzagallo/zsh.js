@@ -194,7 +194,8 @@ gulp.task('deploy', function () {
   config.env = 'production';
 
   gulp.run('build', function () {
-    setTimeout(function () {
+    setTimeout(function() {
+      fs.writeFileSync('out/CNAME', 'tadeuzagallo.com');
       exec('cd out && git init && git add -A . && git c -m "deploy" && git push --force git@github.com:tadeuzagallo/tadeuzagallo.github.io.git master');
     }, 5000);
   });
