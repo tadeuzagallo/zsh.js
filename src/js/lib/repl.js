@@ -179,7 +179,9 @@ REPL.backspace = function () {
   }
 };
 
-REPL.actualCharCode = function (code) {
+REPL.actualCharCode = function (event) {
+  var code = event.keyCode;
+
   if (code >= 65 && code <= 90) {
     if (!event.shiftKey) {
       code += 32;
@@ -215,7 +217,7 @@ REPL.actualCharCode = function (code) {
 };
 
 REPL.update = function(event) {
-  code = this.actualCharCode(event.keyCode);
+  code = this.actualCharCode(event);
 
   if (!~code) {
     return;
