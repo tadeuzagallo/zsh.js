@@ -28,6 +28,8 @@ What I intend to implement next:
 * auto completion for paths
 * add support to pipe commands
 * add the binds for tmux, some functionality is built but not accessible
+* copy and paste
+* C-c to clear line
 * `vim`
 * `mkdir`
 * add help for methods
