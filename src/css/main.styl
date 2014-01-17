@@ -56,12 +56,12 @@ a
 
 // buttons
 
-#buttons
+#buttons {
   float left
-  width 200px
+  width 90px
   height 100%
 
-  a
+  a {
     display block
     float left
     width 12px
@@ -69,6 +69,17 @@ a
     margin-left 8px
     margin-top 5px
     cursor pointer
+  }
+}
+
+#social-buttons {
+  float left
+  margin-top 1px
+
+  .tweet {
+    margin-left 8px
+  }
+}
 
 for button-name in close minimize maximize
   #buttons
@@ -233,7 +244,8 @@ for button-name in close minimize maximize
 
 #content {
   float left
-  width 100%
+  width 90%
+  padding-right 10%
   height s('calc(100% - %s - %s - %s)', bar-height, statusbar-height, 8px)
   padding-top 2px
   overflow auto
@@ -298,3 +310,15 @@ for button-name in close minimize maximize
 .string {
   color yellow
 }
+
+#fork {
+  position absolute
+  top bar-height + 1
+  right 0
+  width 23%
+  height auto
+  max-width 149px
+  max-height 149px
+  border 0
+}
+
