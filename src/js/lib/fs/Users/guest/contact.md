@@ -1,4 +1,4 @@
-# All my contacts, feel free to reach me at any
+# All my contacts, feel free to reach me at any of these
 
 * <a href="mailto:tadeuzagallo@gmail.com" alt="Email">[Email](mailto:tadeuzagallo@gmail.com)</a>
 * <a href="https://github.com/tadeuzagallo" alt="GitHub" target="_blank">[GitHub](https://github.com/tadeuzagallo)</a>
