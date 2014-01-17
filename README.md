@@ -16,7 +16,7 @@ Right now you can use the follow shell functions:
 
 And the functionalities
 
-* Autocomplete
+* Autocomplete for commands
 * Syntax Highlight
 * Commands History
 
@@ -25,6 +25,7 @@ The other executable commands are just to show stuff about me... (since it was m
 What I intend to implement next:
 
 * `less`
+* auto completion for paths
 * add support to pipe commands
 * add the binds for tmux, some functionality is built but not accessible
 * `vim`
