@@ -1,3 +1,4 @@
+require('./lib/site-helpers');
 require('./main');
 
 document.addEventListener('DOMContentLoaded', function (e) {

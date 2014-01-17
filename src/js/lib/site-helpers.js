@@ -1,4 +1,4 @@
-var CommandManager = require('../command-manager');
+var CommandManager = require('./command-manager');
 
 CommandManager.alias('about',    'cat ~/about.md');
 CommandManager.alias('contact',  'cat ~/contact.md');
