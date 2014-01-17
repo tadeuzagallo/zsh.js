@@ -51,11 +51,8 @@ REPL.use = function (span) {
   }
 
   this.span = span;
-  var self = this;
 
-  window.onkeydown = function(e) {
-    self.parse(e);
-  };
+  window.onkeydown = this.parse;
 
   this.write();
 
@@ -72,23 +69,23 @@ REPL.parse = function (event) {
   switch (event.keyCode) {
     case LEFT:
     case RIGHT:
-      this.moveCaret(event.keyCode);
+      REPL.moveCaret(event.keyCode);
       break;
     case UP:
     case DOWN:
-      this.navigateHistory(event.keyCode);
+      REPL.navigateHistory(event.keyCode);
       break;
     case TAB:
-      this.autoComplete();
+      REPL.autoComplete();
       break;
     case ENTER:
-      this.submit();
+      REPL.submit();
       break;
     case BACKSPACE:
-      this.backspace();
+      REPL.backspace();
       break;
     default:
-      this.update(event);
+      REPL.update(event);
   }
 };
 
@@ -218,6 +215,7 @@ REPL.actualCharCode = function (event) {
 
 REPL.update = function(event) {
   code = this.actualCharCode(event);
+  console.log(code);
 
   if (!~code) {
     return;
