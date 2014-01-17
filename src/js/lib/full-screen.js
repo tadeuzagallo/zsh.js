@@ -1,6 +1,8 @@
 module.exports = function() {
   var elem = document.body;
 
+  window.onresize = Terminal.scroll;
+
   document.getElementById('full-screen').onclick = function (e) {
     e.preventDefault();
 
