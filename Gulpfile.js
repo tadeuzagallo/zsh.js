@@ -31,11 +31,11 @@ function exec(cmd) {
   var child = require('child_process').spawn('bash', ['-c', cmd]);
 
   child.stderr.on('data', function(data) {
-   console.log('stderr:' + data);
+    console.log('stderr:' + data);
   });
 
   child.stdout.on('data', function(data) {
-   console.log(data.toString());
+    console.log(data.toString());
   });
 }
 
@@ -53,16 +53,26 @@ gulp.task('lr-server', function () {
 });
 
 gulp.task('commands', function () {
-  var commands =
-    fs.readdirSync('src/js/lib/commands')
-      .filter(function (f) {
-        return f[0] != '.' && f.substr(-3) == '.js';
-      }).map(function (f) {
-        exec('ln -fh ' + __dirname + '/src/js/lib/commands/' + f + ' src/js/lib/fs/usr/bin/' + f.slice(0, -3));
-        return 'require("' + './commands/' + f + '");';
-      });
+  if (production) {
+    gulp.run('clean', _commands);
+  } else {
+    _commands();
+  }
 
-  fs.writeFileSync('src/js/lib/commands.js', commands.join('\n'));
+  function _commands() {
+    var commands = fs.readdirSync('src/js/lib/commands')
+    .filter(function (f) {
+      return f[0] != '.' && f.substr(-3) == '.js';
+    }).map(function (f) {
+      if (production) {
+        exec('ln -fh ' + __dirname + '/src/js/lib/commands/' + f + ' src/js/lib/fs/usr/bin/' + f.slice(0, -3));
+      }
+
+      return 'require("' + './commands/' + f + '");';
+    });
+
+    fs.writeFileSync('src/js/lib/commands.js', commands.join('\n'));
+  }
 });
 
 gulp.task('file-system', function () {
@@ -100,62 +110,62 @@ gulp.task('file-system', function () {
 
 gulp.task('jshint', function() {
   gulp.src(['Gulpfile.js', 'spec/**/*.js', 'src/js/**/*.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+  .pipe(jshint())
+  .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('js', ['jshint', 'commands', 'file-system'], function () {
   var src = config.site ? 'src/js/site.js' : 'src/js/main.js';
 
   gulp.src(src)
-    .pipe(browserify({ debug: !production }))
-    .pipe(concat('all.js'))
-    .pipe(gulpif(production, uglify()))
-    .pipe(gulp.dest('out/js'))
-    .pipe(gulpif(production, gzip()))
-    .pipe(gulpif(production, gulp.dest('out/js')))
-    .pipe(refresh(server));
+  .pipe(browserify({ debug: !production }))
+  .pipe(concat('all.js'))
+  .pipe(gulpif(production, uglify()))
+  .pipe(gulp.dest('out/js'))
+  .pipe(gulpif(production, gzip()))
+  .pipe(gulpif(production, gulp.dest('out/js')))
+  .pipe(refresh(server));
 });
 
 gulp.task('css', function () {
   gulp.src('src/css/**/*.styl')
-    .pipe(stylus({ set: production ? ['compress'] : [] }))
-    .pipe(concat('all.css'))
-    .pipe(gulp.dest('out/css'))
-    .pipe(gulpif(production, gzip()))
-    .pipe(gulp.dest('out/css'))
-    .pipe(refresh(server));
+  .pipe(stylus({ set: production ? ['compress'] : [] }))
+  .pipe(concat('all.css'))
+  .pipe(gulp.dest('out/css'))
+  .pipe(gulpif(production, gzip()))
+  .pipe(gulp.dest('out/css'))
+  .pipe(refresh(server));
 });
 
 gulp.task('images', function () {
   gulp.src('src/images/**')
-    .pipe(gulpif(production, imagemin()))
-    .pipe(gulp.dest('out/images'))
-    .pipe(refresh(server));
+  .pipe(gulpif(production, imagemin()))
+  .pipe(gulp.dest('out/images'))
+  .pipe(refresh(server));
 });
 
 gulp.task('html', function () {
   gulp.src('src/**/*.haml')
-    .pipe(haml({ optimize: production }))
-    .pipe(gulp.dest('out'))
-    .pipe(gulpif(production, gzip()))
-    .pipe(gulp.dest('out'))
-    .pipe(refresh(server));
+  .pipe(haml({ optimize: production }))
+  .pipe(gulp.dest('out'))
+  .pipe(gulpif(production, gzip()))
+  .pipe(gulp.dest('out'))
+  .pipe(refresh(server));
 });
 
 gulp.task('start-server', function() {
   express()
-    .use(express.static(path.resolve("./out")))
-    .use(express.directory(path.resolve("./out")))
-    .listen(config.port, function() {
-      console.log("Listening on ", config.port);
-    });
+  .use(express.static(path.resolve("./out")))
+  .use(express.directory(path.resolve("./out")))
+  .listen(config.port, function() {
+    console.log("Listening on ", config.port);
+  });
 });
 
 
 gulp.task('spec', ['js'], function () {
   gulp.src('spec/**/*-spec.js')
-    .pipe(mocha());
+  .pipe(mocha());
 });
 
 gulp.task('build', ['js', 'css', 'images', 'html']);
