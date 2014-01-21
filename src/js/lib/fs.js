@@ -1,7 +1,7 @@
 var CommandManager = require('./command-manager');
 
 var FS = {};
-var FILE_SYSTEM_KEY = 'file-system';
+var FILE_SYSTEM_KEY = 'file_system';
 
 FS.root = JSON.parse(localStorage.getItem(FILE_SYSTEM_KEY)) || require('./file-system.json');
 FS.currentPath = FS.home = '/Users/guest';
@@ -139,11 +139,7 @@ FS.cat =  function (args, stdout) {
 
 FS.writeFS = function () {
   console.log('writing...');
-  localStorage.setItem(FILE_SYSTEM_KEY, JSON.stringify({
-    currentDir: FS.currentDir,
-    currentPath: FS.currentPath,
-    root: FS.root
-  }));
+  localStorage.setItem(FILE_SYSTEM_KEY, JSON.stringify(FS.root));
 };
 
 CommandManager.register('ls', FS.ls);
