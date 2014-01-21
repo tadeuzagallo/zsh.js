@@ -1,10 +1,10 @@
 var CommandManager = require('./command-manager');
 
 var FS = {};
+var FILE_SYSTEM_KEY = 'file-system';
 
+FS.root = JSON.parse(localStorage.getItem(FILE_SYSTEM_KEY)) || require('./file-system.json');
 FS.currentPath = FS.home = '/Users/guest';
-FS.root = require('./file-system.json');
-
 FS.currentDir = FS.root.Users.guest;
 
 FS.pwd = function (compress, stdout) {
@@ -114,25 +114,6 @@ FS.notFound = function (cmd, arg) {
   return FS.error(cmd, arg, 'No such file or directory');
 };
 
-FS.cd = function (args, stdout) {
-  var directory = args.arguments[0] || '~';
-
-  var path = FS.translatePath(directory);
-  var dir = FS.open(path);
-
-  if (dir) {
-    if (typeof(dir) === 'object') {
-      FS.currentPath = path;
-      FS.currentDir = dir;
-      stdout('');
-    } else {
-      stdout(FS.error('cd', directory, 'Is a file'));
-    }
-  } else {
-    stdout(FS.notFound('cd', directory));
-  }
-};
-
 FS.autocomplete = function () {
 };
 
@@ -154,6 +135,15 @@ FS.cat =  function (args, stdout) {
   });
 
   stdout(out.join('\n'));
+};
+
+FS.writeFS = function () {
+  console.log('writing...');
+  localStorage.setItem(FILE_SYSTEM_KEY, JSON.stringify({
+    currentDir: FS.currentDir,
+    currentPath: FS.currentPath,
+    root: FS.root
+  }));
 };
 
 CommandManager.register('ls', FS.ls);

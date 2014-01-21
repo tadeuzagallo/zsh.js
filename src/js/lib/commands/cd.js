@@ -20,5 +20,6 @@ function cd(args, stdin, stdout, stderr, next) {
     stderr.write(FS.notFound('cd', directory));
   }
 
+  FS.writeFS();
   next();
 }
