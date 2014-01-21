@@ -125,6 +125,9 @@ REPL.navigateHistory = function (direction) {
 };
 
 REPL.submit = function () {
+  this.index = this.input.length;
+  this.write();
+
   var input = this.input.trim();
   var cmd = this.command();
   var args = this.commandArgsString();
