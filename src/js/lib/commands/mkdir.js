@@ -1,20 +1,18 @@
 var CommandManager = require('../command-manager');
 var FS = require('../fs');
+var File = require('../file');
 
 CommandManager.register('mkdir', mkdir);
 
 function mkdir(args, stdin, stdout, stderr, next) {
   args.arguments.forEach(function (arg) {
-    var path = arg.split('/');
-    var dirName = path.pop();
-    path = path.join('/');
-    var dir = FS.open(path);
+    var file = new File(arg);
 
-    if (dir === undefined) {
+    if (!file.parentExists()) {
       stderr.write(FS.notFound('mkdir', path));
-    } else if (typeof(dir) !== 'object'){
+    } else if (!file.isValid()) {
       stderr.write(FS.error('mkdir', path, 'Not a directory'));
-    } else if (dir[dirName] !== undefined) {
+    } else if (file.exists()) {
       stderr.write(FS.error('mkdir', path, 'File exists'));
     } else {
       dir[dirName] = {};
