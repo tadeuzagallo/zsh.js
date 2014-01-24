@@ -78,13 +78,17 @@ CommandManager.parse = function (cmd) {
       file.clear();
     }
 
-    stdout = new stream.PassThrough();
-    stdout.on('data', function(data) {
+    var _stdout = new stream.PassThrough();
+    _stdout.on('data', function(data) {
       file.write(data + '\n', true, true);
     });
 
+    if (prev !== '2') {
+      stdout = _stdout;
+    }
+
     if (prev === '2' || prev === '&') {
-      stderr = stdout;
+      stderr = _stdout;
     }
 
     var _next = next;
