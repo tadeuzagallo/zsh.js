@@ -58,7 +58,13 @@ ArgsParser.parse = function (args) {
     }
 
     if (arg.substr(0, 2) === '--') {
-      addOption(arg.substr(2), args[++i]);
+      var next = args[i+1];
+      if (next && next[0] !== '-') {
+        addOption(arg.substr(2), next);
+        i++;
+      } else {
+        addOption(arg.substr(2));
+      }
     } else if (arg[0] === '-') {
       [].forEach.call(arg.substr(1), addOption);
     } else {

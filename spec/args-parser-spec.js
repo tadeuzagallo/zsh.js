@@ -53,4 +53,11 @@ describe('args-parser', function () {
       ArgsParser.parse('--foo "bar baz');
     }).to.throw();
   });
+
+  it('should parse two followed double dashed options', function () {
+    expect(ArgsParser.parse('--foo --bar').options).to.be.deep.equal({
+      foo: true,
+      bar: true
+    });
+  });
 });
