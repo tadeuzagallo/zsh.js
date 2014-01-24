@@ -86,6 +86,12 @@ CommandManager.parse = function (cmd) {
     if (prev === '2' || prev === '&') {
       stderr = stdout;
     }
+
+    var _next = next;
+    next = function () {
+      FS.writeFS();
+      _next();
+    };
   }
 
   CommandManager.exec(command, args, stdin, stdout, stderr, next);
