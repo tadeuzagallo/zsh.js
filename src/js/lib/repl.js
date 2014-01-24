@@ -1,4 +1,5 @@
 var CommandManager = require('./command-manager');
+var FS = require('./fs');
 
 var REPL_MODE_DEFAULT = 1;
 var REPL_MODE_VI = 1;
@@ -76,7 +77,7 @@ REPL.parse = function (event) {
       REPL.navigateHistory(event.keyCode);
       break;
     case TAB:
-      REPL.autoComplete();
+      REPL.autocomplete();
       break;
     case ENTER:
       REPL.submit();
@@ -98,17 +99,29 @@ REPL.moveCaret = function (direction) {
     this.write();
 };
 
-REPL.autoComplete = function () {
-  if (this.command() === this.input) {
-    options = CommandManager.autoComplete(this.command());
+REPL.autocomplete = function () {
+  var options;
+  var path = false;
 
-    if (options.length === 1) {
-      this.input = options.shift() + ' ';
-      this.index = this.input.length;
-      this.write();
+  if (this.command() === this.input) {
+    options = CommandManager.autocomplete(this.command());
+  } else {
+    path = this.input.split(' ').pop();
+    options = FS.autocomplete(path);
+  }
+
+  if (options.length === 1) {
+    if (path !== false) {
+      this.input += options.shift().substr(path.length);
     } else {
-      this.trigger('output', options.join(' '));
+      this.input = options.shift() + ' ';
     }
+
+    this.index = this.input.length;
+    this.write();
+  } else if (options.length){
+    Terminal.stdout.write(options.join(' '));
+    Terminal.prompt();
   }
 };
 

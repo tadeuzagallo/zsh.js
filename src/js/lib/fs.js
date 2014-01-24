@@ -114,7 +114,22 @@ FS.notFound = function (cmd, arg) {
   return FS.error(cmd, arg, 'No such file or directory');
 };
 
-FS.autocomplete = function () {
+FS.autocomplete = function (path) {
+  path = path.split('/');
+  var fileName = path.pop().toLowerCase();
+  var parentPath = path.join('/');
+  var dir = FS.open(parentPath);
+  var options = [];
+
+  if (dir) {
+    for (var key in dir) {
+      if (key.substr(0, fileName.length).toLowerCase() === fileName) {
+        options.push(key);
+      }
+    }
+  }
+
+  return options;
 };
 
 FS.cat =  function (args, stdout) {
