@@ -43,8 +43,8 @@ CommandManager.parse = function (cmd) {
   var index;
 
   if (~(index = args.indexOf('>'))) {
-    var prev = cmd[index-1];
-    var append = cmd[index+1] === '>';
+    var prev = args[index-1];
+    var append = args[index+1] === '>';
     var init = index;
 
     if (~(['1','2','&']).indexOf(prev)) {
@@ -53,10 +53,8 @@ CommandManager.parse = function (cmd) {
     
     var _args = args.substr(0, init);
     args = args.substr(index+append+1).split(' ').filter(String);
-    console.log(_args, 123, args);
     var path = args.shift();
     args = _args + args.join(' ');
-    console.log(command, 123, args, 123, path);
 
     if (!path) {
       stdout.write('zsh: parse error near `\\n\'');
