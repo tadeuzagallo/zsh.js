@@ -5,7 +5,7 @@ var stream = require('stream');
 var bindFullScreen = require('./full-screen');
 var pwd = require('./commands/pwd');
 
-(window || GLOBAL).Terminal = {};
+(typeof window === 'undefined' ? GLOBAL : window).Terminal = {};
 
 Terminal.$PS1 = function () {
   return '<span class="who">guest</span> ' +
