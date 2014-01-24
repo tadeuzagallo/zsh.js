@@ -14,6 +14,8 @@ ArgsParser.parseStrings = function(rawString) {
           _args.push(word);
           word = '';
           string = null;
+        } else {
+          word += char;
         }
       } else {
         string = char;
@@ -28,7 +30,7 @@ ArgsParser.parseStrings = function(rawString) {
 
   if (string) {
     throw new Error('unterminated string');
-  } else {
+  } else if (word) {
     _args.push(word);
   }
 
