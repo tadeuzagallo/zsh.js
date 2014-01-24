@@ -188,9 +188,9 @@ gulp.task('server', ['build', 'lr-server', 'start-server'], function () {
   });
 });
 
-gulp.task('spec-live', function(){
+gulp.task('spec-live', ['spec'], function(){
   gulp.watch('src/js/**/*.js', function () {
-    gulp.run('js');
+    gulp.run('js', 'spec');
   });
 
   gulp.watch('spec/**/*.js', function(){
