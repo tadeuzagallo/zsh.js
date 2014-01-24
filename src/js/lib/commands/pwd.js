@@ -14,6 +14,8 @@ function pwd(args, stdin, stdout, stderr, next) {
     stdout.write(_pwd);
     next();
   } else {
-    return pwd;
+    return _pwd;
   }
 }
+
+module.exports = pwd;
