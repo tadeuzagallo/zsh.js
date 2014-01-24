@@ -15,8 +15,12 @@ describe('args-parser', function () {
       expect(ArgsParser.parseStrings('"foo bar"')).to.be.deep.equal(['foo bar']);
     });
 
-    it('should parse nested strings', function () {
+    it('should parse nested quotes', function () {
       expect(ArgsParser.parseStrings('"alert(\'foo bar\');"')).to.be.deep.equal(['alert(\'foo bar\');']);
+    });
+
+    it('should accept scaped quotes', function () {
+      expect(ArgsParser.parseStrings('"alert(\\"foo bar\\");"')).to.be.deep.equal(['alert("foo bar");']);
     });
   });
 

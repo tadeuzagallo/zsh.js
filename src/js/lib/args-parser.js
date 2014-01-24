@@ -11,9 +11,13 @@ ArgsParser.parseStrings = function(rawString) {
     if (char === '"' || char === "'") {
       if (string) {
         if (char === string) {
-          _args.push(word);
-          word = '';
-          string = null;
+          if (rawString[i-1] === '\\') {
+            word = word.slice(0, -1) + char;
+          } else {
+            _args.push(word);
+            word = '';
+            string = null;
+          }
         } else {
           word += char;
         }
