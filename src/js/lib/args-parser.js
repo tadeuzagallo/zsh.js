@@ -1,21 +1,13 @@
 var ArgsParser = {};
 
-ArgsParser.parse = function (args) {
-  args = ([args] + '').trim();
-
-  var out =  {
-    arguments: [],
-    options: {},
-    raw: args
-  };
-
+ArgsParser.parseStrings = function(rawString) {
   var _args = [];
   var word = '';
   var string = false;
   var i, l;
 
-  for (i = 0, l = args.length; i < l; i++) {
-    var char = args[i];
+  for (i = 0, l = rawString.length; i < l; i++) {
+    var char = rawString[i];
     if (char === '"' || char === "'") {
       if (string) {
         if (char === string) {
@@ -25,10 +17,6 @@ ArgsParser.parse = function (args) {
         }
       } else {
         string = char;
-        if (word) {
-          _args.push(word);
-          word = '';
-        }
       }
     } else if (char === ' ' && !string) {
       _args.push(word);
@@ -44,7 +32,19 @@ ArgsParser.parse = function (args) {
     _args.push(word);
   }
 
-  args = _args;
+  return _args;
+};
+
+ArgsParser.parse = function (args) {
+  args = ([args] + '').trim();
+
+  var out =  {
+    arguments: [],
+    options: {},
+    raw: args
+  };
+
+  args = ArgsParser.parseStrings(args);
 
   function addOption(option, value) {
     out.options[option] = typeof(value) === 'string' ? value : true;
