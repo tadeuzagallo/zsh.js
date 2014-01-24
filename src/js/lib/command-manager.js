@@ -9,11 +9,12 @@ CommandManager.isValid = function (cmd) {
   return !!(this.commands[cmd] || this.aliases[cmd]);
 };
 
-CommandManager.autoComplete = function (cmd) {
+CommandManager.autocomplete = function (cmd) {
   var matches = [];
+  cmd = cmd.toLowerCase();
 
   (Object.keys(this.commands).concat(Object.keys(this.aliases))).forEach(function (command) {
-    if (command.substr(0, cmd.length) === cmd) {
+    if (command.substr(0, cmd.length).toLowerCase() === cmd) {
       matches.push(command);
     }
   });
