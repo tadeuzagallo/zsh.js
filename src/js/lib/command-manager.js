@@ -1,4 +1,7 @@
 var ArgsParser = require('./args-parser');
+var FS = require('./fs');
+var File = require('./file');
+var stream = require('stream');
 
 var CommandManager = {
   commands: {},
@@ -21,17 +24,93 @@ CommandManager.autocomplete = function (cmd) {
 
   return matches;
 };
+CommandManager.parse = function (cmd) {
+  if (~cmd.indexOf('|')) {
+    cmd = cmd.split('|');
+    cmd.forEach(CommandManager.parse);
+  }
+
+  cmd = cmd.split(' ');
+  var command = cmd.shift();
+  var args = cmd.join(' ');
+  var stdin = Terminal.stdin;
+  var stdout = Terminal.stdout;
+  var stderr = Terminal.stderr;
+  var next = function () {
+    Terminal.prompt();
+  };
+
+  var index;
+
+  if (~(index = args.indexOf('>'))) {
+    var prev = cmd[index-1];
+    var append = cmd[index+1] === '>';
+    var init = index;
+
+    if (~(['1','2','&']).indexOf(prev)) {
+      init--;
+    }
+    
+    var _args = args.substr(0, init);
+    args = args.substr(index+append+1).split(' ').filter(String);
+    console.log(_args, 123, args);
+    var path = args.shift();
+    args = _args + args.join(' ');
+    console.log(command, 123, args, 123, path);
+
+    if (!path) {
+      stdout.write('zsh: parse error near `\\n\'');
+      return;
+    }
+
+    var file = new File(path);
+
+    if (!file.parentExists()) {
+      stdout.write('zsh: no such file or directory: ' + file.path);
+      return;
+    } else if (!file.isValid()) {
+      stdout.write('zsh: not a directory: ' + file.path);
+      return;
+    } else if (file.isDir()) {
+      stdout.write('zsh: is a directory: ' + file.path);
+      return;
+    }
+
+    if (!append) {
+      file.clear();
+    }
+
+    stdout = new stream.PassThrough();
+    stdout.on('data', function(data) {
+      file.write(data + '\n', true, true);
+    });
+
+    if (prev === '2' || prev === '&') {
+      stderr = stdout;
+    }
+  }
+
+  CommandManager.exec(command, args, stdin, stdout, stderr, next);
+};
 
 CommandManager.exec = function (cmd, args, stdin, stdout, stderr, next) {
   if (this.aliases[cmd]) {
     var line = (this.aliases[cmd] + ' ' + args).trim().split(' ');
     return this.exec(line.shift(), line.join(' '), stdin, stdout, stderr, next);
   }
+
   if (!this.commands[cmd]) {
-    stdout.write('zsh: command not found: ' + cmd);
+    stderr.write('zsh: command not found: ' + cmd);
     next();
   } else {
-    this.commands[cmd].call(undefined, ArgsParser.parse(args), stdin, stdout, stderr, next);
+    try {
+      args = ArgsParser.parse(args);
+      this.commands[cmd].call(undefined, args, stdin, stdout, stderr, next);
+    } catch (err) {
+      stderr.write('zsh: ' + err.message);
+      next();
+    }
+
   }
 };
 

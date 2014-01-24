@@ -143,8 +143,6 @@ REPL.submit = function () {
   this.write();
 
   var input = this.input.trim();
-  var cmd = this.command();
-  var args = this.commandArgsString();
 
   this._history[this._history.length] = this.input;
   localStorage.setItem(HISTORY_STORAGE_KEY, this._history);
@@ -153,14 +151,10 @@ REPL.submit = function () {
 
   this.clear();
 
-  function next() {
-    Terminal.prompt();
-  }
-
   if (input) {
-    CommandManager.exec(cmd, args, null, Terminal.stdout, Terminal.stderr, next);
+    CommandManager.parse(input);
   } else {
-    next();
+    Terminal.prompt();
   }
 };
 
