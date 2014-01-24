@@ -1,4 +1,5 @@
 var CommandManager = require('./command-manager');
+var localStorage = require('./local-storage');
 var FS = require('./fs');
 
 var REPL_MODE_DEFAULT = 1;

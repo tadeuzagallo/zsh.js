@@ -1,4 +1,5 @@
 var CommandManager = require('./command-manager');
+var localStorage = require('./local-storage');
 
 var FS = {};
 var FILE_SYSTEM_KEY = 'file_system';
