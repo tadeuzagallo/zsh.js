@@ -3,13 +3,14 @@ var FS = require('./fs');
 var CommandManager = require('./command-manager');
 var stream = require('stream');
 var bindFullScreen = require('./full-screen');
+var pwd = require('./commands/pwd');
 
 (window || GLOBAL).Terminal = {};
 
 Terminal.$PS1 = function () {
   return '<span class="who">guest</span> ' +
     'on ' +
-    '<span class="where">' + FS.pwd(true) + '</span> '+
+    '<span class="where">' + pwd(true) + '</span> '+
     '<span class="branch">±master</span>&gt;';
 };
 
@@ -31,7 +32,7 @@ Terminal.prompt = function () {
 
   REPL.use(code);
 
-  this.status(FS.pwd(true));
+  this.status(pwd(true));
 
   this.scroll();
 };
