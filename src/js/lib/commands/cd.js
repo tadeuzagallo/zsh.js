@@ -9,7 +9,7 @@ function cd(args, stdin, stdout, stderr, next) {
   var path = FS.translatePath(directory);
   var dir = FS.open(path);
 
-  if (dir) {
+  if (dir !== undefined) {
     if (typeof(dir) === 'object') {
       FS.currentPath = path;
       FS.currentDir = dir;

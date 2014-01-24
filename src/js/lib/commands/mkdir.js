@@ -10,11 +10,11 @@ function mkdir(args, stdin, stdout, stderr, next) {
     path = path.join('/');
     var dir = FS.open(path);
 
-    if (!dir) {
+    if (dir === undefined) {
       stderr.write(FS.notFound('mkdir', path));
     } else if (typeof(dir) !== 'object'){
       stderr.write(FS.error('mkdir', path, 'Not a directory'));
-    } else if (dir[dirName]) {
+    } else if (dir[dirName] !== undefined) {
       stderr.write(FS.error('mkdir', path, 'File exists'));
     } else {
       dir[dirName] = {};

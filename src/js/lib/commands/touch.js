@@ -10,11 +10,11 @@ function touch(args, stdin, stdout, stderr, next) {
     path = path.join('/');
     var dir = FS.open(path);
 
-    if (!dir) {
+    if (typeof(dir) === 'undefined') {
       stderr.write(FS.notFound('touch', arg));
     } else if (typeof(dir) !== 'object'){
       stderr.write(FS.error('touch', path, 'Not a directory'));
-    } else if (!dir[fileName]) {
+    } else if (dir[fileName] === undefined) {
       dir[fileName] = '';
     }
   });

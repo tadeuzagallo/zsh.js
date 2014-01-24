@@ -14,7 +14,7 @@ function ls(args, stdin, stdout, stderr, next) {
     var dir = FS.open(arg);
 
     if (typeof(dir) !== 'object') {
-      if (!dir) {
+      if (dir === undefined) {
         stderr.write(FS.notFound('ls', arg));
       } else {
         stderr.write(FS.error('ls', arg, 'Is a file'));

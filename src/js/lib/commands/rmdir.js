@@ -10,11 +10,11 @@ function rmdir(args, stdin, stdout, stderr, next) {
     path = path.join('/');
     var dir = FS.open(path);
 
-    if (!dir) {
+    if (dir === undefined) {
       stderr.write(FS.notFound('rmdir', arg));
     } else if (typeof(dir) !== 'object' || typeof(dir[dirName]) !== 'object'){
       stderr.write(FS.error('rmdir', arg, 'Not a directory'));
-    } else if (!dir[dirName]) {
+    } else if (dir[dirName] === undefined) {
       stderr.write(FS.notFound('rmdir', arg));
     } else {
       delete dir[dirName];

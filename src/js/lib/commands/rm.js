@@ -10,11 +10,11 @@ function rm(args, stdin, stdout, stderr, next) {
     path = path.join('/');
     var dir = FS.open(path);
 
-    if (!dir) {
+    if (dir === undefined) {
       stderr.write(FS.notFound('rm', arg));
     } else if (typeof(dir) !== 'object'){
       stderr.write(FS.error('rm', arg, 'Not a directory'));
-    } else if (typeof(dir[fileName]) === 'undefined') {
+    } else if (dir[fileName] === undefined) {
       stderr.write(FS.notFound('rm', arg));
     } else if (typeof(dir[fileName]) === 'object') {
       stderr.write(FS.error('rm', arg, 'is a directory'));
