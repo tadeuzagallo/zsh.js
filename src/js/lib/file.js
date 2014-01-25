@@ -60,6 +60,10 @@ var File = (function () {
     }
   };
 
+  File.prototype.read = function (cb) {
+    cb(this.dir[this.filename]);
+  };
+
   return File;
 })();
 
