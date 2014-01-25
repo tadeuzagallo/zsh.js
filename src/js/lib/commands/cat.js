@@ -4,22 +4,19 @@ var FS = require('../fs');
 CommandManager.register('cat', cat);
 
 function cat(args, stdin, stdout, stderr, next) {
-  var out = [];
-
   args.arguments.forEach(function (arg) {
     var content = FS.open(arg);
 
     if (content !== undefined) {
       if (typeof(content) === 'string') {
-        out.push(content);
+        stdout.write(content);
       } else {
-        out.push(FS.error('cat', arg, 'Is a directory'));
+        stderr.write(FS.error('cat', arg, 'Is a directory'));
       }
     } else {
-      out.push(FS.notFound('cat', arg));
+      stderr.write(FS.notFound('cat', arg));
     }
   });
 
-  stdout.write(out.join('\n'));
   next();
 }
