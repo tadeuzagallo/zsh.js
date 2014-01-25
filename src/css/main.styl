@@ -278,6 +278,13 @@ for button-name in close minimize maximize
 .code {
   color white
   white-space pre-wrap
+
+  &.stderr::before {
+    content '✖'
+    float left
+    color red
+    margin-right 7px
+  }
 }
 
 .caret {

@@ -62,17 +62,17 @@ Terminal.update = function () {
 
 Terminal.stdout = new stream.PassThrough();
 Terminal.stdout.on('data', function (data) {
-  output(data.toString());
+  output(data.toString(), 'stdout');
 });
 
 Terminal.stderr = new stream.PassThrough();
 Terminal.stderr.on('data', function (data) {
-  output(data.toString());
+  output(data.toString(), 'stderr');
 });
 
-function output (_output) {
+function output (_output, _class) {
   var out = document.createElement('div');
-  out.className = 'code';
+  out.className = 'code ' + [_class];
   out.innerHTML = _output;
 
   Terminal.container.appendChild(out);
