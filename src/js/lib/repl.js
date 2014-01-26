@@ -70,34 +70,38 @@ REPL.parse = function (event) {
 
   switch (event.keyCode) {
     case LEFT:
-    case RIGHT:
+      case RIGHT:
       REPL.moveCaret(event.keyCode);
-      break;
+    break;
     case UP:
-    case DOWN:
+      case DOWN:
       REPL.navigateHistory(event.keyCode);
-      break;
+    break;
     case TAB:
       REPL.autocomplete();
-      break;
+    break;
     case ENTER:
       REPL.submit();
-      break;
+    break;
     case BACKSPACE:
       REPL.backspace();
-      break;
+    break;
     default:
-      REPL.update(event);
+      if (event.ctrlKey) {
+        REPL.action(event);
+      } else {
+        REPL.update(event);
+      }
   }
 };
 
 REPL.moveCaret = function (direction) {
-    if (direction == LEFT) {
-      this.index = Math.max(this.index - 1, 0);
-    } else {
-      this.index = Math.min(this.index + 1, this.input.length + 1);
-    }
-    this.write();
+  if (direction == LEFT) {
+    this.index = Math.max(this.index - 1, 0);
+  } else {
+    this.index = Math.min(this.index + 1, this.input.length + 1);
+  }
+  this.write();
 };
 
 REPL.autocomplete = function () {
@@ -228,6 +232,14 @@ REPL.actualCharCode = function (event) {
   return code;
 };
 
+REPL.action = function(event) {
+  if (String.fromCharCode(event.keyCode) === 'C') {
+    this.index = this.input.length;
+    this.write();
+    this.input = '';
+    Terminal.prompt();
+  }
+}
 REPL.update = function(event) {
   code = this.actualCharCode(event);
 
