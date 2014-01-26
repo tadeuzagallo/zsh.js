@@ -113,7 +113,11 @@ REPL.autocomplete = function () {
 
   if (options.length === 1) {
     if (path !== false) {
-      this.input += options.shift().substr(path.length);
+      path = path.split('/');
+      path.pop();
+      path.push('');
+
+      this.input = this.input.replace(/ [^ ]*$/, ' ' + path.join('/') + options.shift());
     } else {
       this.input = options.shift() + ' ';
     }

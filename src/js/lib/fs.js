@@ -72,17 +72,25 @@ FS.notFound = function (cmd, arg) {
   return FS.error(cmd, arg, 'No such file or directory');
 };
 
-FS.autocomplete = function (path) {
-  path = path.split('/');
-  var fileName = path.pop().toLowerCase();
-  var parentPath = path.join('/');
-  var dir = FS.open(parentPath);
+FS.autocomplete = function (_path) {
+  var path = this.translatePath(_path);
   var options = [];
 
-  if (dir) {
-    for (var key in dir) {
-      if (key.substr(0, fileName.length).toLowerCase() === fileName) {
-        options.push(key);
+  if (path !== undefined) {
+    path = path.split('/');
+    var fileName = path.pop().toLowerCase();
+    var parentPath = path.join('/') || '/';
+    var dir = FS.open(parentPath);
+
+    if (dir) {
+      for (var key in dir) {
+        if (key.substr(0, fileName.length).toLowerCase() === fileName) {
+          if (typeof dir[key] === 'object') {
+            key += '/';
+          }
+
+          options.push(key);
+        }
       }
     }
   }
@@ -91,7 +99,6 @@ FS.autocomplete = function (path) {
 };
 
 FS.writeFS = function () {
-  console.log('writing...');
   localStorage.setItem(FILE_SYSTEM_KEY, JSON.stringify(FS.root));
 };
 
