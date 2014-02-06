@@ -239,7 +239,8 @@ REPL.action = function(event) {
     this.input = '';
     Terminal.prompt();
   }
-}
+};
+
 REPL.update = function(event) {
   code = this.actualCharCode(event);
 
