@@ -15,7 +15,7 @@ function mkdir(args, stdin, stdout, stderr, next) {
     } else if (file.exists()) {
       stderr.write(FS.error('mkdir', path, 'File exists'));
     } else {
-      dir[dirName] = {};
+      file.dir[file.filename] = {};
     }
   });
 
