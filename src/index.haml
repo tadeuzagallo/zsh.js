@@ -23,6 +23,18 @@
     %link(href="css/all.css" rel="stylesheet")
   %body
     #fb-root
+    #sidebar
+      #header
+        %img(src="http://graph.facebook.com/tadeuzagallo/picture" width=30)
+        %span Tadeu Zagallo
+      %ul
+        %li.active
+          %img(src="images/icons/iterm.png" width=15)
+          Terminal
+        %li
+          %img(src="http://placehold.it/15x15" width=15)
+          Talks
+
     #container
       #bar
         #buttons
@@ -36,7 +48,7 @@
         %a#full-screen
       #content
       #status-bar
-    %a(href="https://github.com/tadeuzagallo/Terminal.js")
+    -#%a(href="https://github.com/tadeuzagallo/Terminal.js")
       %img#fork(alt="Fork me on GitHub" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png")
 
     %script(src="js/all.js")
