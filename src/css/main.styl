@@ -30,20 +30,32 @@ body
   font-family monaco, sans-serif
   font-size 12px
   background-color list_background
-  overflow hidden
 a
   color white
   text-decoration underline
 
-#container 
+#container {
+  display none
   float right
   position relative
-  width 85%
-  height 100%
+  width calc(100% - 200px)
+  min-height 100%
   border-radius 5px
-  overflow hidden
   background black
   box-shadow -1px 0 5px 1px #222C
+  color white
+
+  &.lock {
+    overflow hidden
+    height 100%
+  }
+}
+
+#terminal {
+  overflow hidden
+  height calc(100% - 45px)
+  width 100%
+}
 
 // top
 
@@ -160,8 +172,8 @@ for button-name in close minimize maximize
         padding 0 7px
         color #6B6B6B
 
-        &:after,
-        &:before {
+        &::after,
+        &::before {
           content ''
           position absolute
           left 100%
@@ -177,7 +189,7 @@ for button-name in close minimize maximize
           border-left-color #252525
         }
 
-        &:after {
+        &::after {
           top -2px
           z-index 1
           border-width 10px
@@ -196,7 +208,7 @@ for button-name in close minimize maximize
         height 100%
       }
 
-      &:after {
+      &::after {
         content ''
         display inline-block
         height 100%
@@ -216,13 +228,13 @@ for button-name in close minimize maximize
         }
 
         .index {
-          &:after,
+          &::after,
           &:before {
             border 0
           }
         }
 
-        &:after {
+        &::after {
           border-left-color white
         }
       }
@@ -235,11 +247,11 @@ for button-name in close minimize maximize
           .index {
             color #8DE0F8
 
-            &:before {
+            &::before {
               border-left-color #009ABA
             }
 
-            &:after {
+            &::after {
               border-left-color #8DE0F8
             }
           }
@@ -249,7 +261,7 @@ for button-name in close minimize maximize
           }
         }
 
-        &:after {
+        &::after {
           border-left-color #009ABA
         }
       }
@@ -357,6 +369,7 @@ for button-name in close minimize maximize
   text-shadow 1px 1px 1px #333
   font 14px arial narrow
   letter-spacing 1px
+  overflow-x hidden
 
   img {
     float left
@@ -364,7 +377,7 @@ for button-name in close minimize maximize
   }
 
   #header {
-    width 100%
+    width calc(100% - 15px)
     height 30px
     padding 15px
     background-color list_header
@@ -384,9 +397,34 @@ for button-name in close minimize maximize
       border-top 1px solid light_border
       border-bottom 1px solid dark_border
       padding 15px
+      cursor pointer
     }
     li.active {
       background-color list_selected
+
+      &::after {
+        content '×'
+        position absolute
+        left 175px
+        width 16px
+        height 16px
+        background #FFF3
+        border-radius 16px
+        text-align center
+        color #DDD
+      }
     }
   }
+}
+
+#contact {
+  color white
+  font 30px arial narrow
+  ul {
+    list-style none
+  }
+}
+
+#talks {
+  margin-left 15px
 }

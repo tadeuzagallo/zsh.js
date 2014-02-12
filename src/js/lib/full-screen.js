@@ -1,5 +1,5 @@
 module.exports = function() {
-  var elem = document.body;
+  var elem = document.getElementById('terminal');
 
   window.onresize = Terminal.scroll;
 

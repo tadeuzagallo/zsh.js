@@ -28,26 +28,20 @@
         %img(src="http://graph.facebook.com/tadeuzagallo/picture" width=30)
         %span Tadeu Zagallo
       %ul
-        %li.active
-          %img(src="images/icons/iterm.png" width=15)
+        %li#run-terminal
+          %img(src="images/icons/terminal.png" width=15)
           Terminal
-        %li
-          %img(src="http://placehold.it/15x15" width=15)
+        %li#run-talks
+          %img(src="images/icons/talks.png" width=15)
           Talks
-
+        %li#run-resume
+          %img(src="images/icons/resume.png" width=15)
+          Resume
+        %li#run-contact
+          %img(src="images/icons/gmail.png" width=15)
+          Contact
     #container
-      #bar
-        #buttons
-          %a#close
-          %a#minimize
-          %a#maximize
-        #social-buttons
-          .fb-like(data-href="http://tadeuzagallo.com" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true")
-          %a.tweet(href="https://twitter.com/share" class="twitter-share-button" data-via="tadeuzagallo" data-hashtags="WebTerminal") Tweet
-        #title 1. tmux
-        %a#full-screen
-      #content
-      #status-bar
+
     -#%a(href="https://github.com/tadeuzagallo/Terminal.js")
       %img#fork(alt="Fork me on GitHub" src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png")
 

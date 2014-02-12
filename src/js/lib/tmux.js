@@ -7,6 +7,7 @@ Tmux.init = function (terminal) {
 
   Terminal.container.innerHTML = '';
   Terminal.statusbar.innerHTML = '';
+  windows = [];
 
   Terminal._container = Terminal.container;
   Terminal.container = null;
