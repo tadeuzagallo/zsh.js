@@ -39,6 +39,14 @@ function exec(cmd) {
   });
 }
 
+gulp.task('resume', function () {
+  exec('./md2resume html src/resume.md out/');
+
+  if (production) {
+    setTimeout(function () { exec('gzip -k out/resume.html'); }, 500);
+  }
+});
+
 gulp.task('clean', function() {
   exec('rm -rf out');
   exec('rm src/js/lib/fs/usr/bin/*');
@@ -114,7 +122,7 @@ gulp.task('jshint', function() {
   .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('js', ['jshint', 'commands', 'file-system'], function () {
+gulp.task('js', ['resume', 'jshint', 'commands', 'file-system'], function () {
   var src = config.site ? 'src/js/site.js' : 'src/js/main.js';
 
   gulp.src(src)
