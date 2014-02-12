@@ -7,6 +7,7 @@ var path = require('path');
 
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
+var exec = require('gulp-exec');
 var gulpif = require('gulp-if');
 var gzip = require('gulp-gzip');
 var haml = require('gulp-haml');
@@ -27,7 +28,7 @@ var config = _.extend({
 console.log(config);
 var production = config.env === 'production';
 
-function exec(cmd) {
+function _exec(cmd) {
   var child = require('child_process').spawn('bash', ['-c', cmd]);
 
   child.stderr.on('data', function(data) {
@@ -39,17 +40,23 @@ function exec(cmd) {
   });
 }
 
-gulp.task('resume', function () {
-  exec('./md2resume html src/resume.md out/');
+gulp.task('compile-resume', function () {
+  gulp
+    .src('src/resume.md')
+    .pipe(exec('./md2resume html <%= file.path %> out/'));
+});
 
-  if (production) {
-    setTimeout(function () { exec('gzip -k out/resume.html'); }, 500);
-  }
+gulp.task('resume', ['compile-resume'], function () {
+  gulp
+    .src('out/resume.html')
+    .pipe(gulpif(production, gzip()))
+    .pipe(gulp.dest('out'));
 });
 
 gulp.task('clean', function() {
-  exec('rm -rf out');
-  exec('rm src/js/lib/fs/usr/bin/*');
+  gulp
+    .src(['out', 'src/js/lib/fs/usr/bin/*'])
+    .pipe(exec('rm -r <%= file.path %>'));
 });
 
 gulp.task('lr-server', function () {
@@ -60,13 +67,7 @@ gulp.task('lr-server', function () {
   });
 });
 
-gulp.task('commands', function () {
-  if (production) {
-    gulp.run('clean', _commands);
-  } else {
-    _commands();
-  }
-
+gulp.task('commands', ['clean'],  function () {
   function _commands() {
     var commands = fs.readdirSync('src/js/lib/commands')
     .filter(function (f) {
