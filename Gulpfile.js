@@ -26,16 +26,16 @@ var config = _.extend({
   env: 'development'
 }, gulp.env);
 console.log(config);
-var production = config.env === 'production' || ~config._.indexOf('deploy');
+var production = config.env === 'production' || config._.indexOf('deploy') !== -1;
 
 gulp.task('compile-resume', function () {
-  gulp
+  return gulp
     .src('src/resume.md')
     .pipe(exec('./md2resume html <%= file.path %> out/'));
 });
 
 gulp.task('resume', ['compile-resume'], function () {
-  gulp
+  return gulp
     .src('out/resume.html')
     .pipe(gulpif(production, gzip()))
     .pipe(gulp.dest('out'));
@@ -43,18 +43,18 @@ gulp.task('resume', ['compile-resume'], function () {
 
 
 gulp.task('jshint', function() {
-  gulp.src(['Gulpfile.js', 'spec/**/*.js', 'src/js/**/*.js'])
+  return gulp.src(['Gulpfile.js', 'spec/**/*.js', 'src/js/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('clean', function() {
-  gulp
+  return gulp
     .src(['out', 'src/js/lib/fs/usr/bin/*'])
     .pipe(exec('rm -r <%= file.path %>'));
 });
 
-gulp.task('commands', ['clean'],  function (cb) {
+gulp.task('commands', function (cb) {
   var commands = fs.readdirSync('src/js/lib/commands')
     .filter(function (f) {
       return f[0] != '.' && f.substr(-3) == '.js';
@@ -107,7 +107,7 @@ gulp.task('file-system', function (cb) {
 });
 
 gulp.task('js', ['resume', 'jshint', 'commands', 'file-system'], function () {
-  gulp.src('src/js/main.js')
+  return gulp.src('src/js/main.js')
     .pipe(browserify({ debug: !production }))
     .pipe(concat('all.js'))
     .pipe(gulpif(production, uglify()))
@@ -118,7 +118,7 @@ gulp.task('js', ['resume', 'jshint', 'commands', 'file-system'], function () {
 });
 
 gulp.task('css', function () {
-  gulp.src('src/css/**/*.styl')
+  return gulp.src('src/css/**/*.styl')
     .pipe(stylus({ set: production ? ['compress'] : [] }))
     .pipe(concat('all.css'))
     .pipe(gulp.dest('out/css'))
@@ -128,14 +128,14 @@ gulp.task('css', function () {
 });
 
 gulp.task('images', function () {
-  gulp.src('src/images/**')
+  return gulp.src('src/images/**')
     .pipe(gulpif(production, imagemin()))
     .pipe(gulp.dest('out/images'))
     .pipe(refresh(server));
 });
 
 gulp.task('html', function () {
-  gulp.src('src/**/*.haml')
+  return gulp.src('src/**/*.haml')
     .pipe(haml({ optimize: production }))
     .pipe(gulp.dest('out'))
     .pipe(gulpif(production, gzip()))
@@ -143,33 +143,41 @@ gulp.task('html', function () {
     .pipe(refresh(server));
 });
 
-gulp.task('build', ['js', 'css', 'images', 'html']);
+gulp.task('build', ['clean'], function() {
+  return gulp.run('js', 'css', 'images', 'html');
+});
 
-gulp.task('lr-server', function () {
+gulp.task('lr-server', function (cb) {
   server.listen(config.lrport, function (err) {
     if (err) {
       console.log(err);
     }
   });
+
+  cb(null);
 });
 
-gulp.task('start-server', function() {
+gulp.task('start-server', ['build', 'lr-server'], function(cb) {
   express()
     .use(express.static(path.resolve("./out")))
     .use(express.directory(path.resolve("./out")))
     .listen(config.port, function() {
       console.log("Listening on port %s...", config.port);
     });
+
+  cb(null);
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['start-server'], function(cb) {
   gulp.watch(['src/js/**/*.js'], ['js']);
   gulp.watch('src/css/**/*.styl', ['css']);
   gulp.watch('src/images/**', ['images']);
   gulp.watch('src/**/*.haml', ['html']);
+
+  cb(null);
 });
 
-gulp.task('server', ['build', 'lr-server', 'start-server', 'watch']);
+gulp.task('server', ['watch']);
 
 gulp.task('spec', ['js'], function () {
   gulp
@@ -182,7 +190,12 @@ gulp.task('spec-live', ['spec'], function(){
   gulp.watch('spec/**/*.js', ['spec']);
 });
 
-gulp.task('deploy', ['build'], function () {
+gulp.task('create-cname', ['build'], function (cb) {
   fs.writeFileSync('out/CNAME', 'tadeuzagallo.com');
-  exec('cd out && git init && git add -A . && git c -m "deploy" && git push --force git@github.com:tadeuzagallo/tadeuzagallo.github.io.git master');
+  cb(null);
+});
+
+gulp.task('deploy', ['create-cname'], function () {
+  return gulp.src('out')
+    .pipe(exec('cd <%= file.path %> && git init && git add -A . && git c -m "deploy" && git push --force git@github.com:tadeuzagallo/tadeuzagallo.github.io.git master'));
 });
