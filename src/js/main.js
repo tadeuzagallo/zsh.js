@@ -83,7 +83,12 @@ var Programs = (function () {
     },
     show: function (html) {
       showContainer();
-      container().innerHTML = html;
+      if (typeof html === 'string') {
+        container().innerHTML = html;
+      } else {
+        container().innerHTML = '';
+        container().appendChild(html);
+      }
     },
     close: function () {
       this.show('');
@@ -122,8 +127,11 @@ Programs.add('talks', function () {
 
 Programs.add('resume', true, function () {
   var iframe = document.createElement('iframe');
+  iframe.onload = function () {
+    this.style.height = this.contentWindow.document.body.scrollHeight + 'px';
+  };
   iframe.src = 'resume.html';
-  Programs.show(iframe.outerHTML);
+  Programs.show(iframe);
 });
 
 Programs.add('contact', function () {
