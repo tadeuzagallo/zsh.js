@@ -26,19 +26,7 @@ var config = _.extend({
   env: 'development'
 }, gulp.env);
 console.log(config);
-var production = config.env === 'production';
-
-function _exec(cmd) {
-  var child = require('child_process').spawn('bash', ['-c', cmd]);
-
-  child.stderr.on('data', function(data) {
-    console.log('stderr:' + data);
-  });
-
-  child.stdout.on('data', function(data) {
-    console.log(data.toString());
-  });
-}
+var production = config.env === 'production' || ~config._.indexOf('deploy');
 
 gulp.task('compile-resume', function () {
   gulp
@@ -53,23 +41,21 @@ gulp.task('resume', ['compile-resume'], function () {
     .pipe(gulp.dest('out'));
 });
 
+
+gulp.task('jshint', function() {
+  gulp.src(['Gulpfile.js', 'spec/**/*.js', 'src/js/**/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
 gulp.task('clean', function() {
   gulp
     .src(['out', 'src/js/lib/fs/usr/bin/*'])
     .pipe(exec('rm -r <%= file.path %>'));
 });
 
-gulp.task('lr-server', function () {
-  server.listen(config.lrport, function (err) {
-    if (err) {
-      console.log(err);
-    }
-  });
-});
-
-gulp.task('commands', ['clean'],  function () {
-  function _commands() {
-    var commands = fs.readdirSync('src/js/lib/commands')
+gulp.task('commands', ['clean'],  function (cb) {
+  var commands = fs.readdirSync('src/js/lib/commands')
     .filter(function (f) {
       return f[0] != '.' && f.substr(-3) == '.js';
     }).map(function (f) {
@@ -80,11 +66,12 @@ gulp.task('commands', ['clean'],  function () {
       return 'require("' + './commands/' + f + '");';
     });
 
-    fs.writeFileSync('src/js/lib/commands.js', commands.join('\n'));
-  }
+  fs.writeFileSync('src/js/lib/commands.js', commands.join('\n'));
+
+  cb(null);
 });
 
-gulp.task('file-system', function () {
+gulp.task('file-system', function (cb) {
   var _fs = {};
   var _ignore = [
     '\\.DS_Store',
@@ -115,107 +102,87 @@ gulp.task('file-system', function () {
   })(root, _fs);
 
   fs.writeFileSync('src/js/lib/file-system.json', JSON.stringify(_fs, null, 2));
-});
 
-gulp.task('jshint', function() {
-  gulp.src(['Gulpfile.js', 'spec/**/*.js', 'src/js/**/*.js'])
-  .pipe(jshint())
-  .pipe(jshint.reporter('jshint-stylish'));
+  cb(null);
 });
 
 gulp.task('js', ['resume', 'jshint', 'commands', 'file-system'], function () {
-  var src = config.site ? 'src/js/site.js' : 'src/js/main.js';
-
-  gulp.src(src)
-  .pipe(browserify({ debug: !production }))
-  .pipe(concat('all.js'))
-  .pipe(gulpif(production, uglify()))
-  .pipe(gulp.dest('out/js'))
-  .pipe(gulpif(production, gzip()))
-  .pipe(gulpif(production, gulp.dest('out/js')))
-  .pipe(refresh(server));
+  gulp.src('src/js/main.js')
+    .pipe(browserify({ debug: !production }))
+    .pipe(concat('all.js'))
+    .pipe(gulpif(production, uglify()))
+    .pipe(gulp.dest('out/js'))
+    .pipe(gulpif(production, gzip()))
+    .pipe(gulpif(production, gulp.dest('out/js')))
+    .pipe(refresh(server));
 });
 
 gulp.task('css', function () {
   gulp.src('src/css/**/*.styl')
-  .pipe(stylus({ set: production ? ['compress'] : [] }))
-  .pipe(concat('all.css'))
-  .pipe(gulp.dest('out/css'))
-  .pipe(gulpif(production, gzip()))
-  .pipe(gulp.dest('out/css'))
-  .pipe(refresh(server));
+    .pipe(stylus({ set: production ? ['compress'] : [] }))
+    .pipe(concat('all.css'))
+    .pipe(gulp.dest('out/css'))
+    .pipe(gulpif(production, gzip()))
+    .pipe(gulp.dest('out/css'))
+    .pipe(refresh(server));
 });
 
 gulp.task('images', function () {
   gulp.src('src/images/**')
-  .pipe(gulpif(production, imagemin()))
-  .pipe(gulp.dest('out/images'))
-  .pipe(refresh(server));
+    .pipe(gulpif(production, imagemin()))
+    .pipe(gulp.dest('out/images'))
+    .pipe(refresh(server));
 });
 
 gulp.task('html', function () {
   gulp.src('src/**/*.haml')
-  .pipe(haml({ optimize: production }))
-  .pipe(gulp.dest('out'))
-  .pipe(gulpif(production, gzip()))
-  .pipe(gulp.dest('out'))
-  .pipe(refresh(server));
-});
-
-gulp.task('start-server', function() {
-  express()
-  .use(express.static(path.resolve("./out")))
-  .use(express.directory(path.resolve("./out")))
-  .listen(config.port, function() {
-    console.log("Listening on ", config.port);
-  });
-});
-
-
-gulp.task('spec', ['js'], function () {
-  gulp.src('spec/**/*-spec.js')
-  .pipe(mocha());
+    .pipe(haml({ optimize: production }))
+    .pipe(gulp.dest('out'))
+    .pipe(gulpif(production, gzip()))
+    .pipe(gulp.dest('out'))
+    .pipe(refresh(server));
 });
 
 gulp.task('build', ['js', 'css', 'images', 'html']);
 
-gulp.task('server', ['build', 'lr-server', 'start-server'], function () {
-  gulp.watch(['src/js/**/*.js', 'src/js/lib/fs/**'], function () {
-    gulp.run('js');
+gulp.task('lr-server', function () {
+  server.listen(config.lrport, function (err) {
+    if (err) {
+      console.log(err);
+    }
   });
+});
 
-  gulp.watch('src/css/**/*.styl', function () {
-    gulp.run('css');
-  });
+gulp.task('start-server', function() {
+  express()
+    .use(express.static(path.resolve("./out")))
+    .use(express.directory(path.resolve("./out")))
+    .listen(config.port, function() {
+      console.log("Listening on port %s...", config.port);
+    });
+});
 
-  gulp.watch('src/images/**', function () {
-    gulp.run('images');
-  });
+gulp.task('watch', function() {
+  gulp.watch(['src/js/**/*.js'], ['js']);
+  gulp.watch('src/css/**/*.styl', ['css']);
+  gulp.watch('src/images/**', ['images']);
+  gulp.watch('src/**/*.haml', ['html']);
+});
 
-  gulp.watch('src/**/*.haml', function () {
-    gulp.run('html');
-  });
+gulp.task('server', ['build', 'lr-server', 'start-server', 'watch']);
+
+gulp.task('spec', ['js'], function () {
+  gulp
+    .src('spec/**/*-spec.js')
+    .pipe(mocha());
 });
 
 gulp.task('spec-live', ['spec'], function(){
-  gulp.watch('src/js/**/*.js', function () {
-    gulp.run('js', 'spec');
-  });
-
-  gulp.watch('spec/**/*.js', function(){
-    gulp.run('spec');
-  });
+  gulp.watch('src/js/**/*.js', ['js', 'spec']);
+  gulp.watch('spec/**/*.js', ['spec']);
 });
 
-gulp.task('deploy', function () {
-  config.site = true;
-  production = true;
-  config.env = 'production';
-
-  gulp.run('build');
-
-  setTimeout(function() {
-    fs.writeFileSync('out/CNAME', 'tadeuzagallo.com');
-    exec('cd out && git init && git add -A . && git c -m "deploy" && git push --force git@github.com:tadeuzagallo/tadeuzagallo.github.io.git master');
-  }, 10000);
+gulp.task('deploy', ['build'], function () {
+  fs.writeFileSync('out/CNAME', 'tadeuzagallo.com');
+  exec('cd out && git init && git add -A . && git c -m "deploy" && git push --force git@github.com:tadeuzagallo/tadeuzagallo.github.io.git master');
 });
