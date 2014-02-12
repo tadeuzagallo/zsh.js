@@ -4,6 +4,7 @@ var fs = require('fs');
 var gulp = require('gulp');
 var lr = require('tiny-lr');
 var path = require('path');
+var sequence = require('run-sequence');
 
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
@@ -106,7 +107,7 @@ gulp.task('file-system', function (cb) {
   cb(null);
 });
 
-gulp.task('js', ['resume', 'jshint', 'commands', 'file-system'], function () {
+gulp.task('js', ['jshint', 'commands', 'file-system'], function () {
   return gulp.src('src/js/main.js')
     .pipe(browserify({ debug: !production }))
     .pipe(concat('all.js'))
@@ -143,8 +144,10 @@ gulp.task('html', function () {
     .pipe(refresh(server));
 });
 
-gulp.task('build', ['clean'], function() {
-  return gulp.run('js', 'css', 'images', 'html');
+gulp.task('build', function (cb) {
+  sequence('clean',
+           ['js', 'css', 'images', 'html', 'resume'],
+           cb);
 });
 
 gulp.task('lr-server', function (cb) {

@@ -41,6 +41,7 @@
     "gulp-mocha": "~0.3.0",
     "chai": "~1.8.1",
     "type-detect": "~0.1.2",
-    "gulp-exec": "~1.0.4"
+    "gulp-exec": "~1.0.4",
+    "run-sequence": "~0.3.5"
   }
 }
