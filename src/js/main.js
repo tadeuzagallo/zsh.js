@@ -127,6 +127,7 @@ Programs.add('talks', function () {
 
 Programs.add('resume', function () {
   var iframe = document.createElement('iframe');
+  iframe.id = 'resume';
   iframe.scrolling = 0;
   iframe.frameborder = 0;
   iframe.onload = function () {
