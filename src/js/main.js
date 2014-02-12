@@ -120,7 +120,13 @@ Programs.add('talks', function () {
   });
 });
 
-Programs.add('contact', true, function () {
+Programs.add('resume', true, function () {
+  var iframe = document.createElement('iframe');
+  iframe.src = 'resume.html';
+  Programs.show(iframe.outerHTML);
+});
+
+Programs.add('contact', function () {
   load('contact.html', function (html) {
     Programs.show(html);
   });
