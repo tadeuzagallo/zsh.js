@@ -1,7 +1,4 @@
-require('./lib/site-helpers');
-require('./main');
-
-document.addEventListener('DOMContentLoaded', function (e) {
+module.exports = function tutorial() {
   var _onkeydown = window.onkeydown;
   var p = function () {};
 
@@ -24,4 +21,4 @@ document.addEventListener('DOMContentLoaded', function (e) {
       window.onkeydown = null;
     }
   }, 200);
-});
+};

@@ -1,7 +1,10 @@
 require('./lib/commands');
+require('./lib/site-helpers');
+
 var Terminal = require('./lib/terminal');
 var Tmux = require('./lib/tmux');
 var load = require('./lib/load');
+var tutorial = require('./lib/tutorial');
 
 var Programs = (function () {
   var programs = {};
@@ -110,14 +113,23 @@ Programs.before(function () {
   Programs.unlock();
 });
 
-Programs.add('terminal', true, function () {
-  load('terminal.html', function (html) {
-    Programs.show(html);
-    Programs.lock();
-    Terminal.init(document.getElementById('terminal'), document.getElementById('status-bar'));
-    Tmux.init(Terminal);
-  });
-});
+Programs.add('terminal', true, (function () {
+  var _first = true;
+
+  return function () {
+    load('terminal.html', function (html) {
+      Programs.show(html);
+      Programs.lock();
+      Terminal.init(document.getElementById('terminal'), document.getElementById('status-bar'));
+      Tmux.init(Terminal);
+      
+      if (_first) {
+        tutorial();
+        _first = false;
+      }
+    });
+  };
+})());
 
 Programs.add('talks', function () {
   load('talks.html', function (html) {
