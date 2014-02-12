@@ -74,11 +74,9 @@ var Programs = (function () {
     },
     run: function (name) {
       callHooks();
-      if (_current == name) {
-        _current = '';
-        deactivate();
-        this.close();
-      } else if (programs.hasOwnProperty(name) && programs[name].call) {
+      if (_current !== name &&
+        programs.hasOwnProperty(name) &&
+        programs[name].call) {
         activate(name);
         _current = name;
         programs[name]();
@@ -92,10 +90,6 @@ var Programs = (function () {
         container().innerHTML = '';
         container().appendChild(html);
       }
-    },
-    close: function () {
-      this.show('');
-      hideContainer();
     },
     default: function () {
       this.run(_defaultProgram);
