@@ -96,20 +96,6 @@ a
   }
 }
 
-#social-buttons {
-  float left
-  margin-top 1px
-
-  .fb_iframe_widget {
-    height 20px
-    overflow hidden
-  }
-
-  .tweet {
-    margin-left 8px
-  }
-}
-
 for button-name in close minimize maximize
   #buttons
     #{button-name}
@@ -364,6 +350,7 @@ for button-name in close minimize maximize
   top 0
   left 0
   width 100%
+  min-height 430px
   height 100%
   color white
   text-shadow 1px 1px 1px #333
@@ -415,6 +402,17 @@ for button-name in close minimize maximize
       }
     }
   }
+
+  #social-buttons {
+    position absolute
+    bottom 0
+    width 100%
+
+    li {
+      height 20px
+      padding 7px
+    }
+  }
 }
 
 #contact {
@@ -429,8 +427,9 @@ for button-name in close minimize maximize
   margin-left 15px
 }
 
-iframe {
+iframe#resume {
   border none
   width 800px
   margin 0 30px
 }
+

@@ -125,8 +125,10 @@ Programs.add('talks', function () {
   });
 });
 
-Programs.add('resume', true, function () {
+Programs.add('resume', function () {
   var iframe = document.createElement('iframe');
+  iframe.scrolling = 0;
+  iframe.frameborder = 0;
   iframe.onload = function () {
     this.style.height = this.contentWindow.document.body.scrollHeight + 'px';
   };
