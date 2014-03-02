@@ -1,3 +1,5 @@
+require('./commands');
+
 var REPL = require('./REPL');
 var FS = require('./fs');
 var CommandManager = require('./command-manager');
@@ -48,6 +50,23 @@ Terminal.init = function (container, statusbar) {
   this.statusbar = statusbar;
   this.prompt();
   bindFullScreen();
+};
+
+Terminal.create = function (_container) {
+  console.log(_container);
+  var container = document.createElement('div');
+  container.id = 'terminal';
+
+  var statusbar = document.createElement('div');
+  statusbar.id = 'status-bar';
+
+  container.appendChild(content);
+
+  _container.innerHTML = '<div id="bar"><div id="buttons"><a id="close"></a><a id="minimize"></a><a id="maximize"></a></div><div id="title">1. tmux</div><a id="full-screen"></a></div>'
+  _container.appendChild(container);
+  _container.appendChild(statusbar);
+
+  this.init(content, statusbar);
 };
 
 Terminal.update = function () {

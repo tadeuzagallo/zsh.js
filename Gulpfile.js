@@ -172,7 +172,10 @@ gulp.task('start-server', ['build', 'lr-server'], function(cb) {
 });
 
 gulp.task('watch', ['start-server'], function(cb) {
-  gulp.watch(['src/js/**/*.js'], ['js']);
+  gulp.watch('src/js/**/*.js', ['js']);
+             //function(cb) {
+               //gulp.start('js');
+             //});
   gulp.watch('src/css/**/*.styl', ['css']);
   gulp.watch('src/images/**', ['images']);
   gulp.watch('src/**/*.haml', ['html']);

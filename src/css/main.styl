@@ -6,13 +6,6 @@ gray = #A0A0A0
 yellow = #C4C33E
 red = #FF6C65
 
-list_header = #2A3140 // #32394A
-list_background = #32394A
-list_selected = #262C3A
-
-dark_border = #242A37
-light_border = #3E4555
-
 bar-height = 22px
 statusbar-height = 15px
 
@@ -36,10 +29,8 @@ a
   text-decoration underline
 
 #container {
-  display none
   position absolute
-  left 200px
-  min-width calc(100% - 200px)
+  min-width 100%
   min-height 100%
   border-radius 5px
   background black
@@ -50,13 +41,6 @@ a
     overflow hidden
     height 100%
   }
-}
-
-#terminal {
-  overflow auto
-  height calc(100% - 45px)
-  width 90%
-  padding-left 3px
 }
 
 // top
@@ -260,7 +244,7 @@ for button-name in close minimize maximize
 
 // Terminal
 
-#content {
+#terminal {
   float left
   width 90%
   padding-right 10%
@@ -268,12 +252,6 @@ for button-name in close minimize maximize
   padding-top 2px
   padding-left 5px
   overflow auto
-
-  .tmux {
-    float left
-    position relative
-    width 100%
-  }
 }
 
 .ps1 {
@@ -347,83 +325,3 @@ for button-name in close minimize maximize
   max-height 149px
   border 0
 }
-
-#sidebar {
-  position absolute
-  top 0
-  left 0
-  width 100%
-  height 100%
-  color white
-  text-shadow 1px 1px 1px #333
-  font 14px arial narrow
-  letter-spacing 1px
-  overflow-x hidden
-
-  img {
-    float left
-    margin-right 8px
-  }
-
-  #header {
-    width calc(100% - 15px)
-    height 30px
-    padding 15px
-    background-color list_header
-    border-bottom 1px solid dark_border
-
-    span {
-      line-height 30px
-      float left
-    }
-  }
-
-  ul {
-    list-style none
-    padding 0
-
-    li {
-      border-top 1px solid light_border
-      border-bottom 1px solid dark_border
-      padding 15px
-      cursor pointer
-    }
-    
-    li.active {
-      background-color list_selected
-    }
-  }
-
-  #social-buttons {
-    position absolute
-    bottom 0
-    width 100%
-
-    li {
-      height 20px
-      padding 7px
-    }
-  }
-}
-
-#contact {
-  color white
-  font 30px arial narrow
-  ul {
-    list-style none
-  }
-}
-
-#talks {
-  margin-left 15px
-}
-
-iframe#resume {
-  float left
-  min-width 200px
-  max-width 800px
-  width 90%
-  margin 0 30px
-  border none
-}
-
