@@ -1,16 +1,13 @@
 var _ = require('lodash');
-var express = require('express');
 var fs = require('fs');
 var gulp = require('gulp');
 var lr = require('tiny-lr');
 var path = require('path');
-var sequence = require('run-sequence');
 
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var exec = require('gulp-exec');
-var gulpif = require('gulp-if');
-var gzip = require('gulp-gzip');
+var gutil = require('gulp-util');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var plumber = require('gulp-plumber');
@@ -18,14 +15,13 @@ var refresh = require('gulp-livereload');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var stylus = require('gulp-stylus');
-var watch = require('gulp-watch');
 
 var server = lr();
 var config = _.extend({
   port: 8080,
   lrport: 35729,
   env: 'development'
-}, gulp.env);
+}, gutil.env);
 
 var path = {
   js: {
@@ -56,7 +52,6 @@ var production = config.env === 'production';
 
 gulp.task('jshint', function () {
   return gulp.src(['Gulpfile.js', path.js.spec.all, path.js.lib.all])
-    .pipe(watch())
     .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
@@ -68,7 +63,7 @@ gulp.task('clean', function () {
     .pipe(exec('rm -r <%= file.path %>'));
 });
 
-gulp.task('commands', function (cb) {
+gulp.task('commands', ['clean'], function (cb) {
   var commands = fs.readdirSync('src/js/commands')
     .filter(function (f) {
       return f[0] != '.' && f.substr(-3) == '.js';
@@ -85,7 +80,7 @@ gulp.task('commands', function (cb) {
   cb(null);
 });
 
-gulp.task('file-system', function (cb) {
+gulp.task('file-system', ['commands'], function (cb) {
   var _fs = {};
   var _ignore = [
     '\\.DS_Store',
@@ -120,7 +115,7 @@ gulp.task('file-system', function (cb) {
   cb(null);
 });
 
-gulp.task('js-lib', function () {
+gulp.task('js', ['jshint', 'file-system'], function () {
   return gulp.src(path.js.lib.entry)
     .pipe(plumber())
     .pipe(browserify({ debug: !production }))//, standalone: true }))
@@ -128,15 +123,7 @@ gulp.task('js-lib', function () {
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
     .pipe(gulp.dest(path.build))
-    .pipe(gzip())
-    .pipe(gulp.dest(path.build))
     .pipe(refresh(server));
-});
-
-gulp.task('js', function (cb) {
-  sequence(['jshint', 'commands', 'file-system'],
-          'js-lib',
-          cb);
 });
 
 gulp.task('css', function () {
@@ -148,33 +135,17 @@ gulp.task('css', function () {
     .pipe(refresh(server));
 });
 
-gulp.task('build', function (cb) {
-  sequence('clean',
-           ['js', 'css'],
-           cb);
-});
+gulp.task('build', ['js', 'css']);
 
-gulp.task('watch', function (cb) {
+gulp.task('watch', ['build'],function (cb) {
   server.listen(config.lrport, function (err) {
     if (err) {
       console.log(err);
     }
   });
 
-  gulp.start('js', 'css');
-
   gulp.watch(path.css.all, ['css']);
-
-  gulp.watch([ path.js.lib.all,
-               '!'+path.js.commands.all,
-               '!' + path.js.fs.all],
-             ['js-lib']);
-
-  gulp.watch(path.js.commands.all, function (ev) {
-    gulp.start('commands', function () {
-      ev.pipe(refresh(server));
-    });
-  });
+  gulp.watch(path.js.lib.all, ['js']);
 
   cb(null);
 });
