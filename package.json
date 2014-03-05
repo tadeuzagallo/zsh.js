@@ -36,6 +36,7 @@
     "type-detect": "~0.1.2",
     "gulp-exec": "~1.0.4",
     "gulp-plumber": "~0.5.6",
-    "gulp-util": "~2.2.14"
+    "gulp-util": "~2.2.14",
+    "coffee-script": "~1.7.1"
   }
 }
