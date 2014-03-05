@@ -49,24 +49,30 @@ Terminal.init = function (container, statusbar) {
   this.rootContainer = this.container = container;
   this.statusbar = statusbar;
   this.prompt();
-  bindFullScreen();
+  bindFullScreen(this.container.parentElement);
 };
 
-Terminal.create = function (_container) {
-  console.log(_container);
-  var container = document.createElement('div');
-  container.id = 'terminal';
+Terminal.create = function (container) {
+  container.innerHTML = 
+    '<div class="terminal">' +
+      '<div class="bar">' +
+        '<div class="buttons">' +
+          '<a class="close" href="#"></a>' +
+          '<a class="minimize" href="#"></a>' +
+          '<a class="maximize" href="#"></a>' +
+        '</div>' +
+        '<div class="title">' +
+        '</div>' +
+        '<a class="full-screen" href="#"></a>' +
+      '</div>' +
+      '<div class="content">' +
+      '</div>' +
+      '<div class="status-bar">' +
+      '</div>' +
+    '</div>';
 
-  var statusbar = document.createElement('div');
-  statusbar.id = 'status-bar';
-
-  container.appendChild(content);
-
-  _container.innerHTML = '<div id="bar"><div id="buttons"><a id="close"></a><a id="minimize"></a><a id="maximize"></a></div><div id="title">1. tmux</div><a id="full-screen"></a></div>'
-  _container.appendChild(container);
-  _container.appendChild(statusbar);
-
-  this.init(content, statusbar);
+  this.init(container.querySelector('.content'), 
+            container.querySelector('.statusbar'));
 };
 
 Terminal.update = function () {

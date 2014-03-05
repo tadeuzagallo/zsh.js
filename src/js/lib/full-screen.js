@@ -1,23 +1,21 @@
-module.exports = function() {
-  var elem = document.getElementById('terminal');
-
+module.exports = function(container) {
   window.onresize = Terminal.scroll;
 
-  document.getElementById('full-screen').onclick = function (e) {
+  container.querySelector('.full-screen').onclick = function (e) {
     e.preventDefault();
 
     if (!document.fullscreenElement &&
         !document.mozFullScreenElement &&
           !document.webkitFullscreenElement &&
             !document.msFullscreenElement ) {
-      if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-      } else if (elem.msRequestFullscreen) {
-        elem.msRequestFullscreen();
-      } else if (elem.mozRequestFullScreen) {
-        elem.mozRequestFullScreen();
-      } else if (elem.webkitRequestFullscreen) {
-        elem.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+      if (container.requestFullscreen) {
+        container.requestFullscreen();
+      } else if (container.msRequestFullscreen) {
+        container.msRequestFullscreen();
+      } else if (container.mozRequestFullScreen) {
+        container.mozRequestFullScreen();
+      } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
       }
     } else {
       if (document.exitFullscreen) {
