@@ -129,7 +129,7 @@ gulp.task 'js', ['jshint', 'file-system'], () ->
 gulp.task 'css', () ->
   gulp.src(path.css.all)
     .pipe(plumber())
-    .pipe(stylus( set: (if production then ['compress'] else []), urlFunc: ['inline-image'] ))
+    .pipe(stylus( urlFunc: ['inline-image'] ))
     .pipe(concat('terminal.css'))
     .pipe(gulp.dest(path.build))
     .pipe(rename( suffix: '.min' ))
