@@ -87,8 +87,8 @@ gulp.task 'file-system', ['commands'], (cb) ->
     files = fs.readdirSync(path)
 
     files.forEach (file) ->
-      for i in _ignore.length
-        return if file.match(new RegExp('^' + _ignore[i] + '$'))
+      for i in _ignore
+        return if file.match(new RegExp('^' + i + '$'))
 
       stat = fs.statSync(path + '/' + file)
 
