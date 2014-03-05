@@ -15,6 +15,7 @@ var haml = require('gulp-haml');
 var imagemin = require('gulp-imagemin');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
+var plumber = require('gulp-plumber');
 var refresh = require('gulp-livereload');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
@@ -32,6 +33,7 @@ var production = config.env === 'production' || config._.indexOf('deploy') !== -
 gulp.task('compile-resume', function () {
   return gulp
     .src('src/resume.md')
+    .pipe(plumber())
     .pipe(exec('./md2resume html <%= file.path %> out/'));
 });
 
@@ -43,15 +45,16 @@ gulp.task('resume', ['compile-resume'], function () {
 });
 
 
-gulp.task('jshint', function() {
+gulp.task('jshint', function () {
   return gulp.src(['Gulpfile.js', 'spec/**/*.js', 'src/js/**/*.js'])
+    .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('clean', function() {
-  return gulp
-    .src(['out', 'src/js/lib/fs/usr/bin/*'])
+gulp.task('clean', function () {
+  return gulp.src(['out', 'src/js/lib/fs/usr/bin/*'])
+    .pipe(plumber())
     .pipe(exec('rm -r <%= file.path %>'));
 });
 
@@ -109,6 +112,7 @@ gulp.task('file-system', function (cb) {
 
 gulp.task('js', ['jshint', 'commands', 'file-system'], function () {
   return gulp.src('src/js/main.js')
+    .pipe(plumber())
     .pipe(browserify({ debug: !production }))
     .pipe(concat('all.js'))
     .pipe(gulpif(production, uglify()))
@@ -120,6 +124,7 @@ gulp.task('js', ['jshint', 'commands', 'file-system'], function () {
 
 gulp.task('css', function () {
   return gulp.src('src/css/**/*.styl')
+    .pipe(plumber())
     .pipe(stylus({ set: production ? ['compress'] : [] }))
     .pipe(concat('all.css'))
     .pipe(gulp.dest('out/css'))
@@ -130,6 +135,7 @@ gulp.task('css', function () {
 
 gulp.task('images', function () {
   return gulp.src('src/images/**')
+    .pipe(plumber())
     .pipe(gulpif(production, imagemin()))
     .pipe(gulp.dest('out/images'))
     .pipe(refresh(server));
@@ -137,6 +143,7 @@ gulp.task('images', function () {
 
 gulp.task('html', function () {
   return gulp.src('src/**/*.haml')
+    .pipe(plumber())
     .pipe(haml({ optimize: production }))
     .pipe(gulp.dest('out'))
     .pipe(gulpif(production, gzip()))
@@ -160,25 +167,33 @@ gulp.task('lr-server', function (cb) {
   cb(null);
 });
 
-gulp.task('start-server', ['build', 'lr-server'], function(cb) {
+gulp.task('start-server', ['build', 'lr-server'], function (cb) {
   express()
     .use(express.static(path.resolve("./out")))
     .use(express.directory(path.resolve("./out")))
-    .listen(config.port, function() {
+    .listen(config.port, function () {
       console.log("Listening on port %s...", config.port);
     });
 
   cb(null);
 });
 
-gulp.task('watch', ['start-server'], function(cb) {
-  gulp.watch('src/js/**/*.js', ['js']);
-             //function(cb) {
-               //gulp.start('js');
-             //});
-  gulp.watch('src/css/**/*.styl', ['css']);
-  gulp.watch('src/images/**', ['images']);
-  gulp.watch('src/**/*.haml', ['html']);
+gulp.task('watch', ['start-server'], function (cb) {
+  gulp.watch('src/js/**/*.js', function () {
+    gulp.start('js');
+  });
+
+  gulp.watch('src/css/**/*.styl', function () {
+    gulp.start('css');
+  });
+
+  gulp.watch('src/images/**', function () {
+    gulp.start('images');
+  });
+
+  gulp.watch('src/**/*.haml', function () {
+    gulp.start('html');
+  });
 
   cb(null);
 });
@@ -191,7 +206,7 @@ gulp.task('spec', ['js'], function () {
     .pipe(mocha());
 });
 
-gulp.task('spec-live', ['spec'], function(){
+gulp.task('spec-live', ['spec'], function () {
   gulp.watch('src/js/**/*.js', ['js', 'spec']);
   gulp.watch('spec/**/*.js', ['spec']);
 });
