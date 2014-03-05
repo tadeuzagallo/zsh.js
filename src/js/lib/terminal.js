@@ -72,7 +72,7 @@ Terminal.create = function (container) {
     '</div>';
 
   this.init(container.querySelector('.content'), 
-            container.querySelector('.statusbar'));
+            container.querySelector('.status-bar'));
 };
 
 Terminal.update = function () {
