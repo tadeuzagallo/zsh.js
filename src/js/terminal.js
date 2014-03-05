@@ -53,6 +53,10 @@ Terminal.init = function (container, statusbar) {
 };
 
 Terminal.create = function (container) {
+  if (typeof container === 'string') {
+    container = document.getElementById(container);
+  }
+
   container.innerHTML = 
     '<div class="terminal">' +
       '<div class="bar">' +

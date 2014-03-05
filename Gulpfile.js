@@ -11,8 +11,6 @@ var concat = require('gulp-concat');
 var exec = require('gulp-exec');
 var gulpif = require('gulp-if');
 var gzip = require('gulp-gzip');
-var haml = require('gulp-haml');
-var imagemin = require('gulp-imagemin');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var plumber = require('gulp-plumber');
@@ -20,6 +18,7 @@ var refresh = require('gulp-livereload');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var stylus = require('gulp-stylus');
+var watch = require('gulp-watch');
 
 var server = lr();
 var config = _.extend({
@@ -27,50 +26,61 @@ var config = _.extend({
   lrport: 35729,
   env: 'development'
 }, gulp.env);
-console.log(config);
-var production = config.env === 'production' || config._.indexOf('deploy') !== -1;
 
-gulp.task('compile-resume', function () {
-  return gulp
-    .src('src/resume.md')
-    .pipe(plumber())
-    .pipe(exec('./md2resume html <%= file.path %> out/'));
-});
+var path = {
+  js: {
+    bin: 'src/js/fs/usr/bin/*',
+    lib: {
+      all: 'src/js/**/*.js',
+      entry: 'src/js/terminal.js'
+    },
+    fs: {
+      all: 'src/js/fs/**/*.js',
+      entry: 'src/js/file-system.json'
+    },
+    commands: {
+      all: 'src/js/commands/**/*.js',
+      entry: 'src/js/commands.js'
+    },
+    spec: {
+      all: 'spec/js/**/*.js'
+    }
+  },
+  css: {
+    all: 'src/css/**/*.styl'
+  },
+  build: 'build/'
+};
 
-gulp.task('resume', ['compile-resume'], function () {
-  return gulp
-    .src('out/resume.html')
-    .pipe(gulpif(production, gzip()))
-    .pipe(gulp.dest('out'));
-});
-
+var production = config.env === 'production';
 
 gulp.task('jshint', function () {
-  return gulp.src(['Gulpfile.js', 'spec/**/*.js', 'src/js/**/*.js'])
+  return gulp.src(['Gulpfile.js', path.js.spec.all, path.js.lib.all])
+    .pipe(watch())
     .pipe(plumber())
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('clean', function () {
-  return gulp.src(['out', 'src/js/lib/fs/usr/bin/*'])
+  return gulp.src([path.build, path.js.bin])
     .pipe(plumber())
     .pipe(exec('rm -r <%= file.path %>'));
 });
 
 gulp.task('commands', function (cb) {
-  var commands = fs.readdirSync('src/js/lib/commands')
+  var commands = fs.readdirSync('src/js/commands')
     .filter(function (f) {
       return f[0] != '.' && f.substr(-3) == '.js';
     }).map(function (f) {
       if (production) {
-        exec('ln -fh ' + __dirname + '/src/js/lib/commands/' + f + ' src/js/lib/fs/usr/bin/' + f.slice(0, -3));
+        exec('ln -fh ' + __dirname + '/src/js/commands/' + f + ' src/js/fs/usr/bin/' + f.slice(0, -3));
       }
 
       return 'require("' + './commands/' + f + '");';
     });
 
-  fs.writeFileSync('src/js/lib/commands.js', commands.join('\n'));
+  fs.writeFileSync(path.js.commands.entry, commands.join('\n'));
 
   cb(null);
 });
@@ -81,7 +91,7 @@ gulp.task('file-system', function (cb) {
     '\\.DS_Store',
     '.*\\.swp'
   ];
-  var root = 'src/js/lib/fs';
+  var root = 'src/js/fs';
 
   (function readdir(path, container) {
     var files = fs.readdirSync(path);
@@ -105,100 +115,69 @@ gulp.task('file-system', function (cb) {
     });
   })(root, _fs);
 
-  fs.writeFileSync('src/js/lib/file-system.json', JSON.stringify(_fs, null, 2));
+  fs.writeFileSync(path.js.fs.entry, JSON.stringify(_fs, null, 2));
 
   cb(null);
 });
 
-gulp.task('js', ['jshint', 'commands', 'file-system'], function () {
-  return gulp.src('src/js/main.js')
+gulp.task('js-lib', function () {
+  return gulp.src(path.js.lib.entry)
     .pipe(plumber())
-    .pipe(browserify({ debug: !production }))
-    .pipe(concat('all.js'))
-    .pipe(gulpif(production, uglify()))
-    .pipe(gulp.dest('out/js'))
-    .pipe(gulpif(production, gzip()))
-    .pipe(gulpif(production, gulp.dest('out/js')))
+    .pipe(browserify({ debug: !production }))//, standalone: true }))
+    .pipe(gulp.dest(path.build))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(uglify())
+    .pipe(gulp.dest(path.build))
+    .pipe(gzip())
+    .pipe(gulp.dest(path.build))
     .pipe(refresh(server));
+});
+
+gulp.task('js', function (cb) {
+  sequence(['jshint', 'commands', 'file-system'],
+          'js-lib',
+          cb);
 });
 
 gulp.task('css', function () {
-  return gulp.src('src/css/**/*.styl')
+  return gulp.src(path.css.all)
     .pipe(plumber())
-    .pipe(stylus({ set: production ? ['compress'] : [] }))
-    .pipe(concat('all.css'))
-    .pipe(gulp.dest('out/css'))
-    .pipe(gulpif(production, gzip()))
-    .pipe(gulp.dest('out/css'))
-    .pipe(refresh(server));
-});
-
-gulp.task('images', function () {
-  return gulp.src('src/images/**')
-    .pipe(plumber())
-    .pipe(gulpif(production, imagemin()))
-    .pipe(gulp.dest('out/images'))
-    .pipe(refresh(server));
-});
-
-gulp.task('html', function () {
-  return gulp.src('src/**/*.haml')
-    .pipe(plumber())
-    .pipe(haml({ optimize: production }))
-    .pipe(gulp.dest('out'))
-    .pipe(gulpif(production, gzip()))
-    .pipe(gulp.dest('out'))
+    .pipe(stylus({ set: (production ? ['compress'] : []), urlFunc: ['inline-image'] }))
+    .pipe(concat('terminal.css'))
+    .pipe(gulp.dest(path.build))
     .pipe(refresh(server));
 });
 
 gulp.task('build', function (cb) {
   sequence('clean',
-           ['js', 'css', 'images', 'html', 'resume'],
+           ['js', 'css'],
            cb);
 });
 
-gulp.task('lr-server', function (cb) {
+gulp.task('watch', function (cb) {
   server.listen(config.lrport, function (err) {
     if (err) {
       console.log(err);
     }
   });
 
-  cb(null);
-});
+  gulp.start('js', 'css');
 
-gulp.task('start-server', ['build', 'lr-server'], function (cb) {
-  express()
-    .use(express.static(path.resolve("./out")))
-    .use(express.directory(path.resolve("./out")))
-    .listen(config.port, function () {
-      console.log("Listening on port %s...", config.port);
+  gulp.watch(path.css.all, ['css']);
+
+  gulp.watch([ path.js.lib.all,
+               '!'+path.js.commands.all,
+               '!' + path.js.fs.all],
+             ['js-lib']);
+
+  gulp.watch(path.js.commands.all, function (ev) {
+    gulp.start('commands', function () {
+      ev.pipe(refresh(server));
     });
-
-  cb(null);
-});
-
-gulp.task('watch', ['start-server'], function (cb) {
-  gulp.watch('src/js/**/*.js', function () {
-    gulp.start('js');
-  });
-
-  gulp.watch('src/css/**/*.styl', function () {
-    gulp.start('css');
-  });
-
-  gulp.watch('src/images/**', function () {
-    gulp.start('images');
-  });
-
-  gulp.watch('src/**/*.haml', function () {
-    gulp.start('html');
   });
 
   cb(null);
 });
-
-gulp.task('server', ['watch']);
 
 gulp.task('spec', ['js'], function () {
   gulp
@@ -211,12 +190,4 @@ gulp.task('spec-live', ['spec'], function () {
   gulp.watch('spec/**/*.js', ['spec']);
 });
 
-gulp.task('create-cname', ['build'], function (cb) {
-  fs.writeFileSync('out/CNAME', 'tadeuzagallo.com');
-  cb(null);
-});
-
-gulp.task('deploy', ['create-cname'], function () {
-  return gulp.src('out')
-    .pipe(exec('cd <%= file.path %> && git init && git add -A . && git c -m "deploy" && git push --force git@github.com:tadeuzagallo/tadeuzagallo.github.io.git master'));
-});
+gulp.task('default', ['watch']);

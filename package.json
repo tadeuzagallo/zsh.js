@@ -19,7 +19,7 @@
     "url": "tadeuzagallo.com"
   },
   "devDependencies": {
-    "gulp": "~3.3.2",
+    "gulp": "~3.5.5",
     "gulp-haml": "0.0.5",
     "gulp-concat": "~2.1.7",
     "gulp-rename": "~0.2.1",
@@ -34,7 +34,7 @@
     "gulp-watch": "~0.4.1",
     "gulp-if": "0.0.3",
     "gulp-browserify": "~0.2.4",
-    "gulp-stylus": "0.0.9",
+    "gulp-stylus": "0.0.13",
     "gulp-imagemin": "~0.1.4",
     "gulp-gzip": "0.0.4",
     "jshint-stylish": "~0.1.5",
