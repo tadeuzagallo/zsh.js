@@ -31,7 +31,7 @@ path =
     bin: 'src/js/fs/usr/bin/*'
     lib:
       all: 'src/js/**/*.js'
-      entry: 'src/js/terminal.js'
+      entry: 'src/js/terminal.coffee'
     fs:
       all: 'src/js/fs/**/*.js'
       entry: 'src/js/file-system.json'
@@ -106,9 +106,9 @@ gulp.task 'file-system', ['commands'], (cb) ->
   cb(null)
 
 gulp.task 'js', ['jshint', 'file-system'], () ->
-  gulp.src(path.js.lib.entry)
+  gulp.src(path.js.lib.entry, read: false)
     .pipe(plumber())
-    .pipe(browserify( debug: !production ))
+    .pipe(browserify( debug: !production, extensions: ['.coffee'], transform: ['coffeeify'] ))
     .on('prebundle', (bundle)->
       bundle.require('./fs', expose: 'fs')
       bundle.require('./terminal', expose: 'terminal')
@@ -120,6 +120,7 @@ gulp.task 'js', ['jshint', 'file-system'], () ->
         command = Path.basename(command, '.js')
         bundle.require("./commands/#{command}", expose: "commands/#{command}")
     )
+    .pipe(rename( 'terminal.js' ))
     .pipe(gulp.dest(path.build))
     .pipe(rename( suffix: '.min' ))
     .pipe(uglify())
@@ -148,12 +149,12 @@ gulp.task 'watch', ['build'], (cb) ->
 
   cb(null)
 
-gulp.task 'spec', ['js'], () ->
+gulp.task 'spec', ['js'], ->
   gulp
     .src('spec/**/*-spec.js')
     .pipe(mocha())
 
-gulp.task 'spec-live', ['spec'], () ->
+gulp.task 'spec-live', ['spec'], ->
   gulp.watch('src/js/**/*.js', ['js', 'spec'])
   gulp.watch('spec/**/*.js', ['spec'])
 
