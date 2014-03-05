@@ -3,8 +3,8 @@
 *.swo
 *.swp
 .DS_Store
-out/
+build/
 node_modules/
-src/js/lib/file-system.json
-src/js/lib/fs/usr/bin/
-src/js/lib/commands.js
+src/js/file-system.json
+src/js/fs/usr/bin/
+src/js/commands.js
