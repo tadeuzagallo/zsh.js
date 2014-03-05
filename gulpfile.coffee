@@ -1,8 +1,9 @@
 _ = require('lodash')
 fs = require('fs')
+glob = require('glob')
 gulp = require('gulp')
 lr = require('tiny-lr')
-path = require('path')
+Path = require('path')
 
 browserify = require('gulp-browserify')
 concat = require('gulp-concat')
@@ -107,9 +108,20 @@ gulp.task 'file-system', ['commands'], (cb) ->
 gulp.task 'js', ['jshint', 'file-system'], () ->
   gulp.src(path.js.lib.entry)
     .pipe(plumber())
-    .pipe(browserify({ debug: !production })) # , standalone: true }))
+    .pipe(browserify( debug: !production ))
+    .on('prebundle', (bundle)->
+      bundle.require('./fs', expose: 'fs')
+      bundle.require('./terminal', expose: 'terminal')
+      bundle.require('./args-parser', expose: 'args-parser')
+      bundle.require('./command-manager', expose: 'command-manager')
+      bundle.require('./console', expose: 'console')
+      bundle.require('./file', expose: 'file')
+      glob.sync(path.js.commands.all).forEach (command)->
+        command = Path.basename(command, '.js')
+        bundle.require("./commands/#{command}", expose: "commands/#{command}")
+    )
     .pipe(gulp.dest(path.build))
-    .pipe(rename({ suffix: '.min' }))
+    .pipe(rename( suffix: '.min' ))
     .pipe(uglify())
     .pipe(gulp.dest(path.build))
     .pipe(refresh(server))
