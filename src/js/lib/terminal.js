@@ -39,7 +39,7 @@ Terminal.prompt = function () {
 
 Terminal.status = function(text) {
   if (this.statusbar) {
-    this.statusbar.innerText = text;
+    this.statusbar.innerHTML = text;
   }
 };
 

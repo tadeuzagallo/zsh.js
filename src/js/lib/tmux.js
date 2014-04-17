@@ -31,7 +31,7 @@ Tmux.createTabLabel = function (indexOnly) {
 
   var index = document.createElement('span');
   index.className = 'index';
-  index.innerText = windows.length;
+  index.innerHTML = windows.length;
 
   data.appendChild(index);
   tab.appendChild(data);

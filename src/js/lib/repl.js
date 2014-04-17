@@ -275,7 +275,7 @@ REPL.commandArgsString = function () {
 
 REPL.write = function () {
   this.history[this.historyIndex] = this.input;
-  this.caret.innerText = this.input[this.index] || '';
+  this.caret.innerHTML = this.input[this.index] || '';
 
   var span = document.createElement('span');
   var command = this.command();
