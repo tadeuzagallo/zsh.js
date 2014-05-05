@@ -28,25 +28,25 @@ var _ = require('lodash'),
 
     path = {
       js: {
-        bin: 'src/js/fs/usr/bin/*',
+        bin: 'lib/fs/usr/bin/*',
         lib: {
-          all: 'src/js/**/*.js',
-          entry: 'src/js/terminal.js'
+          all: 'lib/**/*.js',
+          entry: 'lib/terminal.js'
         },
         fs: {
-          all: 'src/js/fs/**/*.js',
-          entry: 'src/js/file-system.json'
+          all: 'lib/fs/**/*.js',
+          entry: 'lib/file-system.json'
         },
         commands: {
-          all: 'src/js/commands/**/*.js',
-          entry: 'src/js/commands.js'
+          all: 'lib/commands/**/*.js',
+          entry: 'lib/commands.js'
         },
         spec: {
           all: 'spec/js/**/*.js'
         }
       },
       css: {
-        all: 'src/css/**/*.styl'
+        all: 'assets/**/*.styl'
       },
       build: 'build/'
     },
@@ -71,16 +71,16 @@ gulp.task('clean', function () {
 
 gulp.task('commands', ['clean'], function () {
   'use strict';
-  var commands = fs.readdirSync('src/js/commands')
+  var commands = fs.readdirSync('lib/commands')
     .filter(function (f) {
       return f[0] !== '.' && f.substr(-3) === '.js';
     }).map(function (f) {
       if (production) {
         exec('ln -fh ' +
           __dirname +
-          '/src/js/commands/' +
+          '/lib/commands/' +
           f +
-          ' src/js/fs/usr/bin/' +
+          ' lib/fs/usr/bin/' +
           f.slice(0, -3));
       }
 
@@ -97,7 +97,7 @@ gulp.task('file-system', ['commands'], function () {
       '\\.DS_Store',
       '.*\\.swp'
     ],
-    root = 'src/js/fs';
+    root = 'lib/fs';
 
   (function readdir(path, container)  {
     var files = fs.readdirSync(path);
@@ -185,7 +185,7 @@ gulp.task('spec', ['js'], function () {
 
 gulp.task('spec-live', ['spec'], function () {
   'use strict';
-  gulp.watch('src/js/**/*.js', ['js', 'spec']);
+  gulp.watch('lib/**/*.js', ['js', 'spec']);
   gulp.watch('spec/**/*.js', ['spec']);
 });
 

@@ -58,12 +58,12 @@ statusbar-height = 15px
 
     for button-name in close minimize maximize {
       .{button-name}  {
-        background-image inline-image(s('../images/buttons/%s.jpg', button-name))
+        background-image inline-image(s('buttons/%s.jpg', button-name))
       }
 
       &:hover {
         .{button-name} {
-          background-image inline-image(s('../images/buttons/%s-hover.jpg', button-name))
+          background-image inline-image(s('buttons/%s-hover.jpg', button-name))
         }
       }
     }
@@ -75,11 +75,11 @@ statusbar-height = 15px
     width 14px
     height 15px
     margin 4px
-    background inline-image('../images/buttons/full-screen.jpg')
+    background inline-image('buttons/full-screen.jpg')
     cursor pointer
 
     &:hover {
-      background inline-image('../images/buttons/full-screen-hover.jpg')
+      background inline-image('buttons/full-screen-hover.jpg')
     }
   }
 
