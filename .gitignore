@@ -8,3 +8,4 @@ node_modules/
 src/js/file-system.json
 src/js/fs/usr/bin/
 src/js/commands.js
+npm-debug.log
