@@ -131,15 +131,15 @@ gulp.task('js', ['jshint', 'file-system'], function () {
     .pipe(plumber())
     .pipe(browserify({ debug: !production }))
     .on('prebundle', function (bundle) {
-      bundle.require('./fs', { expose: 'fs' });
-      bundle.require('./terminal', { expose: 'terminal' });
-      bundle.require('./args-parser', { expose: 'args-parser' });
-      bundle.require('./command-manager', { expose: 'command-manager' });
-      bundle.require('./console', { expose: 'console' });
-      bundle.require('./file', { expose: 'file' });
+      bundle.require('./fs', { expose: 'zsh.js/lib/fs' });
+      bundle.require('./terminal', { expose: 'zsh.js' });
+      bundle.require('./args-parser', { expose: 'zsh.js/lib/args-parser' });
+      bundle.require('./command-manager', { expose: 'zsh.js/lib/command-manager' });
+      bundle.require('./console', { expose: 'zsh.js/lib/console' });
+      bundle.require('./file', { expose: 'zsh.js/lib/file' });
       glob.sync(path.js.commands.all).forEach(function (command) {
         command = Path.basename(command, '.js');
-        bundle.require('./commands/' + command, { expose: 'commands/' + command });
+        bundle.require('./commands/' + command, { expose: 'zsh.js/lib/commands/' + command });
       });
     })
     .pipe(rename('terminal.js'))
