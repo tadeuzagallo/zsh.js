@@ -144,7 +144,7 @@ gulp.task('js', ['jshint', 'file-system'], function () {
     })
     .pipe(rename('terminal.js'))
     .pipe(gulp.dest(path.build))
-    .pipe(rename({ suffix: '.min' }))
+    .pipe(rename('terminal.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest(path.build))
     .pipe(refresh(server));
@@ -157,7 +157,7 @@ gulp.task('css', function () {
     .pipe(stylus({ urlFunc: ['inline-image'] }))
     .pipe(concat('terminal.css'))
     .pipe(gulp.dest(path.build))
-    .pipe(rename({ suffix: '.min' }))
+    .pipe(rename('terminal.min.css'))
     .pipe(minifyCss())
     .pipe(gulp.dest(path.build))
     .pipe(refresh(server));
