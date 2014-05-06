@@ -48,7 +48,7 @@ var _ = require('lodash'),
       css: {
         all: 'assets/**/*.styl'
       },
-      build: 'build/'
+      build: 'dist/'
     },
 
     production = config.env === 'production';
