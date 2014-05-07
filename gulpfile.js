@@ -31,7 +31,7 @@ var _ = require('lodash'),
         bin: 'lib/fs/usr/bin/*',
         lib: {
           all: 'lib/**/*.js',
-          entry: 'lib/terminal.js'
+          entry: './lib/zsh.js'
         },
         fs: {
           all: 'lib/fs/**/*.js',
@@ -132,7 +132,7 @@ gulp.task('js', ['jshint', 'file-system'], function () {
     .pipe(browserify({ debug: !production }))
     .on('prebundle', function (bundle) {
       bundle.require('./fs', { expose: 'zsh.js/lib/fs' });
-      bundle.require('./terminal', { expose: 'zsh.js' });
+      bundle.require('./zsh', { expose: 'zsh.js' });
       bundle.require('./args-parser', { expose: 'zsh.js/lib/args-parser' });
       bundle.require('./command-manager', { expose: 'zsh.js/lib/command-manager' });
       bundle.require('./console', { expose: 'zsh.js/lib/console' });
@@ -142,9 +142,9 @@ gulp.task('js', ['jshint', 'file-system'], function () {
         bundle.require('./commands/' + command, { expose: 'zsh.js/lib/commands/' + command });
       });
     })
-    .pipe(rename('terminal.js'))
+    .pipe(rename('zsh.js'))
     .pipe(gulp.dest(path.build))
-    .pipe(rename('terminal.min.js'))
+    .pipe(rename('zsh.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest(path.build))
     .pipe(refresh(server));
@@ -155,9 +155,9 @@ gulp.task('css', function () {
   gulp.src(path.css.all)
     .pipe(plumber())
     .pipe(stylus({ urlFunc: ['inline-image'] }))
-    .pipe(concat('terminal.css'))
+    .pipe(concat('zsh.css'))
     .pipe(gulp.dest(path.build))
-    .pipe(rename('terminal.min.css'))
+    .pipe(rename('zsh.min.css'))
     .pipe(minifyCss())
     .pipe(gulp.dest(path.build))
     .pipe(refresh(server));

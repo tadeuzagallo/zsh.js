@@ -1,15 +1,16 @@
 {
   "name": "zsh.js",
-  "description": "A web version of my terminal",
+  "description": "create a interative terminal into any div",
   "version": "1.0.2",
   "keywords": [
     "terminal",
     "zsh",
     "tmux"
   ],
-  "homepage": "http://tadeuzagallo.com",
+  "repository": "tadeuzagallo/zsh.js",
+  "homepage": "https://github.com/tadeuzagallo/zsh.js",
   "bugs": {
-    "url": "https://github.com/tadeuzagallo/Terminal.js/issues",
+    "url": "https://github.com/tadeuzagallo/zsh.js/issues",
     "email": "tadeuzagallo@gmail.com"
   },
   "license": "MIT",
@@ -18,7 +19,7 @@
     "email": "tadeuzagallo@gmail.com",
     "url": "tadeuzagallo.com"
   },
-  "main": "./lib/terminal.js",
+  "main": "./lib/zsh.js",
   "devDependencies": {
     "gulp": "~3.5.5",
     "gulp-concat": "~2.1.7",
