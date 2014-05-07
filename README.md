@@ -1,6 +1,44 @@
-# Terminal.js
+# zsh.js #
 
-A web version of my terminal, try it: [tadeuzagallo.com](http://tadeuzagallo.com)
+A _almost_ functional zsh terminal in any div
+
+## Instalation ##
+
+You can install via npm
+
+```sh
+$ npm install zsh.js
+```
+
+or via bower
+
+```sh
+$ bower install zsh.js
+```
+
+## Basic Usage ##
+
+Include the script and style
+
+```html
+<link href="path/to/zsh.min.css" rel="stylesheet" />
+<script src="path/to/zsh.js"></script>
+```
+
+A global variable `ZSH` will be available, but require is also available - if you
+want to add a custom command or rack around
+
+```js
+var ZSH = require('zsh.js');
+var FileSystem = require('zsh.js/lib/fs');
+var CommandManager = require('zsh.js/lib/command-manager');
+```
+
+And initialize it, passing an a `div` `id` to `ZSH.create`
+
+```js
+ZSH.create('container');
+```
 
 ## Features
 
