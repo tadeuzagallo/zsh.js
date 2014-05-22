@@ -44,7 +44,8 @@ describe('file-system', function () {
       expect(fs.translatePath('../../../../..')).to.be.equal('/');
     });
 
-    it('should trim trailling spaces', function () {
+    it('should trim trailling slashes', function () {
+      expect(fs.translatePath('/Users/')).to.be.equal('/Users');
     });
   });
 

@@ -174,7 +174,7 @@ gulp.task('watch', ['build'], function () {
   });
 
   gulp.watch(path.css.all, ['css']);
-  gulp.watch(path.js.lib.all, ['js']);
+  gulp.watch(path.js.lib.all, ['build']);
 });
 
 gulp.task('spec', ['js'], function () {
