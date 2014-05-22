@@ -19,6 +19,9 @@
     "email": "tadeuzagallo@gmail.com",
     "url": "tadeuzagallo.com"
   },
+  "scripts": {
+    "test": "mocha spec"
+  },
   "main": "./lib/zsh.js",
   "devDependencies": {
     "gulp": "~3.5.5",

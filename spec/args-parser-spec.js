@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
-var ArgsParser = require('../src/js/lib/args-parser.js');
+var ArgsParser = require('../lib/args-parser.js');
 
 describe('args-parser', function () {
-  describe.only('parseStrings', function() {
+  describe('parseStrings', function() {
     it('should parse a simple string', function () {
       expect(ArgsParser.parseStrings('asd')).to.be.deep.equal(['asd']);
     });

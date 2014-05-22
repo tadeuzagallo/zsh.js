@@ -1,4 +1,4 @@
-var fs = require('../src/js/lib/fs.js');
+var fs = require('../lib/fs.js');
 var expect = require('chai').expect;
 
 describe('file-system', function () {
@@ -42,6 +42,9 @@ describe('file-system', function () {
 
     it('should not go further than root', function () {
       expect(fs.translatePath('../../../../..')).to.be.equal('/');
+    });
+
+    it('should trim trailling spaces', function () {
     });
   });
 
