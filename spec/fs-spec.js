@@ -64,4 +64,10 @@ describe('file-system', function () {
       expect(fs.dirname('foo/bar/baz')).to.equal('foo/bar');
     });
   });
+
+  describe('basename', function () {
+    it('should return path basename', function () {
+      expect(fs.basename('foo/bar/baz')).to.equal('baz');
+    });
+  });
 });
