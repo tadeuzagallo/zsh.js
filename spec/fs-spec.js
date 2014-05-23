@@ -58,4 +58,10 @@ describe('file-system', function () {
       expect(fs.realpath('../..')).to.be.equal('/');
     });
   });
+
+  describe('dirname', function () {
+    it('should return path dirname', function () {
+      expect(fs.dirname('foo/bar/baz')).to.equal('foo/bar');
+    });
+  });
 });
