@@ -70,4 +70,30 @@ describe('file-system', function () {
       expect(fs.basename('foo/bar/baz')).to.equal('baz');
     });
   });
+
+  describe.only('autocomplete', function () {
+    before(function () {
+      fs.currentPath = '/';
+    });
+
+    it('should return an empty set for non existing directories', function () {
+      expect(fs.autocomplete('foo')).to.deep.equal([]);
+    });
+
+    it('should return all dir options for an empty string', function () {
+      expect(fs.autocomplete('')).to.deep.equal(['Users/', 'tmp/', 'usr/']);
+    });
+
+    it('should append a slash when the path is right', function () {
+      expect(fs.autocomplete('usr')).to.deep.equal(['usr/']);
+    });
+
+    it('should work with ~', function () {
+      expect(fs.autocomplete('~/pro')).to.deep.equal(['projects.md']);
+    });
+
+    it('should work with /', function ()  {
+      expect(fs.autocomplete('/usr/b')).to.deep.equal(['bin/']);
+    });
+  });
 });
