@@ -72,19 +72,17 @@ describe('file-system', function () {
   });
 
   describe.only('autocomplete', function () {
-    before(function () {
-      fs.currentPath = '/';
-    });
-
     it('should return an empty set for non existing directories', function () {
       expect(fs.autocomplete('foo')).to.deep.equal([]);
     });
 
     it('should return all dir options for an empty string', function () {
-      expect(fs.autocomplete('')).to.deep.equal(['Users/', 'tmp/', 'usr/']);
+      fs.currentPath = '~';
+      expect(fs.autocomplete('')).to.deep.equal(Object.keys(fs.open('~')));
     });
 
     it('should append a slash when the path is right', function () {
+      fs.currentPath = '/';
       expect(fs.autocomplete('usr')).to.deep.equal(['usr/']);
     });
 
