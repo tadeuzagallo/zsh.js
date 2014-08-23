@@ -1,17 +1,25 @@
-<link rel="stylesheet" href="../dist/zsh.min.css">
 <script src="../dist/zsh.min.js"></script>
+
+<template>
+  <style>
+    @import '../dist/zsh.min.css';
+  </style>
+</template>
+
 <script>
-(function() {
   var Terminal = Object.create(HTMLElement.prototype);
+  var template = document._currentScript.ownerDocument.querySelector('template');
 
   Terminal.createdCallback = function() {
-    var dom = this.createShadowRoot();
+    var root = this.createShadowRoot();
+    root.appendChild(document.importNode(template.content, true));
 
-    ZSH.create(dom);
+    var placeholder = document.createElement('div');
+    ZSH.create(placeholder);
+    root.appendChild(placeholder.firstChild);
   };
 
   document.registerElement('zsh-terminal', {
     prototype: Terminal
   });
-})();
 </script>
