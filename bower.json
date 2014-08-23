@@ -10,7 +10,8 @@
   "keywords": [
     "terminal",
     "zsh",
-    "tmux"
+    "tmux",
+    "web-component"
   ],
   "license": "MIT",
   "ignore": [
@@ -20,5 +21,8 @@
     "app/bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "devDependencies": {
+    "platform": "Polymer/platform#~0.3.5"
+  }
 }

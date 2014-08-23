@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="../dist/zsh.min.css">
+<script src="../dist/zsh.min.js"></script>
+<script>
+(function() {
+  var Terminal = Object.create(HTMLElement.prototype);
+
+  Terminal.createdCallback = function() {
+    var dom = this.createShadowRoot();
+
+    ZSH.create(dom);
+  };
+
+  document.registerElement('zsh-terminal', {
+    prototype: Terminal
+  });
+})();
+</script>
