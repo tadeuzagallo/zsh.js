@@ -66,9 +66,106 @@
     "ctime": "2014-03-02T12:31:10.000Z",
     "content": {
       "bin": {
-        "mtime": "2014-03-02T12:31:10.000Z",
-        "ctime": "2014-03-02T12:31:10.000Z",
-        "content": {},
+        "mtime": "2014-12-25T02:24:59.000Z",
+        "ctime": "2014-12-25T02:24:59.000Z",
+        "content": {
+          "alias.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\n\nCommandManager.register('alias', alias);\n\nfunction alias(args, stdin, stdout, stderr, next) {\n  var buffer = '';\n  if (args.arguments.length) {\n    var key = args.arguments.shift();\n    var index;\n    if (~(index = key.indexOf('='))) {\n      var command;\n\n      if (args.arguments.length && index === key.length - 1) {\n        command = args.arguments.join(' ');\n      } else {\n        command = key.substr(index+1);\n      }\n\n      key = key.substr(0, index);\n\n      if (command) {\n        CommandManager.alias(key, command);\n      }\n    }\n  } else {\n    var aliases = CommandManager.alias();\n\n    for (var i in aliases) {\n      buffer += i + \"='\" + aliases[i] + \"'\\n\";\n    }\n  }\n\n  stdout.write(buffer);\n  next();\n}\n",
+            "type": "f"
+          },
+          "cat.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\nvar FS = require('../fs');\n\nCommandManager.register('cat', cat);\n\nfunction cat(args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (arg) {\n    var content = FS.open(arg);\n\n    if (content !== undefined) {\n      if (typeof(content) === 'string') {\n        stdout.write(content);\n      } else {\n        stderr.write(FS.error('cat', arg, 'Is a directory'));\n      }\n    } else {\n      stderr.write(FS.notFound('cat', arg));\n    }\n  });\n\n  next();\n}\n",
+            "type": "f"
+          },
+          "cd.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\nvar FS = require('../fs');\n\nCommandManager.register('cd', cd);\n\nfunction cd(args, stdin, stdout, stderr, next) {\n  var directory = args.arguments[0] || '~';\n\n  var path = FS.translatePath(directory);\n  var dir = FS.open(path);\n\n  if (dir !== undefined) {\n    if (typeof(dir) === 'object') {\n      FS.currentPath = path;\n      FS.currentDir = dir;\n    } else {\n      stderr.write(FS.error('cd', directory, 'Is a file'));\n    }\n  } else {\n    stderr.write(FS.notFound('cd', directory));\n  }\n\n  FS.writeFS();\n  next();\n}\n",
+            "type": "f"
+          },
+          "echo.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\nvar ArgsParser = require('../args-parser');\n\nfunction echo(args, stdin, stdout, stderr, next) {\n  try {\n    stdout.write(ArgsParser.parseStrings(args.raw).join(' '));\n  } catch (err) {\n    stderr.write('zsh: ' + err.message);\n  }\n  \n  next();\n}\n\nCommandManager.register('echo', echo);\n",
+            "type": "f"
+          },
+          "help.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\n\nfunction help(args, stdin, stdout, stderr, next) {\n  stdout.write('commands:');\n  stdout.write(Object.keys(CommandManager.commands).join(' '));\n\n  stdout.write('\\n');\n\n  stdout.write('aliases:');\n  stdout.write(Object.keys(CommandManager.aliases).map(function (key)  {\n    return key + '=\"' + CommandManager.aliases[key] + '\"';\n  }).join(' '));\n\n  next();\n}\n\nCommandManager.register('help', help);\n",
+            "type": "f"
+          },
+          "less.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "",
+            "type": "f"
+          },
+          "ls.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\nvar FS = require('../fs');\n\nCommandManager.register('ls', ls);\n\nfunction ls(args, stdin, stdout, stderr, next) {\n  var outputs = [];\n\n  if (!args.arguments.length) {\n    args.arguments.push('.');\n  }\n\n  args.arguments.forEach(function (arg) {\n    var dir = FS.open(arg);\n\n    if (typeof(dir) !== 'object') {\n      if (dir === undefined) {\n        stderr.write(FS.notFound('ls', arg));\n      } else {\n        stderr.write(FS.error('ls', arg, 'Is a file'));\n      }\n\n      return;\n    }\n\n    var files = Object.keys(dir);\n\n    if (!args.options.a) {\n      files = files.filter(function (file) {\n        return file[0] !== '.';\n      });\n    }\n\n    if (args.arguments.length > 1) {\n      stdout.write(arg + ':');\n    }\n\n    stdout.write(files.join(args.options.l ? '\\n' : ' '));\n  });\n\n  next();\n}\n",
+            "type": "f"
+          },
+          "mkdir.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\nvar FS = require('../fs');\nvar File = require('../file');\n\nCommandManager.register('mkdir', mkdir);\n\nfunction mkdir(args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (arg) {\n    var file = new File(arg);\n\n    if (!file.parentExists()) {\n      stderr.write(FS.notFound('mkdir', path));\n    } else if (!file.isValid()) {\n      stderr.write(FS.error('mkdir', path, 'Not a directory'));\n    } else if (file.exists()) {\n      stderr.write(FS.error('mkdir', path, 'File exists'));\n    } else {\n      file.dir[file.filename] = {};\n    }\n  });\n\n  FS.writeFS();\n  next();\n}\n",
+            "type": "f"
+          },
+          "mv.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\nvar FS = require('../fs');\nvar File = require('../file');\n\nfunction mv(args, stdin, stdout, stderr, next) {\n  'use strict';\n\n  var targetPath = args.arguments.pop();\n  var sourcePaths = args.arguments;\n  var target = new File(targetPath);\n\n  if (!targetPath ||\n      !sourcePaths.length ||\n        (sourcePaths.length > 1 &&\n         (!target.exists() || target.isFile())\n        )\n     ) {\n    stderr.write('usage: mv source target\\n \\t mv source ... directory');\n  } else if (!target.parentExists()) {\n      stderr.write(FS.notFound('mv', target.dirname));\n  } else {\n    target.read(function (contents) {\n      var success = sourcePaths.reduce(function (success, sourcePath) {\n        if (success) {\n          var source = new File(sourcePath);\n\n          if (!source.exists()) {\n            stderr.write(FS.notFound('mv', sourcePaths[0]));\n          } else if (source.isDir() && target.isFile()) {\n            stderr.write(FS.error('mv', 'rename ' + sourcePaths[0] + ' to ' + targetPath, 'Not a directory'));\n          } else {\n            source.read(function (contents) {\n              if (target.isDir()) {\n                target.dir[target.filename][source.filename] = contents;\n              } else {\n                target.dir[target.filename] = contents;\n              }\n              source.delete();\n            });\n            return true;\n          }\n        }\n\n        return false;\n      }, true);\n\n      if (success) {\n        FS.writeFS();\n      } else {\n        target.dir[target.filename] = contents;\n      }\n    });\n  }\n  \n  next();\n}\n\nCommandManager.register('mv', mv);\n",
+            "type": "f"
+          },
+          "pwd.js": {
+            "mtime": "2014-12-25T02:24:59.000Z",
+            "ctime": "2014-12-25T02:24:59.000Z",
+            "content": "function pwd(args, stdin, stdout, stderr, next) {\n  var _pwd = FS.currentPath;\n\n  if (args === true) {\n    _pwd = _pwd.replace(FS.home, '~');\n  }\n\n  if (stdout) {\n    stdout.write(_pwd);\n    next();\n  } else {\n    return _pwd;\n  }\n}\n",
+            "type": "f"
+          },
+          "rm.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\nvar FS = require('../fs');\nvar File = require('../file');\n\nCommandManager.register('rm', rm);\n\nfunction rm(args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (arg) {\n    var file = new File(arg);\n\n    if (!file.exists()) {\n      stderr.write(FS.notFound('rm', arg));\n    } else if (!file.isValid()) {\n      stderr.write(FS.error('rm', arg, 'Not a directory'));\n    } else if (file.isDir()) {\n      stderr.write(FS.error('rm', arg, 'is a directory'));\n    } else {\n      file.delete();\n    }\n  });\n\n  FS.writeFS();\n  next();\n}\n",
+            "type": "f"
+          },
+          "rmdir.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\nvar FS = require('../fs');\nvar File = require('../file');\n\nCommandManager.register('rmdir', rmdir);\n\nfunction rmdir(args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (arg) {\n    var file = new File(arg);\n\n    if (!file.parentExists() || !file.exists()) {\n      stderr.write(FS.notFound('rmdir', arg));\n    } else if (!file.isDir()) {\n      stderr.write(FS.error('rmdir', arg, 'Not a directory'));\n    } else {\n      file.delete();\n    }\n  });\n\n  FS.writeFS();\n  next();\n}\n",
+            "type": "f"
+          },
+          "source.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\nvar File = require('../file');\nvar Console = require('../console');\n\nCommandManager.register('source', source);\n\nfunction source(args, stdin, stdout, stderr, next) {\n  if (args.arguments.length) {\n    var file = new File(args.arguments[0]);\n    if (!file.exists()) {\n      stderr.write('source: no such file or directory: ' + file.path);\n    } else {\n      try {\n        file.read(function (contents) {\n          var console = new Console(stdout, stderr);\n          var result = JSON.stringify(eval(contents));\n          stdout.write('<- ' + result);\n        });\n      } catch (err) {\n        stderr.write(err.stack);\n      }\n    }\n  } else {\n    stderr.write('source: not enough arguments');\n  }\n\n  next();\n}\n",
+            "type": "f"
+          },
+          "touch.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\nvar FS = require('../fs');\n\nCommandManager.register('touch', touch);\n\nfunction touch(args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (arg) {\n    var path = arg.split('/');\n    var fileName = path.pop();\n    path = path.join('/');\n    var dir = FS.open(path);\n\n    if (typeof(dir) === 'undefined') {\n      stderr.write(FS.notFound('touch', arg));\n    } else if (typeof(dir) !== 'object'){\n      stderr.write(FS.error('touch', path, 'Not a directory'));\n    } else if (dir[fileName] === undefined) {\n      dir[fileName] = '';\n    }\n  });\n\n  FS.writeFS();\n  next();\n}\n",
+            "type": "f"
+          },
+          "unalias.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "var CommandManager = require('../command-manager');\n\nCommandManager.register('unalias', unalias);\n\nfunction unalias(args, stdin, stdout, stderr, next) {\n  var cmd = args.arguments[0];\n\n  if (cmd) {\n    CommandManager.unalias(cmd);\n  }\n\n  next();\n}\n",
+            "type": "f"
+          },
+          "vim.js": {
+            "mtime": "2014-12-25T02:19:58.000Z",
+            "ctime": "2014-12-25T02:19:58.000Z",
+            "content": "",
+            "type": "f"
+          }
+        },
         "type": "d"
       }
     },

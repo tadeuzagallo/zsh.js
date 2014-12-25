@@ -37,10 +37,6 @@ var _ = require('lodash'),
           all: 'lib/fs/**/*.js',
           entry: 'lib/file-system.json'
         },
-        commands: {
-          all: 'lib/commands/**/*.js',
-          entry: 'lib/commands.js'
-        },
         spec: {
           all: 'spec/js/**/*.js'
         }
@@ -64,33 +60,12 @@ gulp.task('jshint', function () {
 
 gulp.task('clean', function () {
   'use strict';
-  gulp.src([path.build, path.js.bin])
+  gulp.src([path.build])
     .pipe(plumber())
     .pipe(exec('rm -r <%= file.path %>'));
 });
 
-gulp.task('commands', ['clean'], function () {
-  'use strict';
-  var commands = fs.readdirSync('lib/commands')
-    .filter(function (f) {
-      return f[0] !== '.' && f.substr(-3) === '.js';
-    }).map(function (f) {
-      if (production) {
-        exec('ln -fh ' +
-          __dirname +
-          '/lib/commands/' +
-          f +
-          ' lib/fs/usr/bin/' +
-          f.slice(0, -3));
-      }
-
-      return 'require(\'./commands/' + f + '\');';
-    });
-
-  fs.writeFileSync(path.js.commands.entry, commands.join('\n'));
-});
-
-gulp.task('file-system', ['commands'], function () {
+gulp.task('file-system', function () {
   'use strict';
   var _fs = {},
     _ignore = [
