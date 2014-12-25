@@ -110,14 +110,13 @@ gulp.task('file-system', ['commands'], function () {
         }
       }
 
-      var stat = fs.statSync(path + '/' + file);
-      var src = fs.readlinkSync(path + '/' + file);
+      var stat = fs.lstatSync(path + '/' + file);
 
       var content;
       var type;
-      if (src !== file) {
-        type = 'l';
-        content = src;
+      if (stat.isSymbolicLink()) {
+        type = 'l'; 
+        content = fs.readlinkSync(path + '/' + file);
       } else if (stat.isDirectory()) {
         content = {};
         readdir(path + '/' + file, content);
