@@ -124,10 +124,6 @@ gulp.task('js', ['jshint', 'file-system'], function () {
       bundle.require('./command-manager', { expose: 'zsh.js/lib/command-manager' });
       bundle.require('./console', { expose: 'zsh.js/lib/console' });
       bundle.require('./file', { expose: 'zsh.js/lib/file' });
-      glob.sync(path.js.commands.all).forEach(function (command) {
-        command = Path.basename(command, '.js');
-        bundle.require('./commands/' + command, { expose: 'zsh.js/lib/commands/' + command });
-      });
     })
     .pipe(rename('zsh.js'))
     .pipe(gulp.dest(path.build))
