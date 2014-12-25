@@ -111,14 +111,27 @@ gulp.task('file-system', ['commands'], function () {
       }
 
       var stat = fs.statSync(path + '/' + file);
+      var src = fs.readlinkSync(path + '/' + file);
 
-      if (stat.isDirectory()) {
-        var f = {};
-        readdir(path + '/' + file, f);
-        container[file] = f;
+      var content;
+      var type;
+      if (src !== file) {
+        type = 'l';
+        content = src;
+      } else if (stat.isDirectory()) {
+        content = {};
+        readdir(path + '/' + file, content);
+        type = 'd';
       } else {
-        container[file] = fs.readFileSync(path + '/' + file).toString();
+        content = fs.readFileSync(path + '/' + file).toString();
+        type = 'f';
       }
+      container[file] = {
+        mtime: stat.mtime,
+        ctime: stat.ctime,
+        content: content,
+        type: type
+      };
     });
   })(root, _fs);
 
