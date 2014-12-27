@@ -1,9 +1,7 @@
 var _ = require('lodash'),
     fs = require('fs'),
-    glob = require('glob'),
     gulp = require('gulp'),
     lr = require('tiny-lr'),
-    Path = require('path'),
 
     browserify = require('gulp-browserify'),
     concat = require('gulp-concat'),
@@ -72,12 +70,12 @@ gulp.task('file-system', function () {
       '\\.DS_Store',
       '.*\\.swp'
     ],
-    root = 'lib/fs';
+    root = 'lib';
 
-  (function readdir(path, container)  {
+  (function readdir(path, container, file)  {
     var files = fs.readdirSync(path);
 
-    files.forEach(function (file)  {
+    function readfile(file) {
       for (var i = 0, l = _ignore.length; i < l; i++) {
         var ignore = _ignore[i];
         if (file.match(new RegExp('^' + ignore + '$'))) {
@@ -90,7 +88,7 @@ gulp.task('file-system', function () {
       var content;
       var type;
       if (stat.isSymbolicLink()) {
-        type = 'l'; 
+        type = 'l';
         content = fs.readlinkSync(path + '/' + file);
       } else if (stat.isDirectory()) {
         content = {};
@@ -106,10 +104,16 @@ gulp.task('file-system', function () {
         content: content,
         type: type
       };
-    });
-  })(root, _fs);
+    }
 
-  fs.writeFileSync(path.js.fs.entry, JSON.stringify(_fs, null, 2));
+    if (file) {
+      readfile(file);
+    } else {
+      files.forEach(readfile);
+    }
+  })(root, _fs, 'fs');
+
+  fs.writeFileSync(path.js.fs.entry, JSON.stringify(_fs['fs'], null, 2));
 });
 
 gulp.task('js', ['jshint', 'file-system'], function () {
