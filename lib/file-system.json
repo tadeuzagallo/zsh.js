@@ -1,174 +1,179 @@
 {
-  "Users": {
-    "mtime": "2014-05-03T23:21:09.000Z",
-    "ctime": "2014-05-03T23:21:09.000Z",
-    "content": {
-      "guest": {
-        "mtime": "2014-07-11T21:50:34.000Z",
-        "ctime": "2014-07-11T21:50:34.000Z",
-        "content": {
-          ".vimrc": {
-            "mtime": "2014-05-03T23:21:09.000Z",
-            "ctime": "2014-05-03T23:21:09.000Z",
-            "content": "",
-            "type": "f"
+  "mtime": "2014-03-02T12:31:10.000Z",
+  "ctime": "2014-03-02T12:31:10.000Z",
+  "content": {
+    "Users": {
+      "mtime": "2014-05-03T23:21:09.000Z",
+      "ctime": "2014-05-03T23:21:09.000Z",
+      "content": {
+        "guest": {
+          "mtime": "2014-07-11T21:50:34.000Z",
+          "ctime": "2014-07-11T21:50:34.000Z",
+          "content": {
+            ".vimrc": {
+              "mtime": "2014-05-03T23:21:09.000Z",
+              "ctime": "2014-05-03T23:21:09.000Z",
+              "content": "",
+              "type": "f"
+            },
+            ".zshrc": {
+              "mtime": "2014-05-03T23:21:09.000Z",
+              "ctime": "2014-05-03T23:21:09.000Z",
+              "content": "",
+              "type": "f"
+            },
+            "about.md": {
+              "mtime": "2014-07-11T21:50:34.000Z",
+              "ctime": "2014-07-11T21:50:34.000Z",
+              "content": "# tadeuzagallo.com\n\n* About me\n  I'm a Full Stack Developer, JS Passionate, Ruby Fan, C++ Something, Game Development Enthusiast,\n  Always willing to contribute to open source projects and trying to learn some more math.\n\n* About this website\n  I wanted more than just show my work, I wanted to show my work environment.\n  Since I do some mobile development as well  I also use (sadly) some IDEs, but always trying\n  to do as much as I can on this terminal, so I made a very similar copy (at least visually)\n  of it so people could get to see what I do and how I (usually) do.\n\n* Commands\n  If you want to know more about me, there are a few commands:\n    * about  (currently running)\n    * contact \n    * resume\n    * projects\n\n  If you need some help about the terminal, or want to know what functionalities are currrently implemented, type `help` any time.\n\nHope you have as much fun as I had doing it :)\n\nTadeu Zagallo\n      \n",
+              "type": "f"
+            },
+            "contact.md": {
+              "mtime": "2014-05-03T23:21:09.000Z",
+              "ctime": "2014-05-03T23:21:09.000Z",
+              "content": "# All my contacts, feel free to reach me at any of these\n\n* <a href=\"mailto:tadeuzagallo@gmail.com\" alt=\"Email\">[Email](mailto:tadeuzagallo@gmail.com)</a>\n* <a href=\"https://github.com/tadeuzagallo\" alt=\"GitHub\" target=\"_blank\">[GitHub](https://github.com/tadeuzagallo)</a>\n* <a href=\"https://twitter.com/tadeuzagallo\" alt=\"Twitter\" target=\"_blank\">[Twitter](https://twitter.com/tadeuzagallo)</a>\n* <a href=\"https://facebook.com/tadeuzagallo\" alt=\"Facebook\" target=\"_blank\">[Facebook](https://facebook.com/tadeuzagallo)</a>\n* <a href=\"https://plus.google.com/+TadeuZagallo\" alt=\"Google +\" target=\"_blank\">[Google +](https://plus.google.com/+TadeuZagallo)</a>\n* <a href=\"http://www.linkedin.com/profile/view?id=160177159\" alt=\"Linkedin\" target=\"_blank\">[Linkedin](http://www.linkedin.com/profile/view?id=160177159)</a>\n* <a href=\"skype://tadeuzagallo\" alt=\"Linkedin\">[Skype](skype://tadeuzagallo)</a>\n",
+              "type": "f"
+            },
+            "projects.md": {
+              "mtime": "2014-12-27T02:45:05.000Z",
+              "ctime": "2014-12-27T02:45:05.000Z",
+              "content": "For now you can have a look at this one! :)\n(That's what I'm doing)\n",
+              "type": "f"
+            },
+            "readme.md": {
+              "mtime": "2014-05-03T23:21:09.000Z",
+              "ctime": "2014-05-03T23:21:09.000Z",
+              "content": "foo bar baz\n",
+              "type": "f"
+            },
+            "resume.md": {
+              "mtime": "2014-05-03T23:21:09.000Z",
+              "ctime": "2014-05-03T23:21:09.000Z",
+              "content": "# Tadeu Zagallo da Silva\n---\n\n## Profile\n--- \n  I am passionate for all kinds of development, love to learn new languages and paradigms, always ready for a good challenge.\n  I also like Math, Game development and when possible contribute to open source projects.\n\n## General Information\n---\n  * Email: tadeuzagallo@gmail.com\n  * Phone: +55 32 8863 3684\n  * Skype: tadeuzagallo\n  * Github: github.com/tadeuzagallo\n  * Location: Juiz de Fora/MG, Brazil\n\n## Educational Background\n---\n\n  * Web Development at Instituto Vianna Junior, 2010\n  * General English at The Carlyle Institute, 2011\n\n# Work Experience\n---\n\n  * <i>*iOS Developer*</i> at <i>*Qranio*</i> from <i>*December, 2013*</i> and <i>*currently employed*</i>\n    - Qranio is a startup that grew inside the company I work (eMiolo.com) and I was invited to lead the iOS development team\n      on a completely rewriten version of the app\n\n  * <i>*Web and Mobile Developer*</i> at <i>*Bonuz*</i> from <i>*February, 2013*</i> and <i>*currently employed*</i>\n    - I started developing the iOS app as a freelancer, after the app was published I was invited to maintain the Ruby on Rails\n      api and work on the Android version of the app\n\n  * <i>*Web and Mobile Developer*</i> at <i>*eMiolo.com*</i> from <i>*April, 2013*</i> and <i>*currently employed*</i>\n    - The company just worked with PHP, so I joined with the intention of bringing new technologies. Worked with Python, Ruby, iOS,\n      Android and HTML5 applications\n\n  * <i>*iOS Developer*</i> at <i>*ProDoctor Software Ltda.*</i> from <i>*July, 2012*</i> until <i>*October, 2012*</i>\n    - Briefly worked with the iOS team on the development of their first mobile version of their main product, a medical software\n\n  * <i>*Web Developer*</i> at <i>*Ato Interativo*</i> from <i>*February, 2012*</i> until <i>*July, 2012*</i>\n    - Most of the work was with PHP and MySQL, also working with JavaScript on the client side. Worked with MSSQL\n      and Oracle databases as well\n\n  * <i>*Web Developer*</i> at <i>*Maria Fumaça Criações*</i> from <i>*October, 2010*</i> until <i>*June, 2011*</i>\n    - I worked mostly with PHP and MySQL, also making the front end with HTML and CSS and most animations in JavaScript,\n      although I also worked with a few in AS3. Briefly worked with MongoDB\n\n## Additional Information\n---\n\n* Experience under Linux and OS X environment\n* Student Exchange: 6 months of residence in Ireland\n\n## Languages\n---\n\n* Portuguese – Native Speaker\n* English – Fluent Level\n* Spanish – Intermediate Level\n\n## Programming languages (ordered by knowledge)\n---\n\n* JavaScript\n* Objective­C\n* C/C++\n* Ruby on Rails\n* NodeJS\n* PHP\n* Java\n* Python\n\n## Additional skills\n---\n\n* HTML5/CSS3\n* MVC\n* Design Patterns\n* TDD/BDD\n* Git\n* Analysis and Design of Algorithms\n",
+              "type": "f"
+            }
           },
-          ".zshrc": {
-            "mtime": "2014-05-03T23:21:09.000Z",
-            "ctime": "2014-05-03T23:21:09.000Z",
-            "content": "",
-            "type": "f"
-          },
-          "about.md": {
-            "mtime": "2014-07-11T21:50:34.000Z",
-            "ctime": "2014-07-11T21:50:34.000Z",
-            "content": "# tadeuzagallo.com\n\n* About me\n  I'm a Full Stack Developer, JS Passionate, Ruby Fan, C++ Something, Game Development Enthusiast,\n  Always willing to contribute to open source projects and trying to learn some more math.\n\n* About this website\n  I wanted more than just show my work, I wanted to show my work environment.\n  Since I do some mobile development as well  I also use (sadly) some IDEs, but always trying\n  to do as much as I can on this terminal, so I made a very similar copy (at least visually)\n  of it so people could get to see what I do and how I (usually) do.\n\n* Commands\n  If you want to know more about me, there are a few commands:\n    * about  (currently running)\n    * contact \n    * resume\n    * projects\n\n  If you need some help about the terminal, or want to know what functionalities are currrently implemented, type `help` any time.\n\nHope you have as much fun as I had doing it :)\n\nTadeu Zagallo\n      \n",
-            "type": "f"
-          },
-          "contact.md": {
-            "mtime": "2014-05-03T23:21:09.000Z",
-            "ctime": "2014-05-03T23:21:09.000Z",
-            "content": "# All my contacts, feel free to reach me at any of these\n\n* <a href=\"mailto:tadeuzagallo@gmail.com\" alt=\"Email\">[Email](mailto:tadeuzagallo@gmail.com)</a>\n* <a href=\"https://github.com/tadeuzagallo\" alt=\"GitHub\" target=\"_blank\">[GitHub](https://github.com/tadeuzagallo)</a>\n* <a href=\"https://twitter.com/tadeuzagallo\" alt=\"Twitter\" target=\"_blank\">[Twitter](https://twitter.com/tadeuzagallo)</a>\n* <a href=\"https://facebook.com/tadeuzagallo\" alt=\"Facebook\" target=\"_blank\">[Facebook](https://facebook.com/tadeuzagallo)</a>\n* <a href=\"https://plus.google.com/+TadeuZagallo\" alt=\"Google +\" target=\"_blank\">[Google +](https://plus.google.com/+TadeuZagallo)</a>\n* <a href=\"http://www.linkedin.com/profile/view?id=160177159\" alt=\"Linkedin\" target=\"_blank\">[Linkedin](http://www.linkedin.com/profile/view?id=160177159)</a>\n* <a href=\"skype://tadeuzagallo\" alt=\"Linkedin\">[Skype](skype://tadeuzagallo)</a>\n",
-            "type": "f"
-          },
-          "projects.md": {
-            "mtime": "2014-05-03T23:21:09.000Z",
-            "ctime": "2014-05-03T23:21:09.000Z",
-            "content": "For now you can have a look at this one! :)\n(That's what I'm doing)\n",
-            "type": "f"
-          },
-          "readme.md": {
-            "mtime": "2014-05-03T23:21:09.000Z",
-            "ctime": "2014-05-03T23:21:09.000Z",
-            "content": "foo bar baz\n",
-            "type": "f"
-          },
-          "resume.md": {
-            "mtime": "2014-05-03T23:21:09.000Z",
-            "ctime": "2014-05-03T23:21:09.000Z",
-            "content": "# Tadeu Zagallo da Silva\n---\n\n## Profile\n--- \n  I am passionate for all kinds of development, love to learn new languages and paradigms, always ready for a good challenge.\n  I also like Math, Game development and when possible contribute to open source projects.\n\n## General Information\n---\n  * Email: tadeuzagallo@gmail.com\n  * Phone: +55 32 8863 3684\n  * Skype: tadeuzagallo\n  * Github: github.com/tadeuzagallo\n  * Location: Juiz de Fora/MG, Brazil\n\n## Educational Background\n---\n\n  * Web Development at Instituto Vianna Junior, 2010\n  * General English at The Carlyle Institute, 2011\n\n# Work Experience\n---\n\n  * <i>*iOS Developer*</i> at <i>*Qranio*</i> from <i>*December, 2013*</i> and <i>*currently employed*</i>\n    - Qranio is a startup that grew inside the company I work (eMiolo.com) and I was invited to lead the iOS development team\n      on a completely rewriten version of the app\n\n  * <i>*Web and Mobile Developer*</i> at <i>*Bonuz*</i> from <i>*February, 2013*</i> and <i>*currently employed*</i>\n    - I started developing the iOS app as a freelancer, after the app was published I was invited to maintain the Ruby on Rails\n      api and work on the Android version of the app\n\n  * <i>*Web and Mobile Developer*</i> at <i>*eMiolo.com*</i> from <i>*April, 2013*</i> and <i>*currently employed*</i>\n    - The company just worked with PHP, so I joined with the intention of bringing new technologies. Worked with Python, Ruby, iOS,\n      Android and HTML5 applications\n\n  * <i>*iOS Developer*</i> at <i>*ProDoctor Software Ltda.*</i> from <i>*July, 2012*</i> until <i>*October, 2012*</i>\n    - Briefly worked with the iOS team on the development of their first mobile version of their main product, a medical software\n\n  * <i>*Web Developer*</i> at <i>*Ato Interativo*</i> from <i>*February, 2012*</i> until <i>*July, 2012*</i>\n    - Most of the work was with PHP and MySQL, also working with JavaScript on the client side. Worked with MSSQL\n      and Oracle databases as well\n\n  * <i>*Web Developer*</i> at <i>*Maria Fumaça Criações*</i> from <i>*October, 2010*</i> until <i>*June, 2011*</i>\n    - I worked mostly with PHP and MySQL, also making the front end with HTML and CSS and most animations in JavaScript,\n      although I also worked with a few in AS3. Briefly worked with MongoDB\n\n## Additional Information\n---\n\n* Experience under Linux and OS X environment\n* Student Exchange: 6 months of residence in Ireland\n\n## Languages\n---\n\n* Portuguese – Native Speaker\n* English – Fluent Level\n* Spanish – Intermediate Level\n\n## Programming languages (ordered by knowledge)\n---\n\n* JavaScript\n* Objective­C\n* C/C++\n* Ruby on Rails\n* NodeJS\n* PHP\n* Java\n* Python\n\n## Additional skills\n---\n\n* HTML5/CSS3\n* MVC\n* Design Patterns\n* TDD/BDD\n* Git\n* Analysis and Design of Algorithms\n",
-            "type": "f"
-          }
-        },
-        "type": "d"
-      }
+          "type": "d"
+        }
+      },
+      "type": "d"
     },
-    "type": "d"
-  },
-  "tmp": {
-    "mtime": "2014-03-02T12:31:10.000Z",
-    "ctime": "2014-03-02T12:31:10.000Z",
-    "content": {},
-    "type": "d"
-  },
-  "usr": {
-    "mtime": "2014-03-02T12:31:10.000Z",
-    "ctime": "2014-03-02T12:31:10.000Z",
-    "content": {
-      "bin": {
-        "mtime": "2014-12-26T03:12:33.000Z",
-        "ctime": "2014-12-26T03:12:33.000Z",
-        "content": {
-          "alias.js": {
-            "mtime": "2014-12-26T02:50:21.000Z",
-            "ctime": "2014-12-26T02:50:21.000Z",
-            "content": "var CommandManager = require('zsh.js/lib/command-manager');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  var buffer = '';\n  if (args.arguments.length) {\n    var key = args.arguments.shift();\n    var index;\n    if (~(index = key.indexOf('='))) {\n      var command;\n\n      if (args.arguments.length && index === key.length - 1) {\n        command = args.arguments.join(' ');\n      } else {\n        command = key.substr(index+1);\n      }\n\n      key = key.substr(0, index);\n\n      if (command) {\n        CommandManager.alias(key, command);\n      }\n    }\n  } else {\n    var aliases = CommandManager.alias();\n\n    for (var i in aliases) {\n      buffer += i + \"='\" + aliases[i] + \"'\\n\";\n    }\n  }\n\n  stdout.write(buffer);\n  next();\n};\n",
-            "type": "f"
-          },
-          "cat.js": {
-            "mtime": "2014-12-26T02:51:28.000Z",
-            "ctime": "2014-12-26T02:51:28.000Z",
-            "content": "var FS = require('zsh.js/lib/fs');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (arg) {\n    var content = FS.open(arg);\n\n    if (content !== undefined) {\n      if (typeof(content) === 'string') {\n        stdout.write(content);\n      } else {\n        stderr.write(FS.error('cat', arg, 'Is a directory'));\n      }\n    } else {\n      stderr.write(FS.notFound('cat', arg));\n    }\n  });\n\n  next();\n};\n",
-            "type": "f"
-          },
-          "cd.js": {
-            "mtime": "2014-12-25T02:52:27.000Z",
-            "ctime": "2014-12-25T02:52:27.000Z",
-            "content": "var FS = require('zsh.js/lib/fs');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  var directory = args.arguments[0] || '~';\n\n  var path = FS.translatePath(directory);\n  var dir = FS.open(path);\n\n  if (dir !== undefined) {\n    if (typeof(dir) === 'object') {\n      FS.currentPath = path;\n      FS.currentDir = dir;\n    } else {\n      stderr.write(FS.error('cd', directory, 'Is a file'));\n    }\n  } else {\n    stderr.write(FS.notFound('cd', directory));\n  }\n\n  FS.writeFS();\n  next();\n};\n",
-            "type": "f"
-          },
-          "echo.js": {
-            "mtime": "2014-12-26T02:52:49.000Z",
-            "ctime": "2014-12-26T02:52:49.000Z",
-            "content": "var ArgsParser = require('zsh.js/lib/args-parser');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  try {\n    stdout.write(ArgsParser.parseStrings(args.raw).join(' '));\n  } catch (err) {\n    stderr.write('zsh: ' + err.message);\n  }\n  \n  next();\n};\n",
-            "type": "f"
-          },
-          "help.js": {
-            "mtime": "2014-12-26T02:53:32.000Z",
-            "ctime": "2014-12-26T02:53:32.000Z",
-            "content": "var CommandManager = require('zsh.js/lib/command-manager');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  stdout.write('commands:');\n  stdout.write(Object.keys(CommandManager.commands).join(' '));\n\n  stdout.write('\\n');\n\n  stdout.write('aliases:');\n  stdout.write(Object.keys(CommandManager.aliases).map(function (key)  {\n    return key + '=\"' + CommandManager.aliases[key] + '\"';\n  }).join(' '));\n\n  next();\n};\n",
-            "type": "f"
-          },
-          "less.js": {
-            "mtime": "2014-12-25T02:19:58.000Z",
-            "ctime": "2014-12-25T02:19:58.000Z",
-            "content": "",
-            "type": "f"
-          },
-          "ls.js": {
-            "mtime": "2014-12-25T02:51:44.000Z",
-            "ctime": "2014-12-25T02:51:44.000Z",
-            "content": "var FS = require('zsh.js/lib/fs');\nreturn function (args, stdin, stdout, stderr, next) {\n  var outputs = [];\n\n  if (!args.arguments.length) {\n    args.arguments.push('.');\n  }\n\n  args.arguments.forEach(function (arg) {\n    var dir = FS.open(arg);\n\n    if (typeof(dir) !== 'object') {\n      if (dir === undefined) {\n        stderr.write(FS.notFound('ls', arg));\n      } else {\n        stderr.write(FS.error('ls', arg, 'Is a file'));\n      }\n\n      return;\n    }\n\n    var files = Object.keys(dir);\n\n    if (!args.options.a) {\n      files = files.filter(function (file) {\n        return file[0] !== '.';\n      });\n    }\n\n    if (args.arguments.length > 1) {\n      stdout.write(arg + ':');\n    }\n\n    stdout.write(files.join(args.options.l ? '\\n' : ' '));\n  });\n\n  next();\n};\n",
-            "type": "f"
-          },
-          "mkdir.js": {
-            "mtime": "2014-12-26T02:55:48.000Z",
-            "ctime": "2014-12-26T02:55:48.000Z",
-            "content": "var FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (arg) {\n    var file = new File(arg);\n\n    if (!file.parentExists()) {\n      stderr.write(FS.notFound('mkdir', path));\n    } else if (!file.isValid()) {\n      stderr.write(FS.error('mkdir', path, 'Not a directory'));\n    } else if (file.exists()) {\n      stderr.write(FS.error('mkdir', path, 'File exists'));\n    } else {\n      var time = new Date().toISOString();\n      file.dir[file.filename] = {\n        ctime: time,\n        mtime: time,\n        content: {}\n      };\n    }\n  });\n\n  FS.writeFS();\n  next();\n};\n",
-            "type": "f"
-          },
-          "mv.js": {
-            "mtime": "2014-12-26T02:56:38.000Z",
-            "ctime": "2014-12-26T02:56:38.000Z",
-            "content": "var FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  'use strict';\n\n  var targetPath = args.arguments.pop();\n  var sourcePaths = args.arguments;\n  var target = new File(targetPath);\n\n  if (!targetPath ||\n      !sourcePaths.length ||\n        (sourcePaths.length > 1 &&\n         (!target.exists() || target.isFile())\n        )\n     ) {\n    stderr.write('usage: mv source target\\n \\t mv source ... directory');\n  } else if (!target.parentExists()) {\n      stderr.write(FS.notFound('mv', target.dirname));\n  } else {\n    target.read(function (contents) {\n      var success = sourcePaths.reduce(function (success, sourcePath) {\n        if (success) {\n          var source = new File(sourcePath);\n\n          if (!source.exists()) {\n            stderr.write(FS.notFound('mv', sourcePaths[0]));\n          } else if (source.isDir() && target.isFile()) {\n            stderr.write(FS.error('mv', 'rename ' + sourcePaths[0] + ' to ' + targetPath, 'Not a directory'));\n          } else {\n            source.read(function (contents) {\n              if (target.isDir()) {\n                target.dir[target.filename][source.filename] = contents;\n              } else {\n                target.dir[target.filename] = contents;\n              }\n              source.delete();\n            });\n            return true;\n          }\n        }\n\n        return false;\n      }, true);\n\n      if (success) {\n        FS.writeFS();\n      } else {\n        target.dir[target.filename] = contents;\n      }\n    });\n  }\n  \n  next();\n};\n",
-            "type": "f"
-          },
-          "pwd.js": {
-            "mtime": "2014-12-26T02:57:50.000Z",
-            "ctime": "2014-12-26T02:57:50.000Z",
-            "content": "return function (args, stdin, stdout, stderr, next) {\n  var _pwd = FS.currentPath;\n\n  if (stdout) {\n    stdout.write(_pwd);\n    next();\n  } else {\n    return _pwd;\n  }\n};\n",
-            "type": "f"
-          },
-          "rm.js": {
-            "mtime": "2014-12-26T02:58:19.000Z",
-            "ctime": "2014-12-26T02:58:19.000Z",
-            "content": "var FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (arg) {\n    var file = new File(arg);\n\n    if (!file.exists()) {\n      stderr.write(FS.notFound('rm', arg));\n    } else if (!file.isValid()) {\n      stderr.write(FS.error('rm', arg, 'Not a directory'));\n    } else if (file.isDir()) {\n      stderr.write(FS.error('rm', arg, 'is a directory'));\n    } else {\n      file.delete();\n    }\n  });\n\n  FS.writeFS();\n  next();\n};\n",
-            "type": "f"
-          },
-          "rmdir.js": {
-            "mtime": "2014-12-26T02:58:37.000Z",
-            "ctime": "2014-12-26T02:58:37.000Z",
-            "content": "var FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (arg) {\n    var file = new File(arg);\n\n    if (!file.parentExists() || !file.exists()) {\n      stderr.write(FS.notFound('rmdir', arg));\n    } else if (!file.isDir()) {\n      stderr.write(FS.error('rmdir', arg, 'Not a directory'));\n    } else {\n      file.delete();\n    }\n  });\n\n  FS.writeFS();\n  next();\n};\n",
-            "type": "f"
-          },
-          "source.js": {
-            "mtime": "2014-12-26T02:59:00.000Z",
-            "ctime": "2014-12-26T02:59:00.000Z",
-            "content": "var File = require('zsh.js/lib/file');\nvar Console = require('zsh.js/lib/console');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  if (args.arguments.length) {\n    var file = new File(args.arguments[0]);\n    if (!file.exists()) {\n      stderr.write('source: no such file or directory: ' + file.path);\n    } else {\n      try {\n        file.read(function (contents) {\n          var console = new Console(stdout, stderr);\n          var result = JSON.stringify(eval(contents));\n          stdout.write('<- ' + result);\n        });\n      } catch (err) {\n        stderr.write(err.stack);\n      }\n    }\n  } else {\n    stderr.write('source: not enough arguments');\n  }\n\n  next();\n};\n",
-            "type": "f"
-          },
-          "touch.js": {
-            "mtime": "2014-12-26T03:12:33.000Z",
-            "ctime": "2014-12-26T03:12:33.000Z",
-            "content": "var FS = require('zsh.js/lib/fs');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (arg) {\n    var path = FS.translatePath(arg).split('/');\n    var fileName = path.pop();\n    path = path.join('/');\n    var dir = FS.open(path);\n\n    if (typeof(dir) === 'undefined') {\n      stderr.write(FS.notFound('touch', arg));\n    } else if (typeof(dir) !== 'object'){\n      stderr.write(FS.error('touch', path, 'Not a directory'));\n    } else {\n      var time = new Date().toISOString();\n      if (dir[fileName] === undefined) {\n        dir[fileName] = {\n          ctime: time,\n          mtime: time,\n          content: ''\n        };\n      } else {\n        dir[fileName].mtime = time;\n      }\n    }\n  });\n\n  FS.writeFS();\n  next();\n};\n",
-            "type": "f"
-          },
-          "unalias.js": {
-            "mtime": "2014-12-26T03:02:07.000Z",
-            "ctime": "2014-12-26T03:02:07.000Z",
-            "content": "var CommandManager = require('zsh.js/lib/command-manager');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  var cmd = args.arguments[0];\n\n  if (cmd) {\n    CommandManager.unalias(cmd);\n  }\n\n  next();\n};\n",
-            "type": "f"
-          },
-          "vim.js": {
-            "mtime": "2014-12-25T02:19:58.000Z",
-            "ctime": "2014-12-25T02:19:58.000Z",
-            "content": "",
-            "type": "f"
-          }
-        },
-        "type": "d"
-      }
+    "tmp": {
+      "mtime": "2014-03-02T12:31:10.000Z",
+      "ctime": "2014-03-02T12:31:10.000Z",
+      "content": {},
+      "type": "d"
     },
-    "type": "d"
-  }
+    "usr": {
+      "mtime": "2014-03-02T12:31:10.000Z",
+      "ctime": "2014-03-02T12:31:10.000Z",
+      "content": {
+        "bin": {
+          "mtime": "2015-01-05T18:42:32.000Z",
+          "ctime": "2015-01-05T18:42:32.000Z",
+          "content": {
+            "alias.js": {
+              "mtime": "2014-12-26T02:50:21.000Z",
+              "ctime": "2014-12-26T02:50:21.000Z",
+              "content": "var CommandManager = require('zsh.js/lib/command-manager');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  var buffer = '';\n  if (args.arguments.length) {\n    var key = args.arguments.shift();\n    var index;\n    if (~(index = key.indexOf('='))) {\n      var command;\n\n      if (args.arguments.length && index === key.length - 1) {\n        command = args.arguments.join(' ');\n      } else {\n        command = key.substr(index+1);\n      }\n\n      key = key.substr(0, index);\n\n      if (command) {\n        CommandManager.alias(key, command);\n      }\n    }\n  } else {\n    var aliases = CommandManager.alias();\n\n    for (var i in aliases) {\n      buffer += i + \"='\" + aliases[i] + \"'\\n\";\n    }\n  }\n\n  stdout.write(buffer);\n  next();\n};\n",
+              "type": "f"
+            },
+            "cat.js": {
+              "mtime": "2014-12-27T02:03:39.000Z",
+              "ctime": "2014-12-27T02:03:39.000Z",
+              "content": "var File = require('zsh.js/lib/file');\nvar FS = require('zsh.js/lib/fs');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (path) {\n    var file = File.open(path);\n\n    if (!file.exists()) {\n      stderr.write(FS.notFound('cat', path));\n    } else if (file.isDir()) {\n      stderr.write(FS.error('cat', path, 'Is a directory'));\n    } else {\n      stdout.write(file.read());\n    }\n  });\n\n  next();\n};\n",
+              "type": "f"
+            },
+            "cd.js": {
+              "mtime": "2014-12-27T03:23:14.000Z",
+              "ctime": "2014-12-27T03:23:14.000Z",
+              "content": "var FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  var path = args.arguments[0] || '~';\n  var dir = File.open(path);\n\n  if (!dir.exists()) {\n    stderr.write(FS.notFound('cd', path));\n  } else if (dir.isFile()) {\n    stderr.write(FS.error('cd', path, 'Is a file'));\n  } else {\n    FS.currentPath = dir.path;\n    FS.currentDir = dir.self();\n  }\n\n  FS.writeFS();\n  next();\n};\n",
+              "type": "f"
+            },
+            "echo.js": {
+              "mtime": "2014-12-26T02:52:49.000Z",
+              "ctime": "2014-12-26T02:52:49.000Z",
+              "content": "var ArgsParser = require('zsh.js/lib/args-parser');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  try {\n    stdout.write(ArgsParser.parseStrings(args.raw).join(' '));\n  } catch (err) {\n    stderr.write('zsh: ' + err.message);\n  }\n  \n  next();\n};\n",
+              "type": "f"
+            },
+            "help.js": {
+              "mtime": "2014-12-26T02:53:32.000Z",
+              "ctime": "2014-12-26T02:53:32.000Z",
+              "content": "var CommandManager = require('zsh.js/lib/command-manager');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  stdout.write('commands:');\n  stdout.write(Object.keys(CommandManager.commands).join(' '));\n\n  stdout.write('\\n');\n\n  stdout.write('aliases:');\n  stdout.write(Object.keys(CommandManager.aliases).map(function (key)  {\n    return key + '=\"' + CommandManager.aliases[key] + '\"';\n  }).join(' '));\n\n  next();\n};\n",
+              "type": "f"
+            },
+            "less.js": {
+              "mtime": "2014-12-25T02:19:58.000Z",
+              "ctime": "2014-12-25T02:19:58.000Z",
+              "content": "",
+              "type": "f"
+            },
+            "ls.js": {
+              "mtime": "2014-12-27T02:29:31.000Z",
+              "ctime": "2014-12-27T02:29:31.000Z",
+              "content": "var FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  var outputs = [];\n\n  if (!args.arguments.length) {\n    args.arguments.push('.');\n  }\n\n  args.arguments.forEach(function (arg) {\n    var dir = File.open(arg);\n\n    if (!dir.exists()) {\n      stderr.write(FS.notFound('ls', arg));\n    } else if (dir.isFile()) {\n      stderr.write(FS.error('ls', arg, 'Is a file'));\n    } else {\n      var files = Object.keys(dir.read());\n\n      if (!args.options.a) {\n        files = files.filter(function (file) {\n          return file[0] !== '.';\n        });\n      }\n\n      if (args.arguments.length > 1) {\n        stdout.write(arg + ':');\n      }\n\n      if (args.options.l) {\n        files = files.map(function (name) {\n          var file = dir.open(name);\n          var type = file.isDir() ? 'd' : '-';\n          var perms = type + 'rw-r--r--';\n\n          return perms + ' guest guest ' + file.length() + ' ' + file.mtime() + ' ' + name;\n        });\n      }\n\n      stdout.write(files.join(args.options.l ? '\\n' : ' '));\n    }\n  });\n\n  next();\n};\n",
+              "type": "f"
+            },
+            "mkdir.js": {
+              "mtime": "2014-12-27T01:42:59.000Z",
+              "ctime": "2014-12-27T01:42:59.000Z",
+              "content": "var FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (path) {\n    var file = File.open(path);\n\n    if (!file.parentExists()) {\n      stderr.write(FS.notFound('mkdir', path));\n    } else if (!file.isValid()) {\n      stderr.write(FS.error('mkdir', path, 'Not a directory'));\n    } else if (file.exists()) {\n      stderr.write(FS.error('mkdir', path, 'File exists'));\n    } else {\n      file.createFolder();\n    }\n  });\n\n  FS.writeFS();\n  next();\n};\n",
+              "type": "f"
+            },
+            "mv.js": {
+              "mtime": "2015-01-05T18:42:32.000Z",
+              "ctime": "2015-01-05T18:42:32.000Z",
+              "content": "var FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  'use strict';\n\n  var targetPath = args.arguments.pop();\n  var sourcePaths = args.arguments;\n  var target = File.open(targetPath);\n\n  if (!targetPath ||\n      !sourcePaths.length ||\n        (sourcePaths.length > 1 &&\n         (!target.exists() || target.isFile())\n        )\n     ) {\n    stderr.write('usage: mv source target\\n \\t mv source ... directory');\n  } else if (!target.parentExists()) {\n      stderr.write(FS.notFound('mv', target.dirname));\n  } else {\n    var backup = target.self();\n    var success = sourcePaths.reduce(function (success, sourcePath) {\n      if (success) {\n        var source = File.open(sourcePath);\n\n        if (!source.exists()) {\n          stderr.write(FS.notFound('mv', sourcePaths[0]));\n        } else if (source.isDir() && target.isFile()) {\n          stderr.write(FS.error('mv', 'rename ' + sourcePaths[0] + ' to ' + targetPath, 'Not a directory'));\n        } else {\n          if (!target.isFile()) {\n            target.read()[source.filename] = source.self();\n          } else {\n            target.write(source.read(), false, true);\n          }\n\n          source.delete();\n          return true;\n        }\n      }\n\n      return false;\n    }, true);\n\n    if (success) {\n      FS.writeFS();\n    } else {\n      target.dir[target.filename] = backup;\n    }\n  }\n\n  next();\n};\n",
+              "type": "f"
+            },
+            "pwd.js": {
+              "mtime": "2014-12-27T02:03:53.000Z",
+              "ctime": "2014-12-27T02:03:53.000Z",
+              "content": "var FS = require('zsh.js/lib/fs');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  var _pwd = FS.currentPath;\n\n  if (stdout) {\n    stdout.write(_pwd);\n    next();\n  } else {\n    return _pwd;\n  }\n};\n",
+              "type": "f"
+            },
+            "rm.js": {
+              "mtime": "2014-12-27T02:04:02.000Z",
+              "ctime": "2014-12-27T02:04:02.000Z",
+              "content": "var FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (arg) {\n    var file = File.open(arg);\n\n    if (!file.exists()) {\n      stderr.write(FS.notFound('rm', arg));\n    } else if (!file.isValid()) {\n      stderr.write(FS.error('rm', arg, 'Not a directory'));\n    } else if (file.isDir()) {\n      stderr.write(FS.error('rm', arg, 'is a directory'));\n    } else {\n      file.delete();\n    }\n  });\n\n  FS.writeFS();\n  next();\n};\n",
+              "type": "f"
+            },
+            "rmdir.js": {
+              "mtime": "2014-12-27T02:04:22.000Z",
+              "ctime": "2014-12-27T02:04:22.000Z",
+              "content": "var FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (arg) {\n    var file = File.open(arg);\n\n    if (!file.parentExists() || !file.exists()) {\n      stderr.write(FS.notFound('rmdir', arg));\n    } else if (!file.isDir()) {\n      stderr.write(FS.error('rmdir', arg, 'Not a directory'));\n    } else {\n      file.delete();\n    }\n  });\n\n  FS.writeFS();\n  next();\n};\n",
+              "type": "f"
+            },
+            "source.js": {
+              "mtime": "2014-12-27T02:05:50.000Z",
+              "ctime": "2014-12-27T02:05:50.000Z",
+              "content": "var File = require('zsh.js/lib/file');\nvar Console = require('zsh.js/lib/console');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  if (args.arguments.length) {\n    var file = File.open(args.arguments[0]);\n    if (!file.exists()) {\n      stderr.write('source: no such file or directory: ' + file.path);\n    } else {\n      try {\n        var console = new Console(stdout, stderr); \n        var result = JSON.stringify(eval(file.read()));\n        stdout.write('<- ' + result);\n      } catch (err) {\n        stderr.write(err.stack);\n      }\n    }\n  } else {\n    stderr.write('source: not enough arguments');\n  }\n\n  next();\n};\n",
+              "type": "f"
+            },
+            "touch.js": {
+              "mtime": "2014-12-27T02:09:18.000Z",
+              "ctime": "2014-12-27T02:09:18.000Z",
+              "content": "var FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (path) {\n    var file = File.open(path);\n\n    if (!file.parentExists()) {\n      stderr.write(FS.notFound('touch', path));\n    } else if (!file.isValid()){\n      stderr.write(FS.error('touch', path, 'Not a directory'));\n    } else {\n      file.write('', true, true);\n    }\n  });\n\n  FS.writeFS();\n  next();\n};\n",
+              "type": "f"
+            },
+            "unalias.js": {
+              "mtime": "2014-12-27T02:14:42.000Z",
+              "ctime": "2014-12-27T02:14:42.000Z",
+              "content": "var CommandManager = require('zsh.js/lib/command-manager');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  var cmd = args.arguments[0];\n\n  if (cmd) {\n    CommandManager.unalias(cmd);\n  }\n\n  next();\n};\n",
+              "type": "f"
+            },
+            "vim.js": {
+              "mtime": "2014-12-25T02:19:58.000Z",
+              "ctime": "2014-12-25T02:19:58.000Z",
+              "content": "",
+              "type": "f"
+            }
+          },
+          "type": "d"
+        }
+      },
+      "type": "d"
+    }
+  },
+  "type": "d"
 }
