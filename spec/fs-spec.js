@@ -78,7 +78,7 @@ describe('file-system', function () {
 
     it('should return all dir options for an empty string', function () {
       fs.currentPath = '~';
-      expect(fs.autocomplete('')).to.deep.equal(Object.keys(fs.open('~')));
+      expect(fs.autocomplete('')).to.deep.equal(Object.keys(fs.open('~').content));
     });
 
     it('should append a slash when the path is right', function () {
