@@ -69,55 +69,55 @@
       "ctime": "2014-03-02T12:31:10.000Z",
       "content": {
         "bin": {
-          "mtime": "2015-01-11T23:47:15.000Z",
-          "ctime": "2015-01-11T23:47:15.000Z",
+          "mtime": "2015-01-12T02:22:24.000Z",
+          "ctime": "2015-01-12T02:22:24.000Z",
           "content": {
             "alias.js": {
-              "mtime": "2015-01-11T23:44:51.000Z",
-              "ctime": "2015-01-11T23:44:51.000Z",
-              "content": "// jshint bitwise: false\n'use strict';\n\nvar CommandManager = require('zsh.js/lib/command-manager');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  var buffer = '';\n  if (args.arguments.length) {\n    var key = args.arguments.shift();\n    var index;\n    if (~(index = key.indexOf('='))) {\n      var command;\n\n      if (args.arguments.length && index === key.length - 1) {\n        command = args.arguments.join(' ');\n      } else {\n        command = key.substr(index+1);\n      }\n\n      key = key.substr(0, index);\n\n      if (command) {\n        CommandManager.alias(key, command);\n      }\n    }\n  } else {\n    var aliases = CommandManager.alias();\n\n    for (var i in aliases) {\n      buffer += i + '=\\'' + aliases[i] + '\\'\\n';\n    }\n  }\n\n  stdout.write(buffer);\n  next();\n};\n",
+              "mtime": "2015-01-12T02:20:54.000Z",
+              "ctime": "2015-01-12T02:20:54.000Z",
+              "content": "return function (args, stdin, stdout, stderr, next) {\n  var buffer = '';\n  if (args.arguments.length) {\n    var key = args.arguments.shift();\n    var index;\n    if (~(index = key.indexOf('='))) {\n      var command;\n\n      if (args.arguments.length && index === key.length - 1) {\n        command = args.arguments.join(' ');\n      } else {\n        command = key.substr(index+1);\n      }\n\n      key = key.substr(0, index);\n\n      if (command) {\n        ZSH.commandManager.alias(key, command);\n      }\n    }\n  } else {\n    var aliases = ZSH.commandManager.alias();\n\n    for (var i in aliases) {\n      buffer += i + '=\\'' + aliases[i] + '\\'\\n';\n    }\n  }\n\n  stdout.write(buffer);\n  next();\n};\n",
               "type": "f"
             },
             "cat.js": {
-              "mtime": "2015-01-11T23:45:00.000Z",
-              "ctime": "2015-01-11T23:45:00.000Z",
-              "content": "'use strict';\n\nvar File = require('zsh.js/lib/file');\nvar FS = require('zsh.js/lib/fs');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (path) {\n    var file = File.open(path);\n\n    if (!file.exists()) {\n      stderr.write(FS.notFound('cat', path));\n    } else if (file.isDir()) {\n      stderr.write(FS.error('cat', path, 'Is a directory'));\n    } else {\n      stdout.write(file.read());\n    }\n  });\n\n  next();\n};\n",
+              "mtime": "2015-01-12T02:20:58.000Z",
+              "ctime": "2015-01-12T02:20:58.000Z",
+              "content": "return function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (path) {\n    var file = ZSH.file.open(path);\n\n    if (!file.exists()) {\n      stderr.write(ZSH.fs.notFound('cat', path));\n    } else if (file.isDir()) {\n      stderr.write(ZSH.fs.error('cat', path, 'Is a directory'));\n    } else {\n      stdout.write(file.read());\n    }\n  });\n\n  next();\n};\n",
               "type": "f"
             },
             "cd.js": {
-              "mtime": "2015-01-11T23:45:08.000Z",
-              "ctime": "2015-01-11T23:45:08.000Z",
-              "content": "'use strict';\n\nvar FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  var path = args.arguments[0] || '~';\n  var dir = File.open(path);\n\n  if (!dir.exists()) {\n    stderr.write(FS.notFound('cd', path));\n  } else if (dir.isFile()) {\n    stderr.write(FS.error('cd', path, 'Is a file'));\n  } else {\n    FS.currentPath = dir.path;\n    FS.currentDir = dir.self();\n  }\n\n  FS.writeFS();\n  next();\n};\n",
+              "mtime": "2015-01-12T02:21:01.000Z",
+              "ctime": "2015-01-12T02:21:01.000Z",
+              "content": "return function (args, stdin, stdout, stderr, next) {\n  var path = args.arguments[0] || '~';\n  var dir = File.open(path);\n\n  if (!dir.exists()) {\n    stderr.write(FS.notFound('cd', path));\n  } else if (dir.isFile()) {\n    stderr.write(FS.error('cd', path, 'Is a file'));\n  } else {\n    FS.currentPath = dir.path;\n    FS.currentDir = dir.self();\n  }\n\n  FS.writeFS();\n  next();\n};\n",
               "type": "f"
             },
             "echo.js": {
-              "mtime": "2015-01-11T23:45:16.000Z",
-              "ctime": "2015-01-11T23:45:16.000Z",
-              "content": "'use strict';\n\nvar ArgsParser = require('zsh.js/lib/args-parser');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  try {\n    stdout.write(ArgsParser.parseStrings(args.raw).join(' '));\n  } catch (err) {\n    stderr.write('zsh: ' + err.message);\n  }\n  \n  next();\n};\n",
+              "mtime": "2015-01-12T02:21:04.000Z",
+              "ctime": "2015-01-12T02:21:04.000Z",
+              "content": "return function (args, stdin, stdout, stderr, next) {\n  try {\n    stdout.write(ZSH.argsParser.parseStrings(args.raw).join(' '));\n  } catch (err) {\n    stderr.write('zsh: ' + err.message);\n  }\n  \n  next();\n};\n",
               "type": "f"
             },
             "help.js": {
-              "mtime": "2015-01-11T23:45:22.000Z",
-              "ctime": "2015-01-11T23:45:22.000Z",
-              "content": "'use strict';\n\nvar CommandManager = require('zsh.js/lib/command-manager');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  stdout.write('commands:');\n  stdout.write(Object.keys(CommandManager.commands).join(' '));\n\n  stdout.write('\\n');\n\n  stdout.write('aliases:');\n  stdout.write(Object.keys(CommandManager.aliases).map(function (key)  {\n    return key + '=\"' + CommandManager.aliases[key] + '\"';\n  }).join(' '));\n\n  next();\n};\n",
+              "mtime": "2015-01-12T02:21:07.000Z",
+              "ctime": "2015-01-12T02:21:07.000Z",
+              "content": "return function (args, stdin, stdout, stderr, next) {\n  stdout.write('commands:');\n  stdout.write(Object.keys(ZSH.commandManager.commands).join(' '));\n\n  stdout.write('\\n');\n\n  stdout.write('aliases:');\n  stdout.write(Object.keys(CommandManager.aliases).map(function (key)  {\n    return key + '=\"' + CommandManager.aliases[key] + '\"';\n  }).join(' '));\n\n  next();\n};\n",
               "type": "f"
             },
             "less.js": {
-              "mtime": "2014-12-25T02:19:58.000Z",
-              "ctime": "2014-12-25T02:19:58.000Z",
+              "mtime": "2015-01-12T02:21:09.000Z",
+              "ctime": "2015-01-12T02:21:09.000Z",
               "content": "",
               "type": "f"
             },
             "ls.js": {
-              "mtime": "2015-01-11T23:45:46.000Z",
-              "ctime": "2015-01-11T23:45:46.000Z",
-              "content": "'use strict';\n\nvar FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  if (!args.arguments.length) {\n    args.arguments.push('.');\n  }\n\n  args.arguments.forEach(function (arg) {\n    var dir = File.open(arg);\n\n    if (!dir.exists()) {\n      stderr.write(FS.notFound('ls', arg));\n    } else if (dir.isFile()) {\n      stderr.write(FS.error('ls', arg, 'Is a file'));\n    } else {\n      var files = Object.keys(dir.read());\n\n      if (!args.options.a) {\n        files = files.filter(function (file) {\n          return file[0] !== '.';\n        });\n      }\n\n      if (args.arguments.length > 1) {\n        stdout.write(arg + ':');\n      }\n\n      if (args.options.l) {\n        files = files.map(function (name) {\n          var file = dir.open(name);\n          var type = file.isDir() ? 'd' : '-';\n          var perms = type + 'rw-r--r--';\n\n          return perms + ' guest guest ' + file.length() + ' ' + file.mtime() + ' ' + name;\n        });\n      }\n\n      stdout.write(files.join(args.options.l ? '\\n' : ' '));\n    }\n  });\n\n  next();\n};\n",
+              "mtime": "2015-01-12T02:21:12.000Z",
+              "ctime": "2015-01-12T02:21:12.000Z",
+              "content": "return function (args, stdin, stdout, stderr, next) {\n  if (!args.arguments.length) {\n    args.arguments.push('.');\n  }\n\n  args.arguments.forEach(function (arg) {\n    var dir = ZSH.file.open(arg);\n\n    if (!dir.exists()) {\n      stderr.write(ZSH.fs.notFound('ls', arg));\n    } else if (dir.isFile()) {\n      stderr.write(ZSH.fs.error('ls', arg, 'Is a file'));\n    } else {\n      var files = Object.keys(dir.read());\n\n      if (!args.options.a) {\n        files = files.filter(function (file) {\n          return file[0] !== '.';\n        });\n      }\n\n      if (args.arguments.length > 1) {\n        stdout.write(arg + ':');\n      }\n\n      if (args.options.l) {\n        files = files.map(function (name) {\n          var file = dir.open(name);\n          var type = file.isDir() ? 'd' : '-';\n          var perms = type + 'rw-r--r--';\n\n          return perms + ' guest guest ' + file.length() + ' ' + file.mtime() + ' ' + name;\n        });\n      }\n\n      stdout.write(files.join(args.options.l ? '\\n' : ' '));\n    }\n  });\n\n  next();\n};\n",
               "type": "f"
             },
             "mkdir.js": {
-              "mtime": "2015-01-11T23:46:06.000Z",
-              "ctime": "2015-01-11T23:46:06.000Z",
-              "content": "'use strict';\n\nvar FS = require('zsh.js/lib/fs');\nvar File = require('zsh.js/lib/file');\n\nreturn function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (path) {\n    var file = File.open(path);\n\n    if (!file.parentExists()) {\n      stderr.write(FS.notFound('mkdir', path));\n    } else if (!file.isValid()) {\n      stderr.write(FS.error('mkdir', path, 'Not a directory'));\n    } else if (file.exists()) {\n      stderr.write(FS.error('mkdir', path, 'File exists'));\n    } else {\n      file.createFolder();\n    }\n  });\n\n  FS.writeFS();\n  next();\n};\n",
+              "mtime": "2015-01-12T02:22:24.000Z",
+              "ctime": "2015-01-12T02:22:24.000Z",
+              "content": "return function (args, stdin, stdout, stderr, next) {\n  args.arguments.forEach(function (path) {\n    var file = ZSH.file.open(path);\n\n    if (!file.parentExists()) {\n      stderr.write(ZSH.fs.notFound('mkdir', path));\n    } else if (!file.isValid()) {\n      stderr.write(ZSH.fs.error('mkdir', path, 'Not a directory'));\n    } else if (file.exists()) {\n      stderr.write(ZSH.fs.error('mkdir', path, 'File exists'));\n    } else {\n      file.createFolder();\n    }\n  });\n\n  ZSH.fs.writeFS();\n  next();\n};\n",
               "type": "f"
             },
             "mv.js": {
