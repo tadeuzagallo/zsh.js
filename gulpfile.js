@@ -1,3 +1,6 @@
+/* global console */
+'use strict';
+
 var _ = require('lodash'),
     fs = require('fs'),
     gulp = require('gulp'),
@@ -48,23 +51,19 @@ var _ = require('lodash'),
     production = config.env === 'production';
 
 gulp.task('jshint', function () {
-  'use strict';
-
   gulp.src(['Gulpfile.js', path.js.spec.all, path.js.lib.all])
     .pipe(plumber())
-    .pipe(jshint())
+    .pipe(jshint('./.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('clean', function () {
-  'use strict';
   gulp.src([path.build])
     .pipe(plumber())
     .pipe(exec('rm -r <%= file.path %>'));
 });
 
 gulp.task('file-system', function () {
-  'use strict';
   var _fs = {},
     _ignore = [
       '\\.DS_Store',
@@ -113,11 +112,10 @@ gulp.task('file-system', function () {
     }
   })(root, _fs, 'fs');
 
-  fs.writeFileSync(path.js.fs.entry, JSON.stringify(_fs['fs'], null, 2));
+  fs.writeFileSync(path.js.fs.entry, JSON.stringify(_fs.fs, null, 2));
 });
 
 gulp.task('js', ['jshint', 'file-system'], function () {
-  'use strict';
   gulp.src(path.js.lib.entry, { read: false })
     .pipe(plumber())
     .pipe(browserify({ debug: !production }))
@@ -138,7 +136,6 @@ gulp.task('js', ['jshint', 'file-system'], function () {
 });
 
 gulp.task('css', function () {
-  'use strict';
   gulp.src(path.css.all)
     .pipe(plumber())
     .pipe(stylus({ urlFunc: ['inline-image'] }))
@@ -153,7 +150,6 @@ gulp.task('css', function () {
 gulp.task('build', ['js', 'css']);
 
 gulp.task('watch', ['build'], function () {
-  'use strict';
   server.listen(config.lrport, function (err) {
     if (err) {
       console.log(err);
@@ -165,13 +161,11 @@ gulp.task('watch', ['build'], function () {
 });
 
 gulp.task('spec', ['js'], function () {
-  'use strict';
   gulp.src('spec/**/*-spec.js')
     .pipe(mocha());
 });
 
 gulp.task('spec-live', ['spec'], function () {
-  'use strict';
   gulp.watch('lib/**/*.js', ['js', 'spec']);
   gulp.watch('spec/**/*.js', ['spec']);
 });

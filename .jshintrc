@@ -1,0 +1,8 @@
+{
+  "maxerr": 1000,
+  "browserify": true,
+  "globalstrict": true,
+  "globals": {
+    "ZSH": true
+  }
+}
