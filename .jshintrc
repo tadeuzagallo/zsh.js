@@ -3,6 +3,7 @@
   "browserify": true,
   "globalstrict": true,
   "globals": {
-    "ZSH": true
+    "ZSH": true,
+    "console": true
   }
 }
