@@ -22,7 +22,7 @@
   "scripts": {
     "test": "mocha spec"
   },
-  "main": "./dist/zsh.js",
+  "main": "./lib/zsh.js",
   "devDependencies": {
     "chai": "~1.8.1",
     "coffee-script": "~1.7.1",
