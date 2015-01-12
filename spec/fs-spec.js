@@ -1,3 +1,6 @@
+/* global describe,it */
+'use strict';
+
 var fs = require('../lib/fs.js');
 var expect = require('chai').expect;
 

@@ -1,3 +1,6 @@
+/* global describe,it */
+'use strict';
+
 var expect = require('chai').expect;
 var ArgsParser = require('../lib/args-parser.js');
 
@@ -8,7 +11,7 @@ describe('args-parser', function () {
     });
 
     it('should parse strings with single quotes', function () {
-      expect(ArgsParser.parseStrings("'foo bar'")).to.be.deep.equal(['foo bar']);
+      expect(ArgsParser.parseStrings('\'foo bar\'')).to.be.deep.equal(['foo bar']);
     });
 
     it('should parse strings with double quotes', function () {
