@@ -1,6 +1,6 @@
 # zsh.js #
 
-A _almost_ functional zsh terminal in any div
+An _almost_ functional zsh terminal in any div
 
 ## Instalation ##
 
@@ -25,8 +25,8 @@ Include the script and style
 <script src="path/to/zsh.js"></script>
 ```
 
-A global variable `ZSH` will be available, but require is also available - if you
-want to add a custom command or rack around
+A global variable `ZSH` will be available, but require is also available - ~~if you
+want to add a custom command or rack around~~ 
 
 ```js
 var ZSH = require('zsh.js');
@@ -42,15 +42,9 @@ ZSH.create('container');
 
 ## Features
 
-Right now you can use the follow shell functions:
+~~Right now you can use the follow shell functions:~~
 
-* `alias`
-* `cat`
-* `cd`
-* `clear`
-* `echo`
-* `ls`
-* `pwd`
+To check the current implemented programs just go run `ls /usr/bin`
 
 And the functionalities
 
@@ -63,27 +57,30 @@ The other executable commands are just to show stuff about me... (since it was m
 What I intend to implement next:
 
 * `less`
-* auto completion for paths
-* add support to pipe commands
-* add the binds for tmux, some functionality is built but not accessible
+* ~~auto completion for paths~~
+* ~~add support to pipe commands~~ Better command parsing
+* ~~add the binds for tmux, some functionality is built but not accessible~~
 * copy and paste
-* C-c to clear line
+* ~~C-c to clear line~~
 * `vim`
-* `mkdir`
+* ~~`mkdir`~~
 * add help for methods
 
 ## Contributing
 
-Any .js file put inside `src/js/lib/commands` will automatically added on build, so feel free to add any
-program and drop it there.
-To actually bind the command you should
+__Updated__
 
-```js
-var CommandManager = require('../command-manager');
-CommandManager.register('my-awesome-program', myAwesomeProram);
-```
+Executable files are now stored inside the actual file system folder and can be viewed within the terminal.
+The path is not customizable yet, so all the commands are in `src/lib/fs/usr/bin/*.js`
 
-Further doubts you can check the source of any of those commands.
+_Notice that_: It is still possible to add commands through the CommandManager, but they are not automatically required, but could work if you are writing a plugin (example: [tadeuzagallo.com/src/js/site-helpers.js](https://github.com/tadeuzagallo/tadeuzagallo.com/blob/master/src/js/site-helpers.js))
+
+~~Any .js file put inside `src/js/lib/commands` will automatically added on build, so feel free to add any
+program and drop it there.~~
+
+The most complex program so far is [mv.js](https://github.com/tadeuzagallo/zsh.js/blob/master/lib/fs/usr/bin/mv.js)... Check it out to if you want to implement a custom command.
+
+If you need help just get in touch!
 
 ## Contact
 
