@@ -1,7 +1,7 @@
 {
   "name": "zsh.js",
   "description": "create a interative terminal into any div",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "keywords": [
     "terminal",
     "zsh",
