@@ -40,11 +40,23 @@ And initialize it, passing an a `div` `id` to `ZSH.create`
 ZSH.create('container');
 ```
 
+### Web Component
+
+You can also include `zsh` as a web component:
+
+```html
+<link rel="import" href="path/to/zsh.js/zsh-terminal.html"/>
+
+<zsh-terminal></zsh-terminal>
+```
+
+An [example](https://github.com/tadeuzagallo/zsh.js/blob/master/example/web-component.html) is also available
+
 ## Features
 
 ~~Right now you can use the follow shell functions:~~
 
-To check the current implemented programs just go run `ls /usr/bin`
+To check the current implemented programs just run `ls /usr/bin` or check the contents of [lib/fs/usr/bin](https://github.com/tadeuzagallo/zsh.js/tree/master/lib/fs/usr/bin)
 
 And the functionalities
 
