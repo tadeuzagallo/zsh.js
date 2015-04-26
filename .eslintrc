@@ -1,0 +1,18 @@
+{
+  "rules": {
+    "quotes": "single",
+    "no-unused-vars": true,
+    "no-unused-expressions": false,
+    "no-underscore-dangle": false,
+    "no-sparse-arrays": false,
+    "no-empty": false,
+    "comma-dangle": true
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "ecmaFeatures": {
+    "modules": true
+  }
+}

@@ -4,6 +4,7 @@
 *.swp
 .DS_Store
 node_modules/
+jspm_packages/
 src/js/file-system.json
 src/js/fs/usr/bin/
 src/js/commands.js
