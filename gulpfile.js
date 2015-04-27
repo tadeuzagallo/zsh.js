@@ -1,16 +1,18 @@
 /* global console */
 'use strict';
 
+/*eslint-env node*/
 var _ = require('lodash'),
     fs = require('fs'),
     gulp = require('gulp'),
     lr = require('tiny-lr'),
 
+    babelify = require('babelify'),
     browserify = require('gulp-browserify'),
     concat = require('gulp-concat'),
     exec = require('gulp-exec'),
     gutil = require('gulp-util'),
-    jshint = require('gulp-jshint'),
+    eslint = require('gulp-eslint'),
     minifyCss = require('gulp-minify-css'),
     mocha = require('gulp-mocha'),
     plumber = require('gulp-plumber'),
@@ -50,11 +52,10 @@ var _ = require('lodash'),
 
     production = config.env === 'production';
 
-gulp.task('jshint', function () {
-  gulp.src(['Gulpfile.js', path.js.spec.all, path.js.lib.all])
+gulp.task('lint', function () {
+  gulp.src(path.js.lib.all)
     .pipe(plumber())
-    .pipe(jshint('./.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(eslint());
 });
 
 gulp.task('clean', function () {
@@ -115,10 +116,15 @@ gulp.task('file-system', function () {
   fs.writeFileSync(path.js.fs.entry, JSON.stringify(_fs.fs, null, 2));
 });
 
-gulp.task('js', ['jshint', 'file-system'], function () {
+gulp.task('js', ['lint', 'file-system'], function () {
   gulp.src(path.js.lib.entry, { read: false })
     .pipe(plumber())
-    .pipe(browserify({ debug: !production }))
+    .pipe(browserify({
+      debug: !production,
+      transform: babelify.configure({
+        ignore: /babel/,
+      })
+    }))
     .on('prebundle', function (bundle) {
       bundle.require('./fs', { expose: 'zsh.js/lib/fs' });
       bundle.require('./zsh', { expose: 'zsh.js' });
