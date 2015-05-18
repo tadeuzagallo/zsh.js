@@ -46,5 +46,8 @@
     "mocha": "^2.1.0",
     "tiny-lr": "0.0.5",
     "type-detect": "~0.1.2"
+  },
+  "browserify": {
+    "transform": ["babelify"]
   }
 }
