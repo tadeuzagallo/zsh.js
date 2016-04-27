@@ -126,12 +126,12 @@ gulp.task('js', ['lint', 'file-system'], function () {
       })
     }))
     .on('prebundle', function (bundle) {
-      bundle.require('./fs', { expose: 'zsh.js/lib/fs' });
+      bundle.require('./fs', { expose: 'zsh.js/fs' });
       bundle.require('./zsh', { expose: 'zsh.js' });
-      bundle.require('./args-parser', { expose: 'zsh.js/lib/args-parser' });
-      bundle.require('./command-manager', { expose: 'zsh.js/lib/command-manager' });
-      bundle.require('./console', { expose: 'zsh.js/lib/console' });
-      bundle.require('./file', { expose: 'zsh.js/lib/file' });
+      bundle.require('./args-parser', { expose: 'zsh.js/args-parser' });
+      bundle.require('./command-manager', { expose: 'zsh.js/command-manager' });
+      bundle.require('./console', { expose: 'zsh.js/console' });
+      bundle.require('./file', { expose: 'zsh.js/file' });
     })
     .pipe(rename('zsh.js'))
     .pipe(gulp.dest(path.build))
