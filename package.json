@@ -1,7 +1,7 @@
 {
   "name": "zsh.js",
   "description": "create a interative terminal into any div",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "keywords": [
     "terminal",
     "zsh",
@@ -48,6 +48,8 @@
     "type-detect": "~0.1.2"
   },
   "browserify": {
-    "transform": ["babelify"]
+    "transform": [
+      "babelify"
+    ]
   }
 }
