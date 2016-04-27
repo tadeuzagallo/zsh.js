@@ -1,14 +1,13 @@
 # tadeuzagallo.com
 
 * About me
-  I'm a Full Stack Developer, JS Passionate, Ruby Fan, C++ Something, Game Development Enthusiast,
-  Always willing to contribute to open source projects and trying to learn some more math.
+  I'm a Software Engineer at Facebook, working in the React Native Performance team.
+  I'm really passionate about Compilers and Low Level Programming
 
 * About this website
-  I wanted more than just show my work, I wanted to show my work environment.
-  Since I do some mobile development as well  I also use (sadly) some IDEs, but always trying
-  to do as much as I can on this terminal, so I made a very similar copy (at least visually)
-  of it so people could get to see what I do and how I (usually) do.
+  I wanted something more than a boring portfolio, so I thought it'd be cool to write
+  a copy of my terminal setup in JavaScript. The bits of it that I manage to implement
+  look exactly like what I'm using on my development machine.
 
 * Commands
   If you want to know more about me, there are a few commands:
@@ -16,10 +15,17 @@
     * contact 
     * resume
     * projects
+    * help (shows all the available terminal commands)
+    
+* Tmux is also available!
+  The prefix is the default (C-b) which means that you have to press ctrl+b before
+  any tmux command.
+  The following commands are available:
+    * c - create a new window
+    * h or left - switch to previous window
+    * l or right - switch to next window
+    * q - close current window
 
-  If you need some help about the terminal, or want to know what functionalities are currrently implemented, type `help` any time.
+Hope you have as much fun as I had building it :)
 
-Hope you have as much fun as I had doing it :)
-
-Tadeu Zagallo
-      
+- @tadeuzagallo
