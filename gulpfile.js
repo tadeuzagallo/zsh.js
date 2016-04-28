@@ -132,6 +132,7 @@ gulp.task('js', ['lint', 'file-system'], function () {
       bundle.require('./command-manager', { expose: 'zsh.js/command-manager' });
       bundle.require('./console', { expose: 'zsh.js/console' });
       bundle.require('./file', { expose: 'zsh.js/file' });
+      bundle.require('./stream', { expose: 'zsh.js/stream' });
     })
     .pipe(rename('zsh.js'))
     .pipe(gulp.dest(path.build))
