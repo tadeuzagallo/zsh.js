@@ -63,8 +63,8 @@
       "ctime": "2015-04-26T21:21:59.000Z",
       "content": {
         "bin": {
-          "mtime": "2016-04-27T22:49:50.000Z",
-          "ctime": "2016-04-27T22:49:50.000Z",
+          "mtime": "2016-04-28T00:39:28.000Z",
+          "ctime": "2016-04-28T00:39:28.000Z",
           "content": {
             "alias.js": {
               "mtime": "2016-04-27T21:24:43.000Z",
@@ -91,9 +91,9 @@
               "type": "f"
             },
             "help.js": {
-              "mtime": "2016-04-27T22:10:02.000Z",
-              "ctime": "2016-04-27T22:10:02.000Z",
-              "content": "import CommandManager from 'zsh.js/command-manager';\nimport File from 'zsh.js/file';\n\nexport default function (args, stdin, stdout, stderr, next) {\n  stdout.write('registered commands:');\n  if (CommandManager.commands) {\n    stdout.write(Object.keys(CommandManager.commands).join(' '));\n  }\n\n  stdout.write('\\n');\n  stdout.write('executables (on /usr/bin):');\n  stdout.write(Object.keys(File.open('/usr/bin').read()).map(function(file) {\n    return file.replace(/\\.js$/, '');\n  }).join(' '));\n\n  stdout.write('\\n');\n\n  stdout.write('aliases:');\n\n  if (CommandManager.aliases) {\n    const it = (key) => `${key}=\"${CommandManager.aliases[key]}\"`;\n    stdout.write(Object.keys(CommandManager.aliases).map(it).join(' '));\n  }\n\n  next();\n}\n",
+              "mtime": "2016-04-28T00:39:28.000Z",
+              "ctime": "2016-04-28T00:39:28.000Z",
+              "content": "import CommandManager from 'zsh.js/command-manager';\nimport File from 'zsh.js/file';\n\nexport default function (args, stdin, stdout, stderr, next) {\n  stdout.write('registered commands:');\n  stdout.write(Object.keys(CommandManager.commands).join(' '));\n\n  stdout.write('\\n');\n  stdout.write('executables (on /usr/bin):');\n  stdout.write(Object.keys(File.open('/usr/bin').read()).map(function(file) {\n    return file.replace(/\\.js$/, '');\n  }).join(' '));\n\n  stdout.write('\\n');\n\n  stdout.write('aliases:');\n\n  const it = (key) => `${key}=\"${CommandManager.aliases[key]}\"`;\n  stdout.write(Object.keys(CommandManager.aliases).map(it).join(' '));\n\n  next();\n}\n",
               "type": "f"
             },
             "ls.js": {
